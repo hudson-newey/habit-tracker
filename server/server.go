@@ -1,13 +1,33 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"server/databaseService"
+	"server/models"
+	"server/routes"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run(":8081")
+	router := gin.Default()
+
+	dbClient, ctx, cancel, err := databaseService.Connect("mongodb://localhost:27017")
+
+	var database models.Database
+
+	database.Client = dbClient
+	database.Ctx = ctx
+	database.Cancel = cancel
+
+	if err != nil {
+		panic(err)
+	}
+
+	router.POST("/habits", routes.CreateHabit(database))
+	router.GET("/habits", routes.ListHabits(database))
+	router.GET("/habits/:id", routes.GetHabit(database))
+	router.PUT("/habits/:id", routes.UpdateHabit(database))
+	router.DELETE("/habits/:id", routes.DeleteHabit(database))
+
+	router.Run(":8081")
 }
