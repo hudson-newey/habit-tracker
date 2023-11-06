@@ -1,7 +1,7 @@
 import { Id } from "src/types/helpers";
 
 interface IAbstractModel {
-  id: Id;
+  Id: Id;
   toString: () => string;
   toJSON: () => string;
 }
@@ -9,7 +9,7 @@ interface IAbstractModel {
 export abstract class AbstractModel implements IAbstractModel {
   public constructor() {}
 
-  public abstract id: Required<Id>;
+  public abstract Id: Required<Id>;
 
   public toString(): string {
     return JSON.stringify(this);

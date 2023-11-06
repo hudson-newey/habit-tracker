@@ -2,10 +2,9 @@ import { Id } from "src/types/helpers";
 import { AbstractModel } from "./abstractModel";
 
 interface IHabit {
-  id: Id;
-  name: string;
-  description: string;
-  completedAt: Date[];
+  Id: Id;
+  Name: string;
+  Description: string;
 }
 
 export class Habit extends AbstractModel implements IHabit {
@@ -15,8 +14,7 @@ export class Habit extends AbstractModel implements IHabit {
     Object.assign(this, data);
   }
 
-  public id!: Id;
-  public name!: string;
-  public description!: string;
-  public completedAt!: Date[];
+  public Id!: Id;
+  public Name!: string;
+  public Description!: string;
 }
