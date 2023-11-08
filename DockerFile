@@ -4,7 +4,6 @@ WORKDIR /app
 COPY ./build/ /app
 
 # database -> server -> client server
+CMD database/dockerServer.sh && SERVER & && clientServer &;
 
-RUN database/dockerServer.sh;
-RUN server &;
-RUN clientServer &;
+EXPOSE 8081
