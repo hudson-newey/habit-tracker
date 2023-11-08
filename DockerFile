@@ -1,0 +1,10 @@
+FROM alpine:20-alpine
+WORKDIR /app
+
+COPY ./build/ /app
+
+# database -> server -> client server
+
+RUN database/dockerServer.sh;
+RUN server &;
+RUN clientServer &;
