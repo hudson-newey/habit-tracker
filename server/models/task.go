@@ -1,6 +1,6 @@
 package models
 
-type Habit struct {
+type Task struct {
 	Id          string
 	Name        string
 	Description string

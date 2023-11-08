@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"server/databaseService"
+	"server/helpers"
 	"server/models"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +19,7 @@ func CreateHabit(database models.Database) func(context *gin.Context) {
 
 		if err := context.BindJSON(&requestBody); err != nil {
 			log.Println(err)
-			BadRequestError(context)
+			helpers.BadRequestError(context)
 			return
 		}
 
@@ -26,7 +27,7 @@ func CreateHabit(database models.Database) func(context *gin.Context) {
 
 		if err != nil {
 			log.Println(err)
-			InternalServerError(context)
+			helpers.InternalServerError(context)
 			return
 		}
 
@@ -36,7 +37,7 @@ func CreateHabit(database models.Database) func(context *gin.Context) {
 		responseBody = requestBody
 		responseBody.Id = id
 
-		Success(context, responseBody)
+		helpers.Success(context, responseBody)
 	}
 }
 
@@ -49,7 +50,7 @@ func ListHabits(database models.Database) func(context *gin.Context) {
 		cursor, err := database.Client.Database("habits").Collection("habits").Find(database.Ctx, bson.D{})
 		if err != nil {
 			log.Println(err)
-			InternalServerError(context)
+			helpers.InternalServerError(context)
 			return
 		}
 		defer cursor.Close(database.Ctx)
@@ -64,7 +65,7 @@ func ListHabits(database models.Database) func(context *gin.Context) {
 
 			if err != nil {
 				log.Println(err)
-				InternalServerError(context)
+				helpers.InternalServerError(context)
 				return
 			}
 
@@ -74,12 +75,12 @@ func ListHabits(database models.Database) func(context *gin.Context) {
 		// Check if there was an error during iteration
 		if err := cursor.Err(); err != nil {
 			log.Println(err)
-			InternalServerError(context)
+			helpers.InternalServerError(context)
 			return
 		}
 
 		// Return the response body as a JSON response
-		Success(context, responseBody)
+		helpers.Success(context, responseBody)
 	}
 }
 
@@ -93,7 +94,7 @@ func GetHabit(database models.Database) func(context *gin.Context) {
 		objectId, err := primitive.ObjectIDFromHex(id)
 		if err != nil {
 			log.Println(err)
-			BadRequestError(context)
+			helpers.BadRequestError(context)
 			return
 		}
 
@@ -103,13 +104,13 @@ func GetHabit(database models.Database) func(context *gin.Context) {
 		err = database.Client.Database("habits").Collection("habits").FindOne(database.Ctx, filter).Decode(&habit)
 		if err != nil {
 			log.Println(err)
-			NotFoundError(context)
+			helpers.NotFoundError(context)
 			return
 		}
 
 		habit.Id = id
 
-		Success(context, habit)
+		helpers.Success(context, habit)
 	}
 }
 
@@ -123,7 +124,7 @@ func UpdateHabit(database models.Database) func(context *gin.Context) {
 		objectId, err := primitive.ObjectIDFromHex(id)
 		if err != nil {
 			log.Println(err)
-			BadRequestError(context)
+			helpers.BadRequestError(context)
 			return
 		}
 
@@ -131,7 +132,7 @@ func UpdateHabit(database models.Database) func(context *gin.Context) {
 		var habit models.Habit
 		if err := context.ShouldBindJSON(&habit); err != nil {
 			log.Println(err)
-			BadRequestError(context)
+			helpers.BadRequestError(context)
 			return
 		}
 
@@ -144,11 +145,11 @@ func UpdateHabit(database models.Database) func(context *gin.Context) {
 		_, err = database.Client.Database("habits").Collection("habits").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
-			InternalServerError(context)
+			helpers.InternalServerError(context)
 			return
 		}
 
-		Success(context, habit)
+		helpers.Success(context, habit)
 	}
 }
 
@@ -162,7 +163,7 @@ func DeleteHabit(database models.Database) func(context *gin.Context) {
 		objectId, err := primitive.ObjectIDFromHex(id)
 		if err != nil {
 			log.Println(err)
-			BadRequestError(context)
+			helpers.BadRequestError(context)
 			return
 		}
 
@@ -171,17 +172,17 @@ func DeleteHabit(database models.Database) func(context *gin.Context) {
 		result, err := database.Client.Database("habits").Collection("habits").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)
-			InternalServerError(context)
+			helpers.InternalServerError(context)
 			return
 		}
 
 		// Check if any document was deleted
 		if result.DeletedCount == 0 {
-			NotFoundError(context)
+			helpers.NotFoundError(context)
 			return
 		}
 
 		// Return a success message
-		Success(context, nil)
+		helpers.Success(context, nil)
 	}
 }
