@@ -1,7 +1,8 @@
 #!/bin/bash
 
+echo "Starting production environment...";
+
 if [ ! -d ./build/ ]; then
-    echo "Building new solution";
     ./build.sh;
 else;
     echo "Using cached build...";

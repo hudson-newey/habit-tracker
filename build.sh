@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Building solution...";
+
 if [ -d ./build/ ]; then
     rm -r ./build/;
 fi
