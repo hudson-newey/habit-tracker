@@ -4,6 +4,6 @@ import { Component } from "@angular/core";
   selector: "app-new-page",
   templateUrl: "new.component.html",
 })
-export class NewComponent {
+export class NewHabitPage {
   public constructor() {}
 }

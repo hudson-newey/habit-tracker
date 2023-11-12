@@ -1,14 +1,14 @@
 import { Id } from "src/types/helpers";
 import { AbstractModel } from "./abstractModel";
 
-interface IHabit {
+interface ITask {
   Id: Id;
   Name: string;
   Description: string;
 }
 
-export class Habit extends AbstractModel<IHabit> implements IHabit {
-  public constructor(data: IHabit) {
+export class Task extends AbstractModel<ITask> implements ITask {
+  public constructor(data: ITask) {
     super(data);
   }
 

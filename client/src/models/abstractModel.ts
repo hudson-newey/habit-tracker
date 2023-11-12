@@ -6,8 +6,10 @@ interface IAbstractModel {
   toJSON: () => string;
 }
 
-export abstract class AbstractModel implements IAbstractModel {
-  public constructor() {}
+export abstract class AbstractModel<T> implements IAbstractModel {
+  public constructor(data: T) {
+    Object.assign(this, data);
+  }
 
   public abstract Id: Required<Id>;
 

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
-import { createFakeHabit } from "src/models/fakes/habit.fake";
 import { Habit } from "src/models/habit";
 import { HabitService } from "src/services/habits.service";
 
@@ -8,7 +7,7 @@ import { HabitService } from "src/services/habits.service";
   selector: "app-list-page",
   templateUrl: "list.component.html",
 })
-export class ListComponent implements OnInit {
+export class HabitListComponent implements OnInit {
   public constructor(private api: HabitService) {}
 
   protected habits: Habit[] = [];
