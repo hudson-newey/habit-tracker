@@ -3,7 +3,7 @@ import { AbstractService } from "./abstract-service.service";
 import { environment } from "src/environment";
 import { createUrl } from "./helpers";
 import { HttpClient } from "@angular/common/http";
-import { Goal } from "src/models/goal";
+import { Goal, IGoal } from "src/models/goal";
 import { Observable, of } from "rxjs";
 import { createFakeGoal } from "src/models/fakes/goal.fake";
 import { Id } from "src/types/helpers";
@@ -18,10 +18,10 @@ export class GoalsService extends AbstractService {
   }
 
   // GET /goals
-  public listGoals(): Observable<Goal[]> {
+  public listGoals(): Observable<IGoal[]> {
     if (environment.production) {
       const endpoint: string = createUrl("/goals");
-      return this.http.get(endpoint) as Observable<Goal[]>;
+      return this.http.get(endpoint) as Observable<IGoal[]>;
     }
 
     // in the development environment, we should return fake data
@@ -40,7 +40,7 @@ export class GoalsService extends AbstractService {
   public getGoal(goalId: Id) {
     if (environment.production) {
       const endpoint: string = createUrl(`/goals/${goalId}`);
-      return this.http.get(endpoint) as Observable<Goal>;
+      return this.http.get(endpoint) as Observable<IGoal>;
     }
 
     console.debug(goalId);
@@ -51,7 +51,7 @@ export class GoalsService extends AbstractService {
   public createGoal(model: Goal) {
     if (environment.production) {
       const endpoint: string = createUrl("/goals");
-      return this.http.post(endpoint, model) as Observable<Goal>;
+      return this.http.post(endpoint, model) as Observable<IGoal>;
     }
 
     console.debug(model);
@@ -62,7 +62,7 @@ export class GoalsService extends AbstractService {
   public updateGoal(model: Goal) {
     if (environment.production) {
       const endpoint: string = createUrl(`/goals/${model.Id}`);
-      return this.http.put(endpoint, model) as Observable<Goal>;
+      return this.http.put(endpoint, model) as Observable<IGoal>;
     }
 
     console.debug(model);
@@ -77,6 +77,6 @@ export class GoalsService extends AbstractService {
     }
 
     console.debug(goalId);
-    return of();
+    return of(undefined);
   }
 }

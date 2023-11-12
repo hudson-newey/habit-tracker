@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
-import { Habit } from "src/models/habit";
+import { Habit, IHabit } from "src/models/habit";
 import { HabitService } from "src/services/habits.service";
 
 @Component({
@@ -16,6 +16,8 @@ export class HabitListComponent implements OnInit {
     this.api
       .getHabits()
       .pipe(take(1))
-      .subscribe((models: Habit[]) => (this.habits = models));
+      .subscribe((models: IHabit[]) => {
+        this.habits = models.map((model: IHabit) => new Habit(model));
+      });
   }
 }

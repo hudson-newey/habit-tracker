@@ -10,12 +10,25 @@
         <th>
           <b>Description</b>
         </th>
+        <th><b>Action</b></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let habit of habits">
-        <td>{{ habit.Name }}</td>
-        <td>{{ habit.Description }}</td>
+      <tr *ngFor="let model of habits">
+        <td>{{ model.Name }}</td>
+        <td>{{ model.Description }}</td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+            >View</a
+          >
+          <a
+            [routerLink]="['/habits', model.Id, 'delete']"
+            class="uk-button-small uk-button-danger"
+            >Delete</a
+          >
+        </td>
       </tr>
     </tbody>
   </table>

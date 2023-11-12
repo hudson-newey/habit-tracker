@@ -15,4 +15,8 @@ export class Goal extends AbstractModel<IGoal> implements IGoal {
   public Id!: Id;
   public Name!: string;
   public Description!: string;
+
+  public override get ViewUrl(): any[] {
+    return [`/goals`, this.Id];
+  }
 }

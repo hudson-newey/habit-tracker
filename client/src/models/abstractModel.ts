@@ -20,4 +20,8 @@ export abstract class AbstractModel<T> implements IAbstractModel {
   public toJSON(): string {
     return JSON.stringify(this);
   }
+  
+  public get ViewUrl(): any[] {
+    throw new Error("ViewUrl not implemented");
+  }
 }

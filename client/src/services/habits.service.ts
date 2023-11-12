@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environment";
 import { Observable, of } from "rxjs";
 import { AbstractService } from "./abstract-service.service";
-import { Habit } from "src/models/habit";
+import { Habit, IHabit } from "src/models/habit";
 import { createFakeHabit } from "src/models/fakes/habit.fake";
 import { EmptyResponse } from "src/types/services";
 import { createUrl } from "./helpers";
@@ -18,10 +18,10 @@ export class HabitService extends AbstractService {
   }
 
   // GET /habits
-  public getHabits(): Observable<Habit[]> {
+  public getHabits(): Observable<IHabit[]> {
     if (environment.production) {
       const endpoint: string = createUrl("/habits");
-      return this.http.get(endpoint) as Observable<Habit[]>;
+      return this.http.get(endpoint) as Observable<IHabit[]>;
     }
 
     // in the development environment, we should return fake data
@@ -40,7 +40,7 @@ export class HabitService extends AbstractService {
   public getHabit(habitId: Id) {
     if (environment.production) {
       const endpoint: string = createUrl(`/habits/${habitId}`);
-      return this.http.get(endpoint) as Observable<Habit>;
+      return this.http.get(endpoint) as Observable<IHabit>;
     }
 
     console.debug(habitId);
@@ -51,7 +51,7 @@ export class HabitService extends AbstractService {
   public createHabit(model: Habit) {
     if (environment.production) {
       const endpoint: string = createUrl("/habits");
-      return this.http.post(endpoint, model) as Observable<Habit>;
+      return this.http.post(endpoint, model) as Observable<IHabit>;
     }
 
     console.debug(model);
@@ -62,7 +62,7 @@ export class HabitService extends AbstractService {
   public updateHabit(model: Habit) {
     if (environment.production) {
       const endpoint: string = createUrl("/habits");
-      return this.http.put(endpoint, model) as Observable<Habit>;
+      return this.http.put(endpoint, model) as Observable<IHabit>;
     }
 
     console.debug(model);
@@ -77,6 +77,6 @@ export class HabitService extends AbstractService {
     }
     
     console.debug(modelId);
-    return of();
+    return of(undefined);
   }
 }

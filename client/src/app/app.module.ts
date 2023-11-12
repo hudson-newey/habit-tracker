@@ -11,8 +11,20 @@ import { HabitListComponent } from "src/pages/habits/list/list.component";
 import { NewHabitPage } from "src/pages/habits/new/new.component";
 import { TasksService } from "src/services/tasks.service";
 import { GoalsService } from "src/services/goals.service";
+import { FormsModule } from "@angular/forms";
+import { HabitShowPageComponent } from "src/pages/habits/habit/show.component";
 
-const pages: any[] = [HabitListComponent, HabitComponent, NewHabitPage];
+const pages: any[] = [
+  // goals
+  
+  // habits
+  HabitListComponent,
+  HabitComponent,
+  NewHabitPage,
+  HabitShowPageComponent,
+
+  // tasks
+];
 
 const services: any[] = [HabitService, GoalsService, TasksService];
 
@@ -20,7 +32,7 @@ const components: any[] = [NavbarComponent];
 
 @NgModule({
   declarations: [AppComponent, ...components, ...pages],
-  imports: [CommonModule, BrowserModule, AppRoutingModule],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, FormsModule],
   providers: [HttpClient, HttpHandler, HttpBackend, ...services],
   bootstrap: [AppComponent],
 })

@@ -15,4 +15,8 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public Id!: Id;
   public Name!: string;
   public Description!: string;
+
+  public override get ViewUrl(): any[] {
+    return [`/habits`, this.Id];
+  }
 }
