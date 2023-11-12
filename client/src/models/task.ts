@@ -1,10 +1,10 @@
 import { Id } from "src/types/helpers";
 import { AbstractModel } from "./abstractModel";
 
-interface ITask {
-  Id: Id;
-  Name: string;
-  Description: string;
+export interface ITask {
+  Id?: Id;
+  Name?: string;
+  Description?: string;
 }
 
 export class Task extends AbstractModel<ITask> implements ITask {

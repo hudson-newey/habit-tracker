@@ -7,10 +7,7 @@ import { AbstractService } from "./abstract-service.service";
 import { Habit } from "src/models/habit";
 import { createFakeHabit } from "src/models/fakes/habit.fake";
 import { EmptyResponse } from "src/types/services";
-
-function createUrl(path: string): string {
-  return environment.endpoint + path;
-}
+import { createUrl } from "./helpers";
 
 @Injectable({ providedIn: "root" })
 export class HabitService extends AbstractService {
@@ -28,6 +25,8 @@ export class HabitService extends AbstractService {
     }
 
     // in the development environment, we should return fake data
+    console.debug("/habits");
+
     return of([
       createFakeHabit(),
       createFakeHabit(),
@@ -44,6 +43,7 @@ export class HabitService extends AbstractService {
       return this.http.get(endpoint) as Observable<Habit>;
     }
 
+    console.debug(habitId);
     return of(createFakeHabit());
   }
 
@@ -54,6 +54,7 @@ export class HabitService extends AbstractService {
       return this.http.post(endpoint, model) as Observable<Habit>;
     }
 
+    console.debug(model);
     return of(createFakeHabit());
   }
 
@@ -64,6 +65,7 @@ export class HabitService extends AbstractService {
       return this.http.put(endpoint, model) as Observable<Habit>;
     }
 
+    console.debug(model);
     return of(createFakeHabit());
   }
 
@@ -74,6 +76,7 @@ export class HabitService extends AbstractService {
       return this.http.delete(endpoint);
     }
     
+    console.debug(modelId);
     return of();
   }
 }

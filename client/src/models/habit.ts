@@ -1,10 +1,10 @@
 import { Id } from "src/types/helpers";
 import { AbstractModel } from "./abstractModel";
 
-interface IHabit {
-  Id: Id;
-  Name: string;
-  Description: string;
+export interface IHabit {
+  Id?: Id;
+  Name?: string;
+  Description?: string;
 }
 
 export class Habit extends AbstractModel<IHabit> implements IHabit {
