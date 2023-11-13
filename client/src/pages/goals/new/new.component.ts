@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-new-task-page",
+  selector: "app-new-goal-page",
   templateUrl: "new.component.html",
 })
-export class NewTaskPageComponent {
+export class NewGoalPageComponent {
   public constructor() {}
 }
