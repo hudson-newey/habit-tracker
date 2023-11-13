@@ -18,6 +18,7 @@ export class NewTaskPageComponent {
 
   protected submitForm(): void {
     const taskModel: Task = new Task(this.model);
+    taskModel.Completed = false;
 
     this.api
       .createTask(taskModel)

@@ -7,6 +7,7 @@
 </section>
 
 <section>
+  <h2>Remaining Tasks</h2>
   <table class="uk-table">
     <thead>
       <tr>
@@ -17,9 +18,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let model of tasks">
+      <tr *ngFor="let model of incompleteTasks">
         <td>
-          <input type="checkbox" class="uk-checkbox">
+          <input
+            [(ngModel)]="model.Completed"
+            (change)="updateTask(model)"
+            type="checkbox"
+            class="uk-checkbox"
+          />
         </td>
         <td>{{ model.Name }}</td>
         <td>{{ model.Description }}</td>
@@ -33,6 +39,44 @@
             [routerLink]="['/tasks', model.Id, 'delete']"
             class="uk-button-small uk-button-danger"
             >Delete</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr>
+
+<section>
+  <h2>Completed Tasks</h2>
+
+  <table class="uk-table uk-text-muted">
+    <thead>
+      <tr>
+        <th>Completed</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of completedTasks">
+        <td>
+          <input
+            [(ngModel)]="model.Completed"
+            (change)="updateTask(model)"
+            type="checkbox"
+            class="uk-checkbox"
+          />
+        </td>
+        <td>{{ model.Name }}</td>
+        <td>{{ model.Description }}</td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+            >View</a
           >
         </td>
       </tr>

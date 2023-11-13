@@ -20,9 +20,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let model of habits">
+      <tr *ngFor="let model of inCompleteHabits">
         <td>
-          <input type="checkbox" class="uk-checkbox" />
+          <input
+            (change)="completeHabit(model)"
+            type="checkbox"
+            class="uk-checkbox"
+          />
         </td>
         <td>{{ model.Name }}</td>
         <td>{{ model.Description }}</td>

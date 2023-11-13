@@ -18,6 +18,7 @@ export class NewGoalPageComponent {
 
   protected submitForm(): void {
     const goalModel: Goal = new Goal(this.model);
+    goalModel.Completed = false;
 
     this.api
       .createGoal(goalModel)

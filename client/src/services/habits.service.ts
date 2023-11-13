@@ -70,7 +70,7 @@ export class HabitService extends AbstractService {
   // PUT /habits/:habitId
   public updateHabit(model: Habit): Observable<ApiHttpResponse<IHabit>> {
     if (environment.production) {
-      const endpoint: string = createUrl("/habits");
+      const endpoint: string = createUrl(`/habits/${model.Id}`);
       return this.http.put(endpoint, model) as Observable<
         ApiHttpResponse<IHabit>
       >;

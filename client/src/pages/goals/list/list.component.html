@@ -10,6 +10,7 @@
   <table class="uk-table">
     <thead>
       <tr>
+        <th>Completed</th>
         <th>Name</th>
         <th>Description</th>
         <th>Action</th>
@@ -17,6 +18,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let model of goals">
+        <td>
+          <input
+            [(ngModel)]="model.Completed"
+            (change)="updateGoal(model)"
+            type="checkbox"
+            class="uk-checkbox"
+          />
+        </td>
         <td>{{ model.Name }}</td>
         <td>{{ model.Description }}</td>
         <td>

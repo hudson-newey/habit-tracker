@@ -12,12 +12,29 @@ export class TasksPageComponent implements OnInit {
 
   protected tasks: Task[] = [];
 
+  protected get completedTasks(): Task[] {
+    return this.tasks.filter((task) => task.Completed);
+  }
+
+  protected get incompleteTasks(): Task[] {
+    return this.tasks.filter((task) => !task.Completed);
+  }
+
   public ngOnInit(): void {
     this.api
       .getTasks()
       .pipe(take(1))
       .subscribe((response) => {
         this.tasks = response.data.map((model: ITask) => new Task(model));
+      });
+  }
+
+  public updateTask(model: Task): void {
+    this.api
+      .updateTask(model)
+      .pipe(take(1))
+      .subscribe((response) => {
+        model = new Task(response.data);
       });
   }
 }

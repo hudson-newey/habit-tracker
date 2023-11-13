@@ -6,6 +6,7 @@ export interface IHabit {
   Name?: string;
   Description?: string;
   AntiHabit?: boolean;
+  CompletedDates?: string[];
 }
 
 export class Habit extends AbstractModel<IHabit> implements IHabit {
@@ -17,6 +18,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public Name!: string;
   public Description!: string;
   public AntiHabit!: boolean;
+  public CompletedDates!: string[];
 
   public override get ViewUrl(): any[] {
     return [`/habits`, this.Id];

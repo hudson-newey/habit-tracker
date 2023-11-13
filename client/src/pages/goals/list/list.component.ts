@@ -20,4 +20,13 @@ export class GoalsPageComponent implements OnInit {
         this.goals = response.data.map((model: IGoal) => new Goal(model));
       });
   }
+
+  public updateGoal(model: Goal): void {
+    this.api
+      .updateGoal(model)
+      .pipe(take(1))
+      .subscribe((response) => {
+        model = new Goal(response.data);
+      });
+  }
 }

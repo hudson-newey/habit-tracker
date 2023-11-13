@@ -10,10 +10,11 @@
     type="text"
   />
 
-  <label [(ngModel)]="model.Description" for="new-task-description" class="uk-form-label">
+  <label for="new-task-description" class="uk-form-label">
     Task Description
   </label>
   <textarea
+    [(ngModel)]="model.Description"
     id="new-task-description"
     name="new-task-description"
     class="uk-textarea"
