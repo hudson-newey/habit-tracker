@@ -10,17 +10,17 @@
   <table class="uk-table">
     <thead>
       <tr>
-        <th>
-          <b>Name</b>
-        </th>
-        <th>
-          <b>Description</b>
-        </th>
-        <th><b>Action</b></th>
+        <th>Completed</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let model of tasks">
+        <td>
+          <input type="checkbox" class="uk-checkbox">
+        </td>
         <td>{{ model.Name }}</td>
         <td>{{ model.Description }}</td>
         <td>

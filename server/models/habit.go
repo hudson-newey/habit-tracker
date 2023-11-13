@@ -4,4 +4,5 @@ type Habit struct {
 	Id          string
 	Name        string
 	Description string
+	AntiHabit   bool // if the habit is not to do something e.g. smoking
 }

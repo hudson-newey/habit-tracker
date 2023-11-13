@@ -26,6 +26,7 @@ import { ContactUsPageComponent } from "src/pages/contact-us/contact-us.componen
 import { TaskPageComponent } from "src/pages/tasks/task/show.component";
 import { GoalPageComponent } from "src/pages/goals/goal/show.component";
 import { HelpPageComponent } from "src/pages/help/help.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 const pages: any[] = [
   // goals
@@ -33,7 +34,7 @@ const pages: any[] = [
   NewGoalPageComponent,
   GoalPageComponent,
   DeleteGoalPageComponent,
-  
+
   // habits
   HabitListComponent,
   HabitComponent,
@@ -62,7 +63,14 @@ const components: any[] = [NavbarComponent];
 
 @NgModule({
   declarations: [AppComponent, ...components, ...pages],
-  imports: [CommonModule, BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    FontAwesomeModule,
+  ],
   providers: [...services],
   bootstrap: [AppComponent],
 })

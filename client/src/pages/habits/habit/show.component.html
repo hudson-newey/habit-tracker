@@ -1,5 +1,12 @@
 <h1>Habit: {{ model?.Name }}</h1>
 
 <p>
-    {{ model?.Description }}
+  {{ model?.Description }}
 </p>
+
+<hr>
+
+<span>
+  Is Anti Habit:
+  <fa-icon [icon]="model?.AntiHabit ? faCheck : faXmark"></fa-icon>
+</span>

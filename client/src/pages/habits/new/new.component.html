@@ -22,13 +22,29 @@
   ></textarea>
 
   <label for="associated-goal" class="uk-form-label">Associated Goal</label>
-  <input type="text" name="associated-goal" id="associated-goal" class="uk-input">
+  <input
+    type="text"
+    name="associated-goal"
+    id="associated-goal"
+    class="uk-input"
+  />
 
-  <button
-    (click)="submitForm()"
-    type="submit"
-    class="uk-button uk-button-primary uk-margin-top"
-  >
-    Add New Task
-  </button>
+  <input
+    [(ngModel)]="model.AntiHabit"
+    type="checkbox"
+    name="anti-habit"
+    id="anti-habit"
+    class="uk-checkbox"
+  />
+  <label for="anti-habit" class="uk-form-label">Anti Habit</label>
+
+  <div>
+    <button
+      (click)="submitForm()"
+      type="submit"
+      class="uk-button uk-button-primary uk-margin-top"
+    >
+      Add New Task
+    </button>
+  </div>
 </form>
