@@ -3,6 +3,7 @@
 <form #ngForm action="">
   <label for="new-task-input" class="uk-form-label">Goal Name</label>
   <input
+    [(ngModel)]="model.Name"
     id="new-task-input"
     name="new-task-input"
     class="uk-input"
@@ -13,6 +14,7 @@
     Goal Description
   </label>
   <textarea
+    [(ngModel)]="model.Description"
     id="new-task-description"
     name="new-task-description"
     class="uk-textarea"
@@ -29,6 +31,7 @@
   <input id="associated-tasks" type="text" class="uk-input">
 
   <button
+    (click)="submitForm()"
     type="submit"
     class="uk-button uk-button-primary uk-margin-top"
   >

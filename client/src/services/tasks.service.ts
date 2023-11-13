@@ -16,8 +16,12 @@ export class TasksService {
   ) {
   }
 
+  public getTodaysRemainingTasks(): Observable<ApiHttpResponse<ITask[]>> {
+    throw new Error("Not implemented");
+  }
+
   // GET /tasks
-  public getTodaysTasks(): Observable<ApiHttpResponse<ITask[]>> {
+  public getTasks(): Observable<ApiHttpResponse<ITask[]>> {
     if (environment.production) {
       const endpoint: string = createUrl("/tasks");
       return this.http.get(endpoint) as Observable<ApiHttpResponse<ITask[]>>

@@ -38,7 +38,7 @@ export class DeleteTaskPageComponent implements OnInit {
       .deleteTask(this.model?.Id)
       .pipe(take(1))
       .subscribe(() =>
-        this.router.navigateByUrl("/")
+        this.router.navigateByUrl("/tasks")
       );
   }
 }

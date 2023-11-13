@@ -1,3 +1,41 @@
-<h1>Tasks</h1>
+<h1>All Tasks</h1>
 
-<a routerLink="/tasks/new" class="uk-button uk-button-default">New Task</a>
+<section>
+  <nav>
+    <a routerLink="/tasks/new" class="uk-button uk-button-default">New Task</a>
+  </nav>
+</section>
+
+<section>
+  <table class="uk-table">
+    <thead>
+      <tr>
+        <th>
+          <b>Name</b>
+        </th>
+        <th>
+          <b>Description</b>
+        </th>
+        <th><b>Action</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of tasks">
+        <td>{{ model.Name }}</td>
+        <td>{{ model.Description }}</td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+            >View</a
+          >
+          <a
+            [routerLink]="['/tasks', model.Id, 'delete']"
+            class="uk-button-small uk-button-danger"
+            >Delete</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -9,7 +9,10 @@ import { HabitService } from "src/services/habits.service";
   templateUrl: "new.component.html",
 })
 export class NewHabitPage {
-  public constructor(private router: Router, private api: HabitService) {}
+  public constructor(
+    private router: Router,
+    private api: HabitService,
+  ) {}
 
   protected model: IHabit = {};
 

@@ -1,3 +1,41 @@
 <h1>Goals</h1>
 
-<a routerLink="/goals/new" class="uk-button uk-button-default">New Goal</a>
+<section>
+  <nav>
+    <a routerLink="/goals/new" class="uk-button uk-button-default">New Goal</a>
+  </nav>
+</section>
+
+<section>
+  <table class="uk-table">
+    <thead>
+      <tr>
+        <th>
+          <b>Name</b>
+        </th>
+        <th>
+          <b>Description</b>
+        </th>
+        <th><b>Action</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of goals">
+        <td>{{ model.Name }}</td>
+        <td>{{ model.Description }}</td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+            >View</a
+          >
+          <a
+            [routerLink]="['/goals', model.Id, 'delete']"
+            class="uk-button-small uk-button-danger"
+            >Delete</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

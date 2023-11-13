@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/models/habit";
 import { HabitService } from "src/services/habits.service";

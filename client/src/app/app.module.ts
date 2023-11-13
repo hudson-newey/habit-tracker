@@ -15,16 +15,16 @@ import { FormsModule } from "@angular/forms";
 import { HabitShowPageComponent } from "src/pages/habits/habit/show.component";
 import { GoalsPageComponent } from "src/pages/goals/list/list.component";
 import { NewGoalPageComponent } from "src/pages/goals/new/new.component";
-import { GoalPageComponent } from "src/pages/goals/goal/goal.component";
 import { DeleteGoalPageComponent } from "src/pages/goals/delete/delete.component";
 import { TasksPageComponent } from "src/pages/tasks/list/list.component";
 import { NewTaskPageComponent } from "src/pages/tasks/new/new.component";
-import { TaskPageComponent } from "src/pages/tasks/task/task.component";
 import { DeleteTaskPageComponent } from "src/pages/tasks/delete/delete.component";
 import { DayPageComponent } from "src/pages/day/day.component";
 import { SchedulePageComponent } from "src/pages/schedule/schedule.component";
 import { AboutPageComponent } from "src/pages/about/about.component";
 import { ContactUsPageComponent } from "src/pages/contact-us/contact-us.component";
+import { TaskPageComponent } from "src/pages/tasks/task/show.component";
+import { GoalPageComponent } from "src/pages/goals/goal/show.component";
 
 const pages: any[] = [
   // goals
