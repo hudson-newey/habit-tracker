@@ -25,6 +25,7 @@ import { AboutPageComponent } from "src/pages/about/about.component";
 import { ContactUsPageComponent } from "src/pages/contact-us/contact-us.component";
 import { TaskPageComponent } from "src/pages/tasks/task/show.component";
 import { GoalPageComponent } from "src/pages/goals/goal/show.component";
+import { HelpPageComponent } from "src/pages/help/help.component";
 
 const pages: any[] = [
   // goals
@@ -52,6 +53,7 @@ const pages: any[] = [
   // site
   AboutPageComponent,
   ContactUsPageComponent,
+  HelpPageComponent,
 ];
 
 const services: any[] = [HabitService, GoalsService, TasksService];

@@ -11,6 +11,7 @@ import { DeleteHabitPageComponent } from "src/pages/habits/delete/delete.compone
 import { HabitShowPageComponent } from "src/pages/habits/habit/show.component";
 import { HabitListComponent } from "src/pages/habits/list/list.component";
 import { NewHabitPage } from "src/pages/habits/new/new.component";
+import { HelpPageComponent } from "src/pages/help/help.component";
 import { SchedulePageComponent } from "src/pages/schedule/schedule.component";
 import { DeleteTaskPageComponent } from "src/pages/tasks/delete/delete.component";
 import { TasksPageComponent } from "src/pages/tasks/list/list.component";
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: "goals/new", component: NewGoalPageComponent },
   { path: "goals/:id", component: GoalPageComponent },
   { path: "goals/:id/delete", component: DeleteGoalPageComponent },
-  
+
   // habits
   { path: "", component: HabitListComponent },
   { path: "habits/new", component: NewHabitPage },
@@ -42,7 +43,8 @@ const routes: Routes = [
 
   // site
   { path: "about", component: AboutPageComponent },
-  { path: "contact-us", component: ContactUsPageComponent }
+  { path: "contact-us", component: ContactUsPageComponent },
+  { path: "help", component: HelpPageComponent },
 ];
 
 @NgModule({
