@@ -16,13 +16,12 @@ func main() {
 	router.Use(cors.Default())
 
 	// create database connection
-	dbClient, ctx, cancel, err := databaseService.Connect("mongodb://localhost:27017")
+	dbClient, ctx, _, err := databaseService.Connect("mongodb://127.0.0.1:27017")
 
 	var database models.Database
 
 	database.Client = dbClient
 	database.Ctx = ctx
-	database.Cancel = cancel
 
 	if err != nil {
 		panic(err)

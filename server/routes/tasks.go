@@ -79,6 +79,10 @@ func ListTasks(database models.Database) func(context *gin.Context) {
 			return
 		}
 
+		if responseBody == nil {
+			responseBody = []models.Task{}
+		}
+
 		// Return the response body as a JSON response
 		helpers.Success(context, responseBody)
 	}

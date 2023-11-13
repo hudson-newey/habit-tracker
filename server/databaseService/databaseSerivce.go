@@ -2,7 +2,6 @@ package databaseService
 
 import (
 	"context"
-	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -28,12 +27,10 @@ func Close(client *mongo.Client, ctx context.Context,
 // context.Context will be used set deadlines for process.
 // context.CancelFunc will be used to cancel context and
 // resource associated with it.
-func Connect(uri string) (*mongo.Client, context.Context, context.CancelFunc, error) {
-
-	ctx, cancel := context.WithTimeout(context.Background(),
-		30*time.Second)
+func Connect(uri string) (*mongo.Client, context.Context, any, error) {
+	ctx := context.Background()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
-	return client, ctx, cancel, err
+	return client, ctx, nil, err
 }
 
 // insertOne is a user defined method, used to insert

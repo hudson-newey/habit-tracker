@@ -79,6 +79,10 @@ func ListGoals(database models.Database) func(context *gin.Context) {
 			return
 		}
 
+		if responseBody == nil {
+			responseBody = []models.Goal{}
+		}
+
 		// Return the response body as a JSON response
 		helpers.Success(context, responseBody)
 	}
