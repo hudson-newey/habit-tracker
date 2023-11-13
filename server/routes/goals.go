@@ -12,10 +12,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// POST /tasks
-func CreateTask(database models.Database) func(context *gin.Context) {
+// POST /goals
+func CreateGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var requestBody models.Task
+		var requestBody models.Goal
 
 		if err := context.BindJSON(&requestBody); err != nil {
 			log.Println(err)
@@ -23,7 +23,7 @@ func CreateTask(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "tasks", requestBody)
+		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "goals", requestBody)
 
 		if err != nil {
 			log.Println(err)
@@ -31,7 +31,7 @@ func CreateTask(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		var responseBody models.Task
+		var responseBody models.Goal
 		id := result.InsertedID.(primitive.ObjectID).Hex()
 
 		responseBody = requestBody
@@ -41,13 +41,13 @@ func CreateTask(database models.Database) func(context *gin.Context) {
 	}
 }
 
-// GET /tasks
-func ListTasks(database models.Database) func(context *gin.Context) {
+// GET /goals
+func ListGoals(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var responseBody []models.Task
+		var responseBody []models.Goal
 
-		// Retrieve all documents from the tasks collection
-		cursor, err := database.Client.Database("habits").Collection("tasks").Find(database.Ctx, bson.D{})
+		// Retrieve all documents from the goals collection
+		cursor, err := database.Client.Database("habits").Collection("goals").Find(database.Ctx, bson.D{})
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -57,11 +57,11 @@ func ListTasks(database models.Database) func(context *gin.Context) {
 
 		// Iterate through the cursor and append each document to the response body
 		for cursor.Next(database.Ctx) {
-			var task models.Task
+			var goal models.Goal
 
-			err := cursor.Decode(&task)
+			err := cursor.Decode(&goal)
 
-			task.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
+			goal.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
 
 			if err != nil {
 				log.Println(err)
@@ -69,7 +69,7 @@ func ListTasks(database models.Database) func(context *gin.Context) {
 				return
 			}
 
-			responseBody = append(responseBody, task)
+			responseBody = append(responseBody, goal)
 		}
 
 		// Check if there was an error during iteration
@@ -84,8 +84,8 @@ func ListTasks(database models.Database) func(context *gin.Context) {
 	}
 }
 
-// GET /tasks/:id
-func GetTask(database models.Database) func(context *gin.Context) {
+// GET /goals/:id
+func GetGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
@@ -100,22 +100,22 @@ func GetTask(database models.Database) func(context *gin.Context) {
 
 		// Find the document with the given _id
 		filter := bson.M{"_id": objectId}
-		var task models.Task
-		err = database.Client.Database("habits").Collection("tasks").FindOne(database.Ctx, filter).Decode(&task)
+		var goal models.Goal
+		err = database.Client.Database("habits").Collection("goals").FindOne(database.Ctx, filter).Decode(&goal)
 		if err != nil {
 			log.Println(err)
 			helpers.NotFoundError(context)
 			return
 		}
 
-		task.Id = id
+		goal.Id = id
 
-		helpers.Success(context, task)
+		helpers.Success(context, goal)
 	}
 }
 
-// PUT /tasks/:id
-func UpdateTask(database models.Database) func(context *gin.Context) {
+// PUT /goals/:id
+func UpdateGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
@@ -128,33 +128,33 @@ func UpdateTask(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		// Get the task model from the request body
-		var task models.Task
-		if err := context.ShouldBindJSON(&task); err != nil {
+		// Get the goal model from the request body
+		var goal models.Goal
+		if err := context.ShouldBindJSON(&goal); err != nil {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
 		}
 
-		// Set the task's ID to the given _id
-		task.Id = id
+		// Set the goal's ID to the given _id
+		goal.Id = id
 
 		// Update the document with the given _id
 		filter := bson.M{"_id": objectId}
-		update := bson.M{"$set": task}
-		_, err = database.Client.Database("habits").Collection("tasks").UpdateOne(database.Ctx, filter, update)
+		update := bson.M{"$set": goal}
+		_, err = database.Client.Database("habits").Collection("goals").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		helpers.Success(context, task)
+		helpers.Success(context, goal)
 	}
 }
 
-// DELETE /tasks/:id
-func DeleteTask(database models.Database) func(context *gin.Context) {
+// DELETE /goals/:id
+func DeleteGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
@@ -169,7 +169,7 @@ func DeleteTask(database models.Database) func(context *gin.Context) {
 
 		// Find the document with the given _id and delete it
 		filter := bson.M{"_id": objectId}
-		result, err := database.Client.Database("habits").Collection("tasks").DeleteOne(database.Ctx, filter)
+		result, err := database.Client.Database("habits").Collection("goals").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)

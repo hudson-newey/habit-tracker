@@ -3,7 +3,6 @@ import { Id } from "src/types/helpers";
 interface IAbstractModel {
   Id: Id;
   toString: () => string;
-  toJSON: () => string;
 }
 
 export abstract class AbstractModel<T> implements IAbstractModel {
@@ -17,10 +16,6 @@ export abstract class AbstractModel<T> implements IAbstractModel {
     return JSON.stringify(this);
   }
 
-  public toJSON(): string {
-    return JSON.stringify(this);
-  }
-  
   public get ViewUrl(): any[] {
     throw new Error("ViewUrl not implemented");
   }

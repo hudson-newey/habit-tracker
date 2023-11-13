@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Task } from "src/models/task";
 import { TasksService } from "src/services/tasks.service";
+import { Id } from "src/types/helpers";
 
 @Component({
   selector: "app-delete-task-page",
@@ -18,13 +19,13 @@ export class DeleteTaskPageComponent implements OnInit {
   protected model?: Task;
 
   public ngOnInit(): void {
-    const modelId: number = Number(this.route.snapshot.paramMap.get("id"));
+    const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
 
     this.api
       .getTask(modelId)
       .pipe(take(1))
-      .subscribe((model) => {
-        this.model = new Task(model);
+      .subscribe((response) => {
+        this.model = new Task(response.data);
       });
   }
 

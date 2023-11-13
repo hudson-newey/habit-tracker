@@ -13,14 +13,11 @@ export class HabitListComponent implements OnInit {
   protected habits: Habit[] = [];
 
   public ngOnInit(): void {
-    // this.api
-    //   .getHabits()
-    //   .pipe(take(1))
-    //   .subscribe((models: IHabit[]) => {
-    //     this.habits = models.map((model: IHabit) => new Habit(model));
-    //   });
-    this.api.getHabits().subscribe(
-      (response) => { console.log(response); },
-      (error) => { console.log(error); });
+    this.api
+      .getHabits()
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.habits = response.data.map((model: IHabit) => new Habit(model));
+      });
   }
 }

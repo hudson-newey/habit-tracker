@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/models/habit";
 import { HabitService } from "src/services/habits.service";
+import { Id } from "src/types/helpers";
 
 @Component({
   selector: "app-habit-page",
@@ -17,13 +18,13 @@ export class HabitShowPageComponent implements OnInit {
   protected model?: Habit;
 
   public ngOnInit(): void {
-    const modelId: number = Number(this.route.snapshot.paramMap.get("id"));
+    const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
     
     this.api
       .getHabit(modelId)
       .pipe(take(1))
-      .subscribe((model: IHabit) => {
-        this.model = new Habit(model);
+      .subscribe((response) => {
+        this.model = new Habit(response.data);
       });
   }
 }
