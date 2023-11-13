@@ -10,11 +10,10 @@ import { Id } from "src/types/helpers";
 import { EmptyResponse } from "src/types/services";
 
 @Injectable({ providedIn: "root" })
-export class TasksService extends AbstractService {
+export class TasksService {
   public constructor(
     public http: HttpClient,
   ) {
-    super();
   }
 
   // GET /tasks

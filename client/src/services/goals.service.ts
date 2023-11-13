@@ -37,7 +37,7 @@ export class GoalsService extends AbstractService {
   }
 
   // GET /goals/:goalId
-  public getGoal(goalId: Id) {
+  public getGoal(goalId: Id): Observable<IGoal> {
     if (environment.production) {
       const endpoint: string = createUrl(`/goals/${goalId}`);
       return this.http.get(endpoint) as Observable<IGoal>;

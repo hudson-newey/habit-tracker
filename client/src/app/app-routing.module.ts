@@ -1,9 +1,10 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AboutComponent as AboutPageComponent } from "src/pages/about/about.component";
-import { ContactUsPage } from "src/pages/contact-us/contact-us.component";
+import { AboutPageComponent } from "src/pages/about/about.component";
+import { ContactUsPageComponent } from "src/pages/contact-us/contact-us.component";
 import { DayPageComponent } from "src/pages/day/day.component";
 import { DeleteGoalPageComponent } from "src/pages/goals/delete/delete.component";
+import { GoalPageComponent } from "src/pages/goals/goal/goal.component";
 import { GoalsPageComponent } from "src/pages/goals/list/list.component";
 import { NewGoalPageComponent } from "src/pages/goals/new/new.component";
 import { DeleteHabitPageComponent } from "src/pages/habits/delete/delete.component";
@@ -20,7 +21,7 @@ const routes: Routes = [
   // goals
   { path: "goals", component: GoalsPageComponent },
   { path: "goals/new", component: NewGoalPageComponent },
-  { path: "goals/:id", component: NewGoalPageComponent },
+  { path: "goals/:id", component: GoalPageComponent },
   { path: "goals/:id/delete", component: DeleteGoalPageComponent },
   
   // habits
@@ -41,7 +42,7 @@ const routes: Routes = [
 
   // site
   { path: "about", component: AboutPageComponent },
-  { path: "contact-us", component: ContactUsPage }
+  { path: "contact-us", component: ContactUsPageComponent }
 ];
 
 @NgModule({

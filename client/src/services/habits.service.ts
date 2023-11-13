@@ -37,7 +37,7 @@ export class HabitService extends AbstractService {
   }
 
   // GET /habits/:habitId
-  public getHabit(habitId: Id) {
+  public getHabit(habitId: Id): Observable<IHabit> {
     if (environment.production) {
       const endpoint: string = createUrl(`/habits/${habitId}`);
       return this.http.get(endpoint) as Observable<IHabit>;
@@ -48,7 +48,7 @@ export class HabitService extends AbstractService {
   }
 
   // POST /habits
-  public createHabit(model: Habit) {
+  public createHabit(model: Habit): Observable<IHabit> {
     if (environment.production) {
       const endpoint: string = createUrl("/habits");
       return this.http.post(endpoint, model) as Observable<IHabit>;
@@ -59,7 +59,7 @@ export class HabitService extends AbstractService {
   }
 
   // PUT /habits/:habitId
-  public updateHabit(model: Habit) {
+  public updateHabit(model: Habit): Observable<IHabit> {
     if (environment.production) {
       const endpoint: string = createUrl("/habits");
       return this.http.put(endpoint, model) as Observable<IHabit>;
