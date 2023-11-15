@@ -24,6 +24,7 @@
         <td>
           <input
             (change)="completeHabit(model)"
+            [disabled]="model.AntiHabit"
             type="checkbox"
             class="uk-checkbox"
           />
@@ -52,3 +53,33 @@
     </tbody>
   </table>
 </section>
+
+<hr>
+
+<section>
+  <h2>Completed Tasks</h2>
+
+  <table class="uk-table uk-text-muted">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of completedHabits">
+        <td>{{ model.Name }}</td>
+        <td>{{ model.Description }}</td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+            >View</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+

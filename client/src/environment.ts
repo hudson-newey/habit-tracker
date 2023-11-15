@@ -4,6 +4,6 @@ interface IEnvironment {
 }
 
 export const environment: IEnvironment = {
-  production: true,
+  production: false,
   endpoint: "http://localhost:8081",
 };

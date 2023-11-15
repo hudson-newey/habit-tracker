@@ -10,3 +10,13 @@
   Is Anti Habit:
   <fa-icon [icon]="model?.AntiHabit ? faCheck : faXmark"></fa-icon>
 </span>
+
+<hr>
+
+<h2>Completed Dates</h2>
+
+<ul>
+  <li *ngFor="let date of model?.CompletedDates">
+    {{ date | date }}
+  </li>
+</ul>

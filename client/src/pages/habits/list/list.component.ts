@@ -21,6 +21,10 @@ export class HabitListComponent implements OnInit {
     return this.habits.filter((habit: Habit) => !this.isCompletedToday(habit));
   }
 
+  protected get completedHabits(): Habit[] {
+    return this.habits.filter((habit: Habit) => this.isCompletedToday(habit));
+  }
+
   public ngOnInit(): void {
     this.api
       .getHabits()
@@ -46,7 +50,7 @@ export class HabitListComponent implements OnInit {
   }
 
   protected isCompletedToday(task: Habit): boolean {
-    const lastCompletedDate = task.CompletedDates?.pop()?.split("T")[0];
+    const lastCompletedDate = task.CompletedDates?.at(-1)?.split("T")[0];
     const today: string = new Date()?.toISOString()?.split("T")[0];
 
     return lastCompletedDate === today;

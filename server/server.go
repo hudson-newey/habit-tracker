@@ -49,6 +49,13 @@ func main() {
 	router.PUT("/tasks/:id", routes.UpdateTask(database))
 	router.DELETE("/tasks/:id", routes.DeleteTask(database))
 
+	// logbook
+
+	// schedule
+	// e.g. calendar, daily todo tasks left
+
+	// ai routes
+
 	// generic app routes
 	router.GET("/", routes.RedirectRoute)
 

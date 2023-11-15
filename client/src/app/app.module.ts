@@ -2,10 +2,9 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HabitComponent } from "src/components/habit/habit.component";
 import { NavbarComponent } from "src/components/navbar/navbar.component";
 import { HabitService } from "src/services/habits.service";
-import { HttpBackend, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { HabitListComponent } from "src/pages/habits/list/list.component";
 import { NewHabitPage } from "src/pages/habits/new/new.component";
@@ -37,7 +36,6 @@ const pages: any[] = [
 
   // habits
   HabitListComponent,
-  HabitComponent,
   NewHabitPage,
   HabitShowPageComponent,
 
