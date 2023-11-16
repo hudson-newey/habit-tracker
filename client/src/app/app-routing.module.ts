@@ -1,22 +1,22 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { AboutPageComponent } from "src/pages/about/about.component";
-import { ContactUsPageComponent } from "src/pages/contact-us/contact-us.component";
-import { DayPageComponent } from "src/pages/day/day.component";
-import { DeleteGoalPageComponent } from "src/pages/goals/delete/delete.component";
-import { GoalPageComponent } from "src/pages/goals/goal/show.component";
-import { GoalsPageComponent } from "src/pages/goals/list/list.component";
-import { NewGoalPageComponent } from "src/pages/goals/new/new.component";
-import { DeleteHabitPageComponent } from "src/pages/habits/delete/delete.component";
-import { HabitShowPageComponent } from "src/pages/habits/habit/show.component";
-import { HabitListComponent } from "src/pages/habits/list/list.component";
-import { NewHabitPage } from "src/pages/habits/new/new.component";
-import { HelpPageComponent } from "src/pages/help/help.component";
-import { SchedulePageComponent } from "src/pages/schedule/schedule.component";
-import { DeleteTaskPageComponent } from "src/pages/tasks/delete/delete.component";
-import { TasksPageComponent } from "src/pages/tasks/list/list.component";
-import { NewTaskPageComponent } from "src/pages/tasks/new/new.component";
-import { TaskPageComponent } from "src/pages/tasks/task/show.component";
+import { Routes, RouterModule } from "@angular/router";
+import { AboutPageComponent } from "./pages/about/about.component";
+import { ContactUsPageComponent } from "./pages/contact-us/contact-us.component";
+import { DayPageComponent } from "./pages/day/day.component";
+import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
+import { GoalPageComponent } from "./pages/goals/goal/show.component";
+import { GoalsPageComponent } from "./pages/goals/list/list.component";
+import { NewGoalPageComponent } from "./pages/goals/new/new.component";
+import { DeleteHabitPageComponent } from "./pages/habits/delete/delete.component";
+import { HabitShowPageComponent } from "./pages/habits/habit/show.component";
+import { HabitListComponent } from "./pages/habits/list/list.component";
+import { NewHabitPage } from "./pages/habits/new/new.component";
+import { HelpPageComponent } from "./pages/help/help.component";
+import { SchedulePageComponent } from "./pages/schedule/schedule.component";
+import { DeleteTaskPageComponent } from "./pages/tasks/delete/delete.component";
+import { TasksPageComponent } from "./pages/tasks/list/list.component";
+import { NewTaskPageComponent } from "./pages/tasks/new/new.component";
+import { TaskPageComponent } from "./pages/tasks/task/show.component";
 
 const routes: Routes = [
   // goals

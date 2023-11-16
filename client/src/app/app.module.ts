@@ -1,31 +1,33 @@
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { NavbarComponent } from "src/components/navbar/navbar.component";
-import { HabitService } from "src/services/habits.service";
-import { HttpClientModule } from "@angular/common/http";
-import { CommonModule } from "@angular/common";
-import { HabitListComponent } from "src/pages/habits/list/list.component";
-import { NewHabitPage } from "src/pages/habits/new/new.component";
-import { TasksService } from "src/services/tasks.service";
-import { GoalsService } from "src/services/goals.service";
-import { FormsModule } from "@angular/forms";
-import { HabitShowPageComponent } from "src/pages/habits/habit/show.component";
-import { GoalsPageComponent } from "src/pages/goals/list/list.component";
-import { NewGoalPageComponent } from "src/pages/goals/new/new.component";
-import { DeleteGoalPageComponent } from "src/pages/goals/delete/delete.component";
-import { TasksPageComponent } from "src/pages/tasks/list/list.component";
-import { NewTaskPageComponent } from "src/pages/tasks/new/new.component";
-import { DeleteTaskPageComponent } from "src/pages/tasks/delete/delete.component";
-import { DayPageComponent } from "src/pages/day/day.component";
-import { SchedulePageComponent } from "src/pages/schedule/schedule.component";
-import { AboutPageComponent } from "src/pages/about/about.component";
-import { ContactUsPageComponent } from "src/pages/contact-us/contact-us.component";
-import { TaskPageComponent } from "src/pages/tasks/task/show.component";
-import { GoalPageComponent } from "src/pages/goals/goal/show.component";
-import { HelpPageComponent } from "src/pages/help/help.component";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { AboutPageComponent } from "./pages/about/about.component";
+import { ContactUsPageComponent } from "./pages/contact-us/contact-us.component";
+import { DayPageComponent } from "./pages/day/day.component";
+import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
+import { GoalPageComponent } from "./pages/goals/goal/show.component";
+import { GoalsPageComponent } from "./pages/goals/list/list.component";
+import { NewGoalPageComponent } from "./pages/goals/new/new.component";
+import { HabitShowPageComponent } from "./pages/habits/habit/show.component";
+import { HabitListComponent } from "./pages/habits/list/list.component";
+import { NewHabitPage } from "./pages/habits/new/new.component";
+import { HelpPageComponent } from "./pages/help/help.component";
+import { SchedulePageComponent } from "./pages/schedule/schedule.component";
+import { DeleteTaskPageComponent } from "./pages/tasks/delete/delete.component";
+import { TasksPageComponent } from "./pages/tasks/list/list.component";
+import { NewTaskPageComponent } from "./pages/tasks/new/new.component";
+import { TaskPageComponent } from "./pages/tasks/task/show.component";
+import { GoalsService } from "./services/goals/goals.service";
+import { HabitsService } from "./services/habits/habits.service";
+import { TasksService } from "./services/tasks/tasks.service";
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const pages: any[] = [
   // goals
@@ -53,9 +55,11 @@ const pages: any[] = [
   AboutPageComponent,
   ContactUsPageComponent,
   HelpPageComponent,
+  RegisterComponent,
+  LoginComponent,
 ];
 
-const services: any[] = [HabitService, GoalsService, TasksService];
+const services: any[] = [HabitsService, GoalsService, TasksService];
 
 const components: any[] = [NavbarComponent];
 
