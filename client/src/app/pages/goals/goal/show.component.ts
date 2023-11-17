@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
-import { GoalsService } from "src/app/services/goals.service";
+import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({

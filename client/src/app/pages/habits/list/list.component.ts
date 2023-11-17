@@ -2,14 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Habit, IHabit } from "src/app/models/habit";
-import { HabitService } from "src/app/services/habits.service";
+import { HabitsService } from "src/app/services/habits/habits.service";
 
 @Component({
   selector: "app-list-page",
   templateUrl: "list.component.html",
 })
 export class HabitListComponent implements OnInit {
-  public constructor(private api: HabitService) {}
+  public constructor(private api: HabitsService) {}
 
   protected habits: Habit[] = [];
 

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { take } from "rxjs";
 import { IGoal, Goal } from "src/app/models/goal";
-import { GoalsService } from "src/app/services/goals.service";
+import { GoalsService } from "src/app/services/goals/goals.service";
 
 @Component({
   selector: "app-new-goal-page",

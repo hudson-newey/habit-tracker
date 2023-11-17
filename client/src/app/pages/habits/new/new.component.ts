@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { take } from "rxjs";
 import { IHabit, Habit } from "src/app/models/habit";
-import { HabitService } from "src/app/services/habits.service";
+import { HabitsService } from "src/app/services/habits/habits.service";
 
 @Component({
   selector: "app-new-page",
@@ -11,7 +11,7 @@ import { HabitService } from "src/app/services/habits.service";
 export class NewHabitPage {
   public constructor(
     private router: Router,
-    private api: HabitService,
+    private api: HabitsService,
   ) {}
 
   protected model: IHabit = {};

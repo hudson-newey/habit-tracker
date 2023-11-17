@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { Task, ITask } from "src/app/models/task";
-import { TasksService } from "src/app/services/tasks.service";
+import { TasksService } from "src/app/services/tasks/tasks.service";
 
 @Component({
   selector: "app-tasks-page",

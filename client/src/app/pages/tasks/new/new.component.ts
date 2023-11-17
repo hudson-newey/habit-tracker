@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { take } from "rxjs";
 import { ITask, Task } from "src/app/models/task";
-import { TasksService } from "src/app/services/tasks.service";
+import { TasksService } from "src/app/services/tasks/tasks.service";
 
 @Component({
   selector: "app-new-task-page",

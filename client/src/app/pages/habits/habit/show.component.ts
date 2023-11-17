@@ -3,8 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Habit } from "src/app/models/habit";
-import { HabitService } from "src/app/services/habits.service";
 import { Id } from "src/app/types/helpers";
+import { HabitsService } from "src/app/services/habits/habits.service";
 
 @Component({
   selector: "app-habit-page",
@@ -12,7 +12,7 @@ import { Id } from "src/app/types/helpers";
 })
 export class HabitShowPageComponent implements OnInit {
   public constructor(
-    private api: HabitService,
+    private api: HabitsService,
     private route: ActivatedRoute
   ) {}
 

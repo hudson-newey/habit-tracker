@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { take } from "rxjs";
 import { Habit } from "src/app/models/habit";
-import { HabitService } from "src/app/services/habits.service";
+import { HabitsService } from "src/app/services/habits/habits.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
@@ -11,7 +11,7 @@ import { Id } from "src/app/types/helpers";
 })
 export class DeleteHabitPageComponent implements OnInit {
   public constructor(
-    private api: HabitService,
+    private api: HabitsService,
     private route: ActivatedRoute,
     private router: Router
   ) {}

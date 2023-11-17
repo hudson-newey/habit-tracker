@@ -40,7 +40,7 @@
             class="uk-button-small uk-button-primary"
           >
             View
-          </a>
+          </a><br/>
 
           <a
             [routerLink]="['/habits', model.Id, 'delete']"
@@ -57,13 +57,14 @@
 <hr>
 
 <section>
-  <h2>Completed Tasks</h2>
+  <h2>Completed Habits</h2>
 
   <table class="uk-table uk-text-muted">
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Anti Habit</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -71,6 +72,9 @@
       <tr *ngFor="let model of completedHabits">
         <td>{{ model.Name }}</td>
         <td>{{ model.Description }}</td>
+        <td>
+          <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
+        </td>
         <td>
           <a
             [routerLink]="model.ViewUrl"
