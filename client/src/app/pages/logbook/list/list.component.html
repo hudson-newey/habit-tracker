@@ -9,19 +9,16 @@
 </section>
 
 <section>
-  <h2>Remaining Tasks</h2>
   <table class="uk-table">
     <thead>
       <tr>
         <th>Name</th>
-        <th>Description</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let model of logbooks">
         <td>{{ model.Name }}</td>
-        <td>{{ model.Content }}</td>
         <td>
           <a
             [routerLink]="model.ViewUrl"
@@ -30,13 +27,6 @@
             View
           </a>
           <br />
-
-          <a
-            [routerLink]="['/logbook', model.Id, 'delete']"
-            class="uk-button-small uk-button-danger"
-          >
-            Delete
-          </a>
         </td>
       </tr>
     </tbody>

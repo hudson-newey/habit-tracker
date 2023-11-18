@@ -21,8 +21,14 @@
     rows="10"
   ></textarea>
 
-  <label for="completion-date" class="uk-form-label">Completion Date</label>
-  <input id="completion-date" type="date" class="uk-input">
+  <label for="complete-by-input" class="uk-form-label">Complete By</label>
+  <input
+    type="date"
+    name="complete-by-input"
+    id="complete-by-input"
+    class="uk-input"
+    (change)="updateCompleteBy($event)"
+  />
 
   <button
     (click)="submitForm()"

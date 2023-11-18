@@ -26,12 +26,12 @@ import { TaskPageComponent } from "./pages/tasks/task/show.component";
 import { GoalsService } from "./services/goals/goals.service";
 import { HabitsService } from "./services/habits/habits.service";
 import { TasksService } from "./services/tasks/tasks.service";
-import { RegisterComponent } from './pages/register/register.component';
-import { LoginComponent } from './pages/login/login.component';
-import { LogbookShowComponent } from './pages/logbook/show/show.component';
-import { LogbookDeleteComponent } from './pages/logbook/delete/delete.component';
-import { LogbookNewComponent } from './pages/logbook/new/new.component';
-import { LogbookListComponent } from './pages/logbook/list/list.component';
+import { RegisterComponent } from "./pages/register/register.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { LogbookShowComponent } from "./pages/logbook/show/show.component";
+import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
+import { LogbookNewComponent } from "./pages/logbook/new/new.component";
+import { LogbookListComponent } from "./pages/logbook/list/list.component";
 
 const pages: any[] = [
   // goals

@@ -8,6 +8,10 @@ import { createFakeGoal } from "../../models/fakes/goal.fake";
 import { IGoal, Goal } from "../../models/goal";
 import { Id } from "../../types/helpers";
 import { ApiHttpResponse, EmptyResponse } from "../../types/services";
+import { ITask } from "src/app/models/task";
+import { createFakeTask } from "src/app/models/fakes/task.fake";
+import { IHabit } from "src/app/models/habit";
+import { createFakeHabit } from "src/app/models/fakes/habit.fake";
 
 @Injectable({ providedIn: "root" })
 export class GoalsService extends AbstractService {
@@ -113,5 +117,44 @@ export class GoalsService extends AbstractService {
 
     console.debug(goalId);
     return of(undefined);
+  }
+
+  // associations
+  public getGoalTasks(goalId: Id): Observable<ApiHttpResponse<ITask[]>> {
+    if (environment.production) {
+      const endpoint: string = createUrl(`/goals/${goalId}/tasks`);
+      return this.http.get(endpoint) as Observable<ApiHttpResponse<ITask[]>>;
+    }
+
+    console.debug(goalId);
+    return of({
+      data: [
+        createFakeTask(),
+        createFakeTask(),
+        createFakeTask(),
+        createFakeTask(),
+        createFakeTask(),
+      ],
+      message: "success",
+    });
+  }
+
+  public getGoalHabits(goalId: Id): Observable<ApiHttpResponse<IHabit[]>> {
+    if (environment.production) {
+      const endpoint: string = createUrl(`/goals/${goalId}/habits`);
+      return this.http.get(endpoint) as Observable<ApiHttpResponse<IHabit[]>>;
+    }
+
+    console.debug(goalId);
+    return of({
+      data: [
+        createFakeHabit(),
+        createFakeHabit(),
+        createFakeHabit(),
+        createFakeHabit(),
+        createFakeHabit(),
+      ],
+      message: "success",
+    });
   }
 }

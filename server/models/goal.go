@@ -5,4 +5,5 @@ type Goal struct {
 	Name        string
 	Description string
 	Completed   bool
+	CompleteBy  string
 }
