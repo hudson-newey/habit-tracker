@@ -23,6 +23,9 @@ import { LogbookShowComponent } from "./pages/logbook/show/show.component";
 import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { RegisterComponent } from "./pages/register/register.component";
+import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
+import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
+import { TasksUpdateComponent } from "./pages/tasks/update/update.component";
 
 const routes: Routes = [
   // goals
@@ -30,18 +33,21 @@ const routes: Routes = [
   { path: "goals/new", component: NewGoalPageComponent },
   { path: "goals/:id", component: GoalPageComponent },
   { path: "goals/:id/delete", component: DeleteGoalPageComponent },
+  { path: "goals/:id/edit", component: GoalsUpdateComponent },
 
   // habits
   { path: "", component: HabitListComponent },
   { path: "habits/new", component: NewHabitPage },
   { path: "habits/:id", component: HabitShowPageComponent },
   { path: "habits/:id/delete", component: DeleteHabitPageComponent },
+  { path: "habits/:id/edit", component: HabitsUpdateComponent },
 
   // tasks
   { path: "tasks", component: TasksPageComponent },
   { path: "tasks/new", component: NewTaskPageComponent },
   { path: "tasks/:id", component: TaskPageComponent },
   { path: "tasks/:id/delete", component: DeleteTaskPageComponent },
+  { path: "tasks/:id/edit", component: TasksUpdateComponent },
 
   // logbook
   { path: "logbook", component: LogbookListComponent },

@@ -28,6 +28,14 @@ export class Task extends AbstractModel<ITask> implements ITask {
     return ["/tasks", this.Id];
   }
 
+  public override get EditUrl(): any[] {
+    return ["/tasks", this.Id, "edit"];
+  }
+
+  public override get DeleteUrl(): any[] {
+    return ["/tasks", this.Id, "delete"];
+  }
+
   public get ImportanceHuman(): string {
     const map: Record<number, string> = {
       1: "Low",

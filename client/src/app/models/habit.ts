@@ -26,6 +26,14 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
     return [`/habits`, this.Id];
   }
 
+  public override get EditUrl(): any[] {
+    return [`/habits`, this.Id, "edit"];
+  }
+
+  public override get DeleteUrl(): any[] {
+    return [`/habits`, this.Id, "delete"];
+  }
+
   // get the dates in the format yyyy-MM-dd
   public get FormattedCompletedDates(): string[] {
     return this.CompletedDates.map((date: string) => {

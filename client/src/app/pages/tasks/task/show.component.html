@@ -1,21 +1,28 @@
-<h1>Task: {{ model?.Name }} ({{ model?.Completed ? "Completed" : "Incomplete" }})</h1>
+<h1>
+  Task: {{ model?.Name }} ({{ model?.Completed ? "Completed" : "Incomplete" }})
+</h1>
+
+<button
+  class="uk-button-secondary uk-button uk-margin-small-right"
+  [routerLink]="model?.EditUrl"
+>
+  Edit: {{ model?.Name }}
+</button>
+<button class="uk-button-danger uk-button" [routerLink]="model?.DeleteUrl">
+  Delete: {{ model?.Name }}
+</button>
 
 <p>
-    {{ model?.Description }}
+  {{ model?.Description }}
 </p>
+
+<p>Importance: {{ model?.ImportanceHuman }}</p>
+
+<p>Complete By: {{ model?.CompleteBy | date }}</p>
 
 <p>
-    Importance: {{ model?.ImportanceHuman }}
+  Associated Goal:
+  <a [routerLink]="goalModel?.ViewUrl">
+    {{ goalModel?.Name }}
+  </a>
 </p>
-
-<p>
-    Complete By: {{ model?.CompleteBy | date }}
-</p>
-
-<p>
-    Associated Goal:
-    <a [routerLink]="goalModel?.ViewUrl">
-        {{ goalModel?.Name }}
-    </a>
-</p>
-

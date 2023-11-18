@@ -32,6 +32,10 @@ import { LogbookShowComponent } from "./pages/logbook/show/show.component";
 import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
 import { LogbookNewComponent } from "./pages/logbook/new/new.component";
 import { LogbookListComponent } from "./pages/logbook/list/list.component";
+import { TasksUpdateComponent } from './pages/tasks/update/update.component';
+import { DeleteHabitPageComponent } from "./pages/habits/delete/delete.component";
+import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
+import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
 
 const pages: any[] = [
   // goals
@@ -39,17 +43,21 @@ const pages: any[] = [
   NewGoalPageComponent,
   GoalPageComponent,
   DeleteGoalPageComponent,
+  GoalsUpdateComponent,
 
   // habits
   HabitListComponent,
   NewHabitPage,
   HabitShowPageComponent,
+  DeleteHabitPageComponent,
+  HabitsUpdateComponent,
 
   // tasks
   TasksPageComponent,
   NewTaskPageComponent,
   TaskPageComponent,
   DeleteTaskPageComponent,
+  TasksUpdateComponent,
 
   // logbook
   LogbookListComponent,

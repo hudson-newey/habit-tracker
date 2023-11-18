@@ -1,5 +1,15 @@
 <h1>Goal: {{ model?.Name }}</h1>
 
+<button
+  class="uk-button-secondary uk-button uk-margin-small-right"
+  [routerLink]="model?.EditUrl"
+>
+  Edit: {{ model?.Name }}
+</button>
+<button class="uk-button-danger uk-button" [routerLink]="model?.DeleteUrl">
+  Delete: {{ model?.Name }}
+</button>
+
 <p>
     {{ model?.Description }}
 </p>

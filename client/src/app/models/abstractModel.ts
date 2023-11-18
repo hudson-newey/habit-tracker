@@ -19,4 +19,12 @@ export abstract class AbstractModel<T> implements IAbstractModel {
   public get ViewUrl(): any[] {
     throw new Error("ViewUrl not implemented");
   }
+
+  public get EditUrl(): any[] {
+    throw new Error("EditUrl not implemented");
+  }
+
+  public get DeleteUrl(): any[] {
+    throw new Error("DeleteUrl not implemented");
+  }
 }
