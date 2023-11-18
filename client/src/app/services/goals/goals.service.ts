@@ -37,6 +37,27 @@ export class GoalsService extends AbstractService {
     });
   }
 
+  // GET /goals?q=name
+  // gets a list of goal models from a partial name
+  public findGoals(searchTerm: string): Observable<ApiHttpResponse<IGoal[]>> {
+    if (environment.production) {
+      const endpoint: string = createUrl(`/goals?q=${searchTerm}`);
+      return this.http.get(endpoint) as Observable<ApiHttpResponse<IGoal[]>>;
+    }
+
+    console.debug(searchTerm);
+    return of({
+      data: [
+        createFakeGoal(),
+        createFakeGoal(),
+        createFakeGoal(),
+        createFakeGoal(),
+        createFakeGoal(),
+      ],
+      message: "success",
+    });
+  }
+
   // GET /goals/:goalId
   public getGoal(goalId: Id): Observable<ApiHttpResponse<IGoal>> {
     if (environment.production) {

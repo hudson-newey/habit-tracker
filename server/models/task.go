@@ -5,4 +5,6 @@ type Task struct {
 	Name        string
 	Description string
 	Completed   bool
+  Goal        string
+  Importance  int
 }

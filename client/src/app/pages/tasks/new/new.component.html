@@ -2,24 +2,24 @@
 
 <form #ngForm action="">
   <label for="new-task-input" class="uk-form-label">Task Name</label>
-  <input
-    [(ngModel)]="model.Name"
-    id="new-task-input"
-    name="new-task-input"
-    class="uk-input"
-    type="text"
-  />
+  <input [(ngModel)]="model.Name" id="new-task-input" name="new-task-input" class="uk-input" type="text" />
 
   <label for="new-task-description" class="uk-form-label">
     Task Description
   </label>
-  <textarea
-    [(ngModel)]="model.Description"
-    id="new-task-description"
-    name="new-task-description"
-    class="uk-textarea"
-    rows="10"
-  ></textarea>
+  <textarea [(ngModel)]="model.Description" id="new-task-description" name="new-task-description" class="uk-textarea"
+    rows="10"></textarea>
+
+  <label for="importance-input" class="uk-form-label">
+    Importance (low number = low importance; high number = high importance)
+  </label>
+  <select class="uk-input" [(ngModel)]="model.Importance">
+    <option value="1">Low</option>
+    <option value="2">Low-Medium</option>
+    <option value="3" selected>Medium</option>
+    <option value="4">Medium-High</option>
+    <option value="5">High</option>
+  </select>
 
   <label for="associated-goal" class="uk-form-label">Associated Goal</label>
   <input type="text" name="associated-goal" id="associated-goal" class="uk-input">

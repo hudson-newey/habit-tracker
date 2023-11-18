@@ -7,6 +7,7 @@ export interface IHabit {
   Description?: string;
   AntiHabit?: boolean;
   CompletedDates?: string[];
+  Goal?: Id;
 }
 
 export class Habit extends AbstractModel<IHabit> implements IHabit {
@@ -18,9 +19,18 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public Name!: string;
   public Description!: string;
   public AntiHabit!: boolean;
-  public CompletedDates!: string[];
+  public CompletedDates!: string[]; // as ISO 8601
+  public Goal!: Id;
 
   public override get ViewUrl(): any[] {
     return [`/habits`, this.Id];
+  }
+
+  // get the dates in the format yyyy-MM-dd
+  public get FormattedCompletedDates(): string[] {
+    return this.CompletedDates.map((date: string) => {
+      const dateObject = new Date(date);
+      return dateObject.toLocaleDateString("en-CA");
+    });
   }
 }

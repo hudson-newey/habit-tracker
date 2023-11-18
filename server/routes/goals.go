@@ -88,6 +88,12 @@ func ListGoals(database models.Database) func(context *gin.Context) {
 	}
 }
 
+func FindGoals(database models.Database) func(context *gin.Context) {
+	return func(context *gin.Context) {
+		// searchTerm := context.Query("lastname")
+	}
+}
+
 // GET /goals/:id
 func GetGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {

@@ -6,6 +6,8 @@ export interface ITask {
   Name?: string;
   Description?: string;
   Completed?: boolean;
+  Goal?: Id;
+  Importance?: number;
 }
 
 export class Task extends AbstractModel<ITask> implements ITask {
@@ -17,6 +19,8 @@ export class Task extends AbstractModel<ITask> implements ITask {
   public Name!: string;
   public Description!: string;
   public Completed!: boolean;
+  public Goal!: Id;
+  public Importance!: number;
 
   public override get ViewUrl(): any[] {
     return [`/tasks`, this.Id];

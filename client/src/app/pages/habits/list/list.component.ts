@@ -34,18 +34,36 @@ export class HabitListComponent implements OnInit {
       });
   }
 
-  public completeHabit(habit: Habit): void {
-    if (!habit.CompletedDates?.length) {
-      habit.CompletedDates = [];
+  public completeHabit(model: Habit): void {
+    if (!model.CompletedDates?.length) {
+      model.CompletedDates = [];
     };
 
-    habit.CompletedDates.push(new Date().toISOString());
+    model.CompletedDates.push(new Date().toISOString());
 
     this.api
-      .updateHabit(habit)
+      .updateHabit(model)
       .pipe(take(1))
       .subscribe((response) => {
-        habit = new Habit(response.data);
+        model = new Habit(response.data);
+      });
+  }
+
+  public uncompleteHabit(model: Habit): void {
+    const todaysDate: string = new Date().toLocaleDateString("en-CA");
+
+    const indexToRemove: number = model.CompletedDates.findIndex((item: string) => {
+      const formattedDate: string = new Date(item).toLocaleDateString("en-CA");
+      return todaysDate === formattedDate;
+    });
+
+    model.CompletedDates.splice(indexToRemove, 1);
+
+    this.api
+      .updateHabit(model)
+      .pipe(take(1))
+      .subscribe((response) => {
+        model = new Habit(response.data);
       });
   }
 

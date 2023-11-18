@@ -6,6 +6,8 @@ export function createFakeHabit(): IHabit {
     Name: "Fake Habit",
     Description:
       "This is a fake model used in development. Change production = true in the environment.ts to enable communication with the api",
-    CompletedDates: [],
+    CompletedDates: [
+      "2020-01-01"
+    ],
   };
 }

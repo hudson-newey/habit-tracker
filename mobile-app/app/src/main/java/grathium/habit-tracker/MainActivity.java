@@ -24,12 +24,6 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//      These lines makes the status bar transparent and the website will take up the whole length of the display, Work for Android versions post-KitKat; uncomment if needed
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            Window w = getWindow(); // in Activity's onCreate() for instance
-//            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        }
-
         mWebView = (WebView) findViewById(R.id.webview);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -67,7 +61,7 @@ public class MainActivity extends FragmentActivity {
         if (!DetectConnection.checkInternetConnection(this)) {
             mWebView.loadUrl("file:///android_asset/landing.html");
         } else {
-            mWebView.loadUrl("https://rewordgame.herokuapp.com"); //change
+            mWebView.loadUrl("https://www.google.com");
         }
     }
 
@@ -86,7 +80,10 @@ public class MainActivity extends FragmentActivity {
         public boolean handleUri(final Uri uri) {
             final String host = uri.getHost();
             final String scheme = uri.getScheme();
-            if (host.endsWith("herokuapp.com")) { //change the host url to match your website
+
+            return false;
+
+            if (host.endsWith("domain.com")) { //change the host url to match your website
                 return false;
             } else {
                 final Intent intent = new Intent(Intent.ACTION_VIEW, uri);

@@ -5,4 +5,6 @@ type Goal struct {
 	Name        string
 	Description string
 	Completed   bool
+  Habits      []string // as _id[]
+  Tasks       []string // as_id[]
 }

@@ -13,7 +13,7 @@ func main() {
 	http.HandleFunc("/", home)
 
 	//Use the default DefaultServeMux.
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe("0.0.0.0:8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}

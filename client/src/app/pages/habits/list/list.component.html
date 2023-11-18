@@ -24,7 +24,6 @@
         <td>
           <input
             (change)="completeHabit(model)"
-            [disabled]="model.AntiHabit"
             type="checkbox"
             class="uk-checkbox"
           />
@@ -62,6 +61,7 @@
   <table class="uk-table uk-text-muted">
     <thead>
       <tr>
+        <th>Completed</th>
         <th>Name</th>
         <th>Description</th>
         <th>Anti Habit</th>
@@ -70,6 +70,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let model of completedHabits">
+        <td>
+          <input
+            (change)="uncompleteHabit(model)"
+            type="checkbox"
+            class="uk-checkbox"
+          />
+        </td>
         <td>{{ model.Name }}</td>
         <td>{{ model.Description }}</td>
         <td>
