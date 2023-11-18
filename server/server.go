@@ -37,6 +37,8 @@ func main() {
 	router.DELETE("/goals/:id", routes.DeleteGoal(database))
 
 	router.GET("/goals/search", routes.SearchGoals(database))
+	router.GET("/goals/:id/tasks", routes.ListTasksByGoal(database))
+	router.GET("/goals/:id/habits", routes.ListHabitsByGoal(database))
 
 	// habits
 	router.POST("/habits", routes.CreateHabit(database))

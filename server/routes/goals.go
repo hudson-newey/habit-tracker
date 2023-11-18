@@ -240,3 +240,104 @@ func DeleteGoal(database models.Database) func(context *gin.Context) {
 		helpers.Success(context, nil)
 	}
 }
+
+// associations
+func ListTasksByGoal(database models.Database) func(context *gin.Context) {
+	return func(context *gin.Context) {
+		id := context.Param("id")
+
+		// find all tasks documents in the tasks collection where the goal field matches the given goal id
+		var responseBody []models.Task
+
+		// retrieve all documents from the tasks collection where the goal field matches the given goal id
+		cursor, err := database.Client.Database("habits").Collection("tasks").Find(database.Ctx, bson.M{"goal": id})
+		if err != nil {
+			log.Println(err)
+			helpers.InternalServerError(context)
+			return
+		}
+
+		defer cursor.Close(database.Ctx)
+
+		// Iterate through the cursor and append each document to the response body
+		for cursor.Next(database.Ctx) {
+			var task models.Task
+
+			err := cursor.Decode(&task)
+
+			task.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
+
+			if err != nil {
+				log.Println(err)
+				helpers.InternalServerError(context)
+				return
+			}
+
+			responseBody = append(responseBody, task)
+		}
+
+		// Check if there was an error during iteration
+		if err := cursor.Err(); err != nil {
+			log.Println(err)
+			helpers.InternalServerError(context)
+			return
+		}
+
+		if responseBody == nil {
+			responseBody = []models.Task{}
+		}
+
+		// Return the response body as a JSON response
+		helpers.Success(context, responseBody)
+	}
+}
+
+func ListHabitsByGoal(database models.Database) func(context *gin.Context) {
+	return func(context *gin.Context) {
+		id := context.Param("id")
+
+		// find all tasks documents in the tasks collection where the goal field matches the given goal id
+		var responseBody []models.Task
+
+		// retrieve all documents from the tasks collection where the goal field matches the given goal id
+		cursor, err := database.Client.Database("habits").Collection("habits").Find(database.Ctx, bson.M{"goal": id})
+		if err != nil {
+			log.Println(err)
+			helpers.InternalServerError(context)
+			return
+		}
+
+		defer cursor.Close(database.Ctx)
+
+		// Iterate through the cursor and append each document to the response body
+		for cursor.Next(database.Ctx) {
+			var task models.Task
+
+			err := cursor.Decode(&task)
+
+			task.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
+
+			if err != nil {
+				log.Println(err)
+				helpers.InternalServerError(context)
+				return
+			}
+
+			responseBody = append(responseBody, task)
+		}
+
+		// Check if there was an error during iteration
+		if err := cursor.Err(); err != nil {
+			log.Println(err)
+			helpers.InternalServerError(context)
+			return
+		}
+
+		if responseBody == nil {
+			responseBody = []models.Task{}
+		}
+
+		// Return the response body as a JSON response
+		helpers.Success(context, responseBody)
+	}
+}
