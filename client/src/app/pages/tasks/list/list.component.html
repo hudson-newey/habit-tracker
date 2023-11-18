@@ -8,7 +8,7 @@
 
 <section>
   <h2>Remaining Tasks</h2>
-  <table class="uk-table">
+  <table class="uk-table uk-table-striped">
     <thead>
       <tr>
         <th>Completed</th>
@@ -29,25 +29,29 @@
             class="uk-checkbox"
           />
         </td>
+        
         <td>{{ model.Name }}</td>
+        
         <td>
           <ng-container *ngIf="model.Description; else defaultDescription">
             {{ model.Description }}
           </ng-container>
         </td>
+
         <td>{{ model.ImportanceHuman }}</td>
+        
         <td>
           <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
-            {{ model.CompleteBy | date: 'shortDate' }}
+            {{ model.CompleteBy | date }}
           </ng-container>
         </td>
+        
         <td>
           <a
             [routerLink]="model.ViewUrl"
-            class="uk-button-small uk-button-primary"
+            class="uk-button-small uk-button-primary uk-margin-small-right"
             >View</a
-          ><br/>
-
+          >
           <a
             [routerLink]="['/tasks', model.Id, 'delete']"
             class="uk-button-small uk-button-danger"
@@ -59,12 +63,10 @@
   </table>
 </section>
 
-<hr>
-
 <section>
   <h2>Completed Tasks</h2>
 
-  <table class="uk-table uk-text-muted">
+  <table class="uk-table uk-table-striped uk-text-muted">
     <thead>
       <tr>
         <th>Completed</th>
@@ -95,7 +97,7 @@
           {{ model.ImportanceHuman }}
         </td>
         <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
-          {{ model.CompleteBy | date: 'shortDate' }}
+          {{ model.CompleteBy | date }}
         </ng-container>
         <td>
           <a

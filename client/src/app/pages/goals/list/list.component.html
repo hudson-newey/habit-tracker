@@ -7,7 +7,7 @@
 </section>
 
 <section>
-  <table class="uk-table">
+  <table class="uk-table uk-table-striped">
     <thead>
       <tr>
         <th>Completed</th>
@@ -26,15 +26,17 @@
             class="uk-checkbox"
           />
         </td>
+        
         <td>{{ model.Name }}</td>
+
         <td>{{ model.Description }}</td>
+
         <td>
           <a
             [routerLink]="model.ViewUrl"
-            class="uk-button-small uk-button-primary"
+            class="uk-button-small uk-button-primary uk-margin-small-right"
             >View</a
-          ><br/>
-
+          >
           <a
             [routerLink]="['/goals', model.Id, 'delete']"
             class="uk-button-small uk-button-danger"

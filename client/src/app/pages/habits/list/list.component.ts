@@ -37,7 +37,7 @@ export class HabitListComponent implements OnInit {
   public completeHabit(model: Habit): void {
     if (!model.CompletedDates?.length) {
       model.CompletedDates = [];
-    };
+    }
 
     model.CompletedDates.push(new Date().toISOString());
 
@@ -52,10 +52,14 @@ export class HabitListComponent implements OnInit {
   public uncompleteHabit(model: Habit): void {
     const todaysDate: string = new Date().toLocaleDateString("en-CA");
 
-    const indexToRemove: number = model.CompletedDates.findIndex((item: string) => {
-      const formattedDate: string = new Date(item).toLocaleDateString("en-CA");
-      return todaysDate === formattedDate;
-    });
+    const indexToRemove: number = model.CompletedDates.findIndex(
+      (item: string) => {
+        const formattedDate: string = new Date(item).toLocaleDateString(
+          "en-CA"
+        );
+        return todaysDate === formattedDate;
+      }
+    );
 
     model.CompletedDates.splice(indexToRemove, 1);
 
