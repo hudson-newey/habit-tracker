@@ -21,6 +21,8 @@ import { LogbookListComponent } from "./pages/logbook/list/list.component";
 import { LogbookNewComponent } from "./pages/logbook/new/new.component";
 import { LogbookShowComponent } from "./pages/logbook/show/show.component";
 import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
+import { LoginComponent } from "./pages/login/login.component";
+import { RegisterComponent } from "./pages/register/register.component";
 
 const routes: Routes = [
   // goals
@@ -50,6 +52,10 @@ const routes: Routes = [
   // general
   { path: "day", component: DayPageComponent },
   { path: "schedule", component: SchedulePageComponent },
+
+  // authentication
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
 
   // site
   { path: "about", component: AboutPageComponent },
