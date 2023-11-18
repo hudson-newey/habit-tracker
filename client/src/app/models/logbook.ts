@@ -4,7 +4,7 @@ import { AbstractModel } from "./abstractModel";
 export interface ILogbook {
     Id?: Id;
     Name?: string;
-    Description?: string;
+    Content?: string;
 }
 
 export class Logbook extends AbstractModel<ILogbook> {
@@ -14,5 +14,9 @@ export class Logbook extends AbstractModel<ILogbook> {
 
     public Id!: Id;
     public Name!: string;
-    public Description!: string;
+    public Content!: string;
+
+    public override get ViewUrl(): any[] {
+        return ["/logbook", this.Id];
+    }
 }

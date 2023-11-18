@@ -3,6 +3,7 @@ package main
 import (
 	"server/cors"
 	"server/databaseService"
+	"server/helpers"
 	"server/models"
 	"server/routes"
 
@@ -35,6 +36,8 @@ func main() {
 	router.PUT("/goals/:id", routes.UpdateGoal(database))
 	router.DELETE("/goals/:id", routes.DeleteGoal(database))
 
+	router.GET("/goals/search", routes.SearchGoals(database))
+
 	// habits
 	router.POST("/habits", routes.CreateHabit(database))
 	router.GET("/habits", routes.ListHabits(database))
@@ -50,6 +53,11 @@ func main() {
 	router.DELETE("/tasks/:id", routes.DeleteTask(database))
 
 	// logbook
+	router.POST("/logbooks", routes.CreateLogbook(database))
+	router.GET("/logbooks", routes.ListLogbooks(database))
+	router.GET("/logbooks/:id", routes.GetLogbook(database))
+	router.PUT("/logbooks/:id", routes.UpdateLogbook(database))
+	router.DELETE("/logbooks/:id", routes.DeleteLogbook(database))
 
 	// schedule
 	// e.g. calendar, daily todo tasks left
@@ -59,5 +67,6 @@ func main() {
 	// generic app routes
 	router.GET("/", routes.RedirectRoute)
 
-	router.Run(":8081")
+	serverPort := helpers.EnvVariable("PORT")
+	router.Run(":" + serverPort)
 }

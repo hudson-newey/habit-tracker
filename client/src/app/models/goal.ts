@@ -6,8 +6,6 @@ export interface IGoal {
   Name?: string;
   Description?: string;
   Completed?: boolean;
-  Tasks?: Id[];
-  Habits?: Id[];
 }
 
 export class Goal extends AbstractModel<IGoal> implements IGoal {
@@ -19,10 +17,8 @@ export class Goal extends AbstractModel<IGoal> implements IGoal {
   public Name!: string;
   public Description!: string;
   public Completed!: boolean;
-  public Tasks!: Id[];
-  public Habits!: Id[];
 
   public override get ViewUrl(): any[] {
-    return [`/goals`, this.Id];
+    return ["/goals", this.Id];
   }
 }

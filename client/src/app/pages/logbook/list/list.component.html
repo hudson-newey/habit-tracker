@@ -1,0 +1,44 @@
+<h1>Logbook Entries</h1>
+
+<section>
+  <nav>
+    <a routerLink="/logbook/new" class="uk-button uk-button-default"
+      >New Entry</a
+    >
+  </nav>
+</section>
+
+<section>
+  <h2>Remaining Tasks</h2>
+  <table class="uk-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of logbooks">
+        <td>{{ model.Name }}</td>
+        <td>{{ model.Content }}</td>
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+          >
+            View
+          </a>
+          <br />
+
+          <a
+            [routerLink]="['/logbook', model.Id, 'delete']"
+            class="uk-button-small uk-button-danger"
+          >
+            Delete
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,6 +1,21 @@
-<h1>Task: {{ model?.Name }}</h1>
+<h1>Task: {{ model?.Name }} ({{ model?.Completed ? "Completed" : "Incomplete" }})</h1>
 
 <p>
     {{ model?.Description }}
+</p>
+
+<p>
+    Importance: {{ model?.ImportanceHuman }}
+</p>
+
+<p>
+    Complete By: {{ model?.CompleteBy | date }}
+</p>
+
+<p>
+    Associated Goal:
+    <a [routerLink]="goalModel?.ViewUrl">
+        {{ goalModel?.Name }}
+    </a>
 </p>
 

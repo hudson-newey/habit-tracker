@@ -22,12 +22,11 @@
   ></textarea>
 
   <label for="associated-goal" class="uk-form-label">Associated Goal</label>
-  <input
-    type="text"
-    name="associated-goal"
-    id="associated-goal"
-    class="uk-input"
-  />
+  <select name="associated-goal" id="associated-goal" class="uk-input" [(ngModel)]="model.Goal">
+    <ng-container *ngFor="let goal of goals$ | async">
+      <option [value]="goal.Id">{{ goal.Name }}</option>
+    </ng-container>
+  </select>
 
   <input
     [(ngModel)]="model.AntiHabit"

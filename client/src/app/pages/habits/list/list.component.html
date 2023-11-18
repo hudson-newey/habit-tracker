@@ -29,7 +29,10 @@
           />
         </td>
         <td>{{ model.Name }}</td>
-        <td>{{ model.Description }}</td>
+        <td>
+          <ng-container *ngIf="model.Description; else defaultDescription">
+            {{ model.Description }}
+          </ng-container>
         <td>
           <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
         </td>
@@ -78,7 +81,11 @@
           />
         </td>
         <td>{{ model.Name }}</td>
-        <td>{{ model.Description }}</td>
+        <td>
+          <ng-container *ngIf="model.Description; else defaultDescription">
+            {{ model.Description }}
+          </ng-container>
+        </td>
         <td>
           <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
         </td>
@@ -93,4 +100,8 @@
     </tbody>
   </table>
 </section>
+
+<ng-template #defaultDescription>
+  <i>No description</i>
+</ng-template>
 

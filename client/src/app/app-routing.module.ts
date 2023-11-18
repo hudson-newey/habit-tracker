@@ -17,6 +17,10 @@ import { DeleteTaskPageComponent } from "./pages/tasks/delete/delete.component";
 import { TasksPageComponent } from "./pages/tasks/list/list.component";
 import { NewTaskPageComponent } from "./pages/tasks/new/new.component";
 import { TaskPageComponent } from "./pages/tasks/task/show.component";
+import { LogbookListComponent } from "./pages/logbook/list/list.component";
+import { LogbookNewComponent } from "./pages/logbook/new/new.component";
+import { LogbookShowComponent } from "./pages/logbook/show/show.component";
+import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
 
 const routes: Routes = [
   // goals
@@ -36,6 +40,12 @@ const routes: Routes = [
   { path: "tasks/new", component: NewTaskPageComponent },
   { path: "tasks/:id", component: TaskPageComponent },
   { path: "tasks/:id/delete", component: DeleteTaskPageComponent },
+
+  // logbook
+  { path: "logbook", component: LogbookListComponent },
+  { path: "logbook/new", component: LogbookNewComponent },
+  { path: "logbook/:id", component: LogbookShowComponent },
+  { path: "logbook/:id/delete", component: LogbookDeleteComponent },
 
   // general
   { path: "day", component: DayPageComponent },

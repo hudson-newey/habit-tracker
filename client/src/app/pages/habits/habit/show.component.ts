@@ -5,6 +5,8 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Habit } from "src/app/models/habit";
 import { Id } from "src/app/types/helpers";
 import { HabitsService } from "src/app/services/habits/habits.service";
+import { Goal } from "src/app/models/goal";
+import { GoalsService } from "src/app/services/goals/goals.service";
 
 @Component({
   selector: "app-habit-page",
@@ -13,10 +15,12 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 export class HabitShowPageComponent implements OnInit {
   public constructor(
     private api: HabitsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private goalApi: GoalsService,
   ) {}
 
   protected model?: Habit;
+  protected goalModel?: Goal;
 
   // font-awesome icons
   protected faCheck = faCheck;
@@ -30,6 +34,12 @@ export class HabitShowPageComponent implements OnInit {
       .pipe(take(1))
       .subscribe((response) => {
         this.model = new Habit(response.data);
+
+        this.goalApi.getGoal(this.model?.Goal as Id)
+          .pipe(take(1))
+          .subscribe((response) => {
+            this.goalModel = new Goal(response.data);
+          });
       });
   }
 }

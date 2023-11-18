@@ -1,7 +1,7 @@
 package models
 
 type Logbook struct {
-	Id          string
-	Name        string
-	Description string
+	Id      string
+	Name    string
+	Content string
 }

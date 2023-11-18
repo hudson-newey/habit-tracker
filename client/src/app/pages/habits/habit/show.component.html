@@ -11,6 +11,13 @@
   <fa-icon [icon]="model?.AntiHabit ? faCheck : faXmark"></fa-icon>
 </span>
 
+<p>
+  Associated Goal:
+  <a [routerLink]="goalModel?.ViewUrl">
+      {{ goalModel?.Name }}
+  </a>
+</p>
+
 <hr>
 
 <h2>Completed Dates</h2>

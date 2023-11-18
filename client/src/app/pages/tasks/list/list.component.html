@@ -14,6 +14,8 @@
         <th>Completed</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Importance</th>
+        <th>Complete By</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -28,7 +30,17 @@
           />
         </td>
         <td>{{ model.Name }}</td>
-        <td>{{ model.Description }}</td>
+        <td>
+          <ng-container *ngIf="model.Description; else defaultDescription">
+            {{ model.Description }}
+          </ng-container>
+        </td>
+        <td>{{ model.ImportanceHuman }}</td>
+        <td>
+          <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
+            {{ model.CompleteBy | date: 'shortDate' }}
+          </ng-container>
+        </td>
         <td>
           <a
             [routerLink]="model.ViewUrl"
@@ -58,6 +70,8 @@
         <th>Completed</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Importance</th>
+        <th>Complete By</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -72,7 +86,17 @@
           />
         </td>
         <td>{{ model.Name }}</td>
-        <td>{{ model.Description }}</td>
+        <td>
+          <ng-container *ngIf="model.Description; else defaultDescription">
+            {{ model.Description }}
+          </ng-container>
+        </td>
+        <td>
+          {{ model.ImportanceHuman }}
+        </td>
+        <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
+          {{ model.CompleteBy | date: 'shortDate' }}
+        </ng-container>
         <td>
           <a
             [routerLink]="model.ViewUrl"
@@ -84,3 +108,11 @@
     </tbody>
   </table>
 </section>
+
+<ng-template #defaultDescription>
+  <i>No description</i>
+</ng-template>
+
+<ng-template #defaultCompleteBy>
+  <i>No date set</i>
+</ng-template>

@@ -2,7 +2,6 @@ package routes
 
 import (
 	"log"
-
 	"server/databaseService"
 	"server/helpers"
 	"server/models"
@@ -12,10 +11,10 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// POST /goals
-func CreateGoal(database models.Database) func(context *gin.Context) {
+// POST /logbooks
+func CreateLogbook(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var requestBody models.Goal
+		var requestBody models.Logbook
 
 		if err := context.BindJSON(&requestBody); err != nil {
 			log.Println(err)
@@ -23,7 +22,7 @@ func CreateGoal(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "goals", requestBody)
+		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "logbooks", requestBody)
 
 		if err != nil {
 			log.Println(err)
@@ -31,7 +30,7 @@ func CreateGoal(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		var responseBody models.Goal
+		var responseBody models.Logbook
 		id := result.InsertedID.(primitive.ObjectID).Hex()
 
 		responseBody = requestBody
@@ -41,13 +40,13 @@ func CreateGoal(database models.Database) func(context *gin.Context) {
 	}
 }
 
-// GET /goals
-func ListGoals(database models.Database) func(context *gin.Context) {
+// GET /logbooks
+func ListLogbooks(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
-		var responseBody []models.Goal
+		var responseBody []models.Logbook
 
-		// Retrieve all documents from the goals collection
-		cursor, err := database.Client.Database("habits").Collection("goals").Find(database.Ctx, bson.D{})
+		// Retrieve all documents from the logbooks collection
+		cursor, err := database.Client.Database("habits").Collection("logbooks").Find(database.Ctx, bson.D{})
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -57,11 +56,11 @@ func ListGoals(database models.Database) func(context *gin.Context) {
 
 		// Iterate through the cursor and append each document to the response body
 		for cursor.Next(database.Ctx) {
-			var goal models.Goal
+			var Logbook models.Logbook
 
-			err := cursor.Decode(&goal)
+			err := cursor.Decode(&Logbook)
 
-			goal.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
+			Logbook.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
 
 			if err != nil {
 				log.Println(err)
@@ -69,7 +68,7 @@ func ListGoals(database models.Database) func(context *gin.Context) {
 				return
 			}
 
-			responseBody = append(responseBody, goal)
+			responseBody = append(responseBody, Logbook)
 		}
 
 		// Check if there was an error during iteration
@@ -80,7 +79,7 @@ func ListGoals(database models.Database) func(context *gin.Context) {
 		}
 
 		if responseBody == nil {
-			responseBody = []models.Goal{}
+			responseBody = []models.Logbook{}
 		}
 
 		// Return the response body as a JSON response
@@ -88,58 +87,8 @@ func ListGoals(database models.Database) func(context *gin.Context) {
 	}
 }
 
-// GET /goals/search?name=partial_name
-func SearchGoals(database models.Database) func(context *gin.Context) {
-	return func(context *gin.Context) {
-		searchTerm := context.Query("name")
-
-		var responseBody []models.Goal
-
-		// retrieve all documents from the goals collection where the name contains the search term
-		cursor, err := database.Client.Database("habits").Collection("goals").Find(database.Ctx, bson.M{"name": bson.M{"$regex": searchTerm}})
-		if err != nil {
-			log.Println(err)
-			helpers.InternalServerError(context)
-			return
-		}
-
-		defer cursor.Close(database.Ctx)
-
-		// Iterate through the cursor and append each document to the response body
-		for cursor.Next(database.Ctx) {
-			var goal models.Goal
-
-			err := cursor.Decode(&goal)
-
-			goal.Id = cursor.Current.Lookup("_id").ObjectID().Hex()
-
-			if err != nil {
-				log.Println(err)
-				helpers.InternalServerError(context)
-				return
-			}
-
-			responseBody = append(responseBody, goal)
-		}
-
-		// Check if there was an error during iteration
-		if err := cursor.Err(); err != nil {
-			log.Println(err)
-			helpers.InternalServerError(context)
-			return
-		}
-
-		if responseBody == nil {
-			responseBody = []models.Goal{}
-		}
-
-		// Return the response body as a JSON response
-		helpers.Success(context, responseBody)
-	}
-}
-
-// GET /goals/:id
-func GetGoal(database models.Database) func(context *gin.Context) {
+// GET /logbooks/:id
+func GetLogbook(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
@@ -154,22 +103,22 @@ func GetGoal(database models.Database) func(context *gin.Context) {
 
 		// Find the document with the given _id
 		filter := bson.M{"_id": objectId}
-		var goal models.Goal
-		err = database.Client.Database("habits").Collection("goals").FindOne(database.Ctx, filter).Decode(&goal)
+		var Logbook models.Logbook
+		err = database.Client.Database("habits").Collection("logbooks").FindOne(database.Ctx, filter).Decode(&Logbook)
 		if err != nil {
 			log.Println(err)
 			helpers.NotFoundError(context)
 			return
 		}
 
-		goal.Id = id
+		Logbook.Id = id
 
-		helpers.Success(context, goal)
+		helpers.Success(context, Logbook)
 	}
 }
 
-// PUT /goals/:id
-func UpdateGoal(database models.Database) func(context *gin.Context) {
+// PUT /logbooks/:id
+func UpdateLogbook(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
@@ -182,33 +131,33 @@ func UpdateGoal(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		// Get the goal model from the request body
-		var goal models.Goal
-		if err := context.ShouldBindJSON(&goal); err != nil {
+		// Get the Logbook model from the request body
+		var Logbook models.Logbook
+		if err := context.ShouldBindJSON(&Logbook); err != nil {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
 		}
 
-		// Set the goal's ID to the given _id
-		goal.Id = id
+		// Set the Logbook's ID to the given _id
+		Logbook.Id = id
 
 		// Update the document with the given _id
 		filter := bson.M{"_id": objectId}
-		update := bson.M{"$set": goal}
-		_, err = database.Client.Database("habits").Collection("goals").UpdateOne(database.Ctx, filter, update)
+		update := bson.M{"$set": Logbook}
+		_, err = database.Client.Database("habits").Collection("logbooks").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
 			return
 		}
 
-		helpers.Success(context, goal)
+		helpers.Success(context, Logbook)
 	}
 }
 
-// DELETE /goals/:id
-func DeleteGoal(database models.Database) func(context *gin.Context) {
+// DELETE /logbooks/:id
+func DeleteLogbook(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
@@ -223,7 +172,7 @@ func DeleteGoal(database models.Database) func(context *gin.Context) {
 
 		// Find the document with the given _id and delete it
 		filter := bson.M{"_id": objectId}
-		result, err := database.Client.Database("habits").Collection("goals").DeleteOne(database.Ctx, filter)
+		result, err := database.Client.Database("habits").Collection("logbooks").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
