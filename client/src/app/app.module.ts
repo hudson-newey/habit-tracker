@@ -1,3 +1,4 @@
+// ts-ignore
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
@@ -9,7 +10,6 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AboutPageComponent } from "./pages/about/about.component";
 import { ContactUsPageComponent } from "./pages/contact-us/contact-us.component";
-import { DayPageComponent } from "./pages/day/day.component";
 import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
 import { GoalPageComponent } from "./pages/goals/goal/show.component";
 import { GoalsPageComponent } from "./pages/goals/list/list.component";
@@ -36,6 +36,7 @@ import { TasksUpdateComponent } from './pages/tasks/update/update.component';
 import { DeleteHabitPageComponent } from "./pages/habits/delete/delete.component";
 import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
 import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
+import { CalendarHeatmapComponent } from './components/calendar-heatmap/calendar-heatmap.component';
 
 const pages: any[] = [
   // goals
@@ -66,7 +67,6 @@ const pages: any[] = [
   LogbookDeleteComponent,
 
   // general
-  DayPageComponent,
   SchedulePageComponent,
 
   // site
@@ -79,7 +79,7 @@ const pages: any[] = [
 
 const services: any[] = [HabitsService, GoalsService, TasksService];
 
-const components: any[] = [NavbarComponent];
+const components: any[] = [NavbarComponent, CalendarHeatmapComponent];
 
 @NgModule({
   declarations: [AppComponent, ...components, ...pages],

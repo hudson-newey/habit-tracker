@@ -63,6 +63,8 @@ func main() {
 
 	// schedule
 	// e.g. calendar, daily todo tasks left
+	router.GET("/schedule/daily-remaining", routes.DailyRemainingRoute(database))
+	router.GET("/schedule/calendar", routes.CalendarRoute(database))
 
 	// ai routes
 

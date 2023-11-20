@@ -14,7 +14,7 @@
   {{ model?.Description }}
 </p>
 
-<hr>
+<hr />
 
 <span>
   Is Anti Habit:
@@ -24,11 +24,11 @@
 <p>
   Associated Goal:
   <a [routerLink]="goalModel?.ViewUrl">
-      {{ goalModel?.Name }}
+    {{ goalModel?.Name }}
   </a>
 </p>
 
-<hr>
+<hr />
 
 <h2>Completed Dates</h2>
 
@@ -37,3 +37,7 @@
     {{ date | date }}
   </li>
 </ul>
+
+<ng-container *ngIf="model?.CompletedDates?.length">
+  <app-calendar-heatmap></app-calendar-heatmap>
+</ng-container>

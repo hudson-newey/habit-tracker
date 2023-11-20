@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AboutPageComponent } from "./pages/about/about.component";
 import { ContactUsPageComponent } from "./pages/contact-us/contact-us.component";
-import { DayPageComponent } from "./pages/day/day.component";
 import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
 import { GoalPageComponent } from "./pages/goals/goal/show.component";
 import { GoalsPageComponent } from "./pages/goals/list/list.component";
@@ -56,7 +55,6 @@ const routes: Routes = [
   { path: "logbook/:id/delete", component: LogbookDeleteComponent },
 
   // general
-  { path: "day", component: DayPageComponent },
   { path: "schedule", component: SchedulePageComponent },
 
   // authentication
