@@ -2,9 +2,12 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "data": {
-    "values": [{ "date": "2020-01-01", "count": 5 }]
+    "values": []
   },
-  "mark": "rect",
+  "mark": {
+    "type": "rect",
+    "tooltip": true
+  },
   "encoding": {
     "x": {
       "field": "date",
@@ -12,7 +15,7 @@
       "type": "ordinal",
       "title": "Day",
       "axis": {
-        "tickCount": {"timeUnit": "day", "step": 1}
+        "tickCount": { "timeUnit": "day", "step": 1 }
       }
     },
     "y": {
@@ -40,7 +43,10 @@
     "color": {
       "field": "count",
       "type": "quantitative",
-      "title": "Count"
-    }
+      "title": "Count",
+      "condition": { "test": "datum.count === 0", "value": "transparent" },
+      "legend": null
+    },
+    "tooltip": [{ "field": "count", "type": "quantitative", "title": "Count" }]
   }
 }

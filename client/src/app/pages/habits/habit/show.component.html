@@ -38,8 +38,8 @@
   </li>
 </ul>
 
-<ng-container *ngIf="model?.CompletedDates?.length">
+<ng-container *ngIf="model">
   <app-calendar-heatmap
-    [data]="model?.CompletedDates ?? []"
+    [data]="model.CompletedDates ? model.CompletedDates : []"
   ></app-calendar-heatmap>
 </ng-container>

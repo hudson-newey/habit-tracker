@@ -25,7 +25,7 @@ export class CalendarHeatmapComponent implements AfterViewInit {
 
     this.chart = await embed("#calendar-element", this.spec);
     
-    console.debug(this.chart);
+    console.debug(this.spec.data.values);
   }
 
   private addDataToSpec(data: string[], spec: any): any {
@@ -35,11 +35,42 @@ export class CalendarHeatmapComponent implements AfterViewInit {
   }
 
   private formatData(data: string[]): CalendarData[] {
-    return data.map((date: string): CalendarData => {
-      return {
-        date,
-        count: 1,
-      };
+    // Extract all unique dates from the original array
+    const uniqueDates = Array.from(new Set(data));
+  
+    // Extract years from unique dates
+    const years = uniqueDates.map(date => new Date(date).getFullYear());
+  
+    // Get the minimum and maximum years
+    const minYear = Math.min(...years);
+    const maxYear = Math.max(...years);
+  
+    // Create an object to store counts for each date in the range
+    const dateCounts: { [date: string]: number } = {};
+  
+    // Initialize counts to zero for all dates in the range
+    for (let year = minYear; year <= maxYear; year++) {
+      for (let month = 1; month <= 12; month++) {
+        for (let day = 1; day <= 31; day++) {
+          const date = new Date(year, month - 1, day).toISOString().split("T")[0];
+          dateCounts[date] = 0;
+        }
+      }
+    }
+  
+    // Increment counts for dates present in the original array
+    uniqueDates.forEach(date => {
+      const formattedDate = new Date(date).toISOString().split("T")[0];
+      dateCounts[formattedDate] += 1;
     });
+  
+    // Convert the dateCounts object to an array of CalendarData
+    const result: CalendarData[] = Object.entries(dateCounts).map(([date, count]) => ({
+      date,
+      count,
+    }));
+  
+    return result;
   }
+  
 }
