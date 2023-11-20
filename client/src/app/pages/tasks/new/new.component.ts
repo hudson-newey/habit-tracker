@@ -17,7 +17,9 @@ export class NewTaskPageComponent implements OnInit {
     private goalApi: GoalsService
   ) {}
 
-  protected model: ITask = {};
+  protected model: ITask = {
+    Importance: 1,
+  };
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 
   public ngOnInit(): void {

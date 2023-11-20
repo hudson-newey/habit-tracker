@@ -29,7 +29,13 @@
         
         <td>{{ model.Name }}</td>
 
-        <td>{{ model.Description }}</td>
+        <td>
+          <ng-container *ngIf="model.Description; else defaultDescription">
+            <p class="description">
+              {{ model.Description }}
+            </p>
+          </ng-container>
+        </td>
 
         <td>
           <a
@@ -47,3 +53,7 @@
     </tbody>
   </table>
 </section>
+
+<ng-template #defaultDescription>
+  <i>No description provided.</i>
+</ng-template>

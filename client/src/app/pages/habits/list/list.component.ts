@@ -7,6 +7,7 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 @Component({
   selector: "app-list-page",
   templateUrl: "list.component.html",
+  styleUrls: ["list.component.less"],
 })
 export class HabitListComponent implements OnInit {
   public constructor(private api: HabitsService) {}

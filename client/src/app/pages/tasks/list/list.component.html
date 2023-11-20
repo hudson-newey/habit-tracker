@@ -37,7 +37,9 @@
 
         <td>
           <ng-container *ngIf="model.Description; else defaultDescription">
-            {{ model.Description }}
+            <p class="description">
+              {{ model.Description }}
+            </p>
           </ng-container>
         </td>
 
@@ -93,7 +95,9 @@
         <td>{{ model.Name }}</td>
         <td>
           <ng-container *ngIf="model.Description; else defaultDescription">
-            {{ model.Description }}
+            <p class="description">
+              {{ model.Description }}
+            </p>
           </ng-container>
         </td>
         <td>

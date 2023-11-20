@@ -13,20 +13,27 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Created At</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let model of logbooks">
         <td>{{ model.Name }}</td>
+        <td>{{ model.CreatedAt | date }}</td>
         <td>
           <a
             [routerLink]="model.ViewUrl"
-            class="uk-button-small uk-button-primary"
+            class="uk-button-small uk-button-primary uk-margin-small-right"
           >
             View
           </a>
-          <br />
+          <a
+            [routerLink]="model.DeleteUrl"
+            class="uk-button-small uk-button-danger"
+          >
+            Delete
+          </a>
         </td>
       </tr>
     </tbody>

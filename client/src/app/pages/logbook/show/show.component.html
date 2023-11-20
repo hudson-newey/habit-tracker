@@ -1,5 +1,7 @@
 <h1>Task: {{ model?.Name }}</h1>
 
+<span class="uk-text-default">Created: {{ model?.CreatedAt | date }}</span>
+
 <pre>
     {{ model?.Content }}
 </pre>

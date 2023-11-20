@@ -6,6 +6,7 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 @Component({
   selector: "app-goals-page",
   templateUrl: "list.component.html",
+  styleUrls: ["list.component.less"],
 })
 export class GoalsPageComponent implements OnInit {
   public constructor(private api: GoalsService) {}

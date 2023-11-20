@@ -14,7 +14,9 @@ export class LogbookNewComponent {
     private api: LogbookService,
   ) {}
 
-  protected model: ILogbook = {};
+  protected model: ILogbook = {
+    CreatedAt: new Date().toISOString(),
+  };
 
   protected submitForm(): void {
     const logbookModel: Logbook = new Logbook(this.model);
