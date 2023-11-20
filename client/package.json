@@ -26,6 +26,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uikit": "^3.17.8",
+    "vega-embed": "^6.23.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
