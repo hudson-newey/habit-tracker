@@ -17,7 +17,6 @@ import { NewGoalPageComponent } from "./pages/goals/new/new.component";
 import { HabitShowPageComponent } from "./pages/habits/habit/show.component";
 import { HabitListComponent } from "./pages/habits/list/list.component";
 import { NewHabitPage } from "./pages/habits/new/new.component";
-import { HelpPageComponent } from "./pages/help/help.component";
 import { SchedulePageComponent } from "./pages/schedule/schedule.component";
 import { DeleteTaskPageComponent } from "./pages/tasks/delete/delete.component";
 import { TasksPageComponent } from "./pages/tasks/list/list.component";
@@ -72,7 +71,6 @@ const pages: any[] = [
   // site
   AboutPageComponent,
   ContactUsPageComponent,
-  HelpPageComponent,
   RegisterComponent,
   LoginComponent,
 ];

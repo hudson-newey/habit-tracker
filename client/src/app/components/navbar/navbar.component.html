@@ -4,106 +4,36 @@
       <strong class="uk-nav-primary">Goal Tracker</strong>
 
       <ul class="uk-navbar-nav">
-        <li class="uk-active">
-          <a
-            routerLink="/"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Habits
-          </a>
+        <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
+          <a routerLink="/" class="uk-link uk-navbar-item">Habits</a>
         </li>
 
-        <li>
-          <a
-            routerLink="/goals"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Goals
-          </a>
+        <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
+          <a routerLink="/goals" class="uk-link uk-navbar-item">Goals</a>
         </li>
 
-        <li>
-          <a
-            routerLink="/tasks"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Tasks
-          </a>
+        <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
+          <a routerLink="/tasks" class="uk-link uk-navbar-item">Tasks</a>
         </li>
 
-        <li>
-          <a
-            routerLink="/schedule"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Schedule
-          </a>
+        <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
+          <a routerLink="/schedule" class="uk-link uk-navbar-item">Schedule</a>
         </li>
 
-        <li>
-          <a
-            routerLink="/logbook"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Logbook
-          </a>
+        <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
+          <a routerLink="/logbook" class="uk-link uk-navbar-item">Logbook</a>
         </li>
 
-        <li>
-          <a
-            routerLink="/help"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Help
-          </a>
-        </li>
-
-        <li>
-          <a
-            routerLink="/about"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            About
-          </a>
-        </li>
-
-        <li>
-          <a
-            routerLink="/contact-us"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Contact Us
-          </a>
-        </li>
-
-        <li>
-          <a
-            routerLink="/login"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Login
-          </a>
-        </li>
-
-        <li>
-          <a
-            routerLink="/register"
-            routerLinkActive="active"
-            class="uk-link uk-navbar-item"
-          >
-            Register
-          </a>
+        <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
+          <a routerLink="/about" class="uk-link uk-navbar-item">About</a>
         </li>
       </ul>
+
+      <span class="authentication-navbar">
+        <a routerLink="/login" class="uk-link-muted">Login</a>
+        <a routerLink="/register" class="uk-link-muted uk-margin-left">Register</a>
+      </span>
     </div>
   </div>
 </nav>
+

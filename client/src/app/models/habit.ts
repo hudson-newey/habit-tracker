@@ -56,7 +56,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
 
       return formattedCompletedDates;
     } else {
-      return this.CompletedDates.map((date: string) => {
+      return this.CompletedDates?.map((date: string) => {
         const dateObject = new Date(date);
         return dateObject.toISOString().split("T")[0];
       });

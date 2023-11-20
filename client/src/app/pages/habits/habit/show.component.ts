@@ -35,6 +35,10 @@ export class HabitShowPageComponent implements OnInit {
       .subscribe((response) => {
         this.model = new Habit(response.data);
 
+        if (!this.model?.Goal) {
+          return;
+        }
+        
         this.goalApi.getGoal(this.model?.Goal as Id)
           .pipe(take(1))
           .subscribe((response) => {
