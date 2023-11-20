@@ -6,6 +6,7 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
 @Component({
   selector: "app-tasks-page",
   templateUrl: "list.component.html",
+  styleUrls: ["list.component.less"],
 })
 export class TasksPageComponent implements OnInit {
   public constructor(private api: TasksService) {}

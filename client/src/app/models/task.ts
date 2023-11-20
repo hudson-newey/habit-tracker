@@ -51,4 +51,10 @@ export class Task extends AbstractModel<ITask> implements ITask {
 
     return map[this.Importance];
   }
+
+  public get isOverdue(): boolean {
+    const now = new Date();
+    const due = new Date(this.CompleteBy);
+    return now > due;
+  }
 }

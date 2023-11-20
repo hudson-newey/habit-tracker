@@ -17,7 +17,9 @@ export class NewHabitPage implements OnInit {
     private goalApi: GoalsService,
   ) {}
 
-  protected model: IHabit = {};
+  protected model: IHabit = {
+    CreatedAt: new Date().toISOString(),
+  };
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 
   public ngOnInit(): void {

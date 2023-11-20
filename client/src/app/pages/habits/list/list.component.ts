@@ -22,7 +22,15 @@ export class HabitListComponent implements OnInit {
   }
 
   protected get completedHabits(): Habit[] {
-    return this.habits.filter((habit: Habit) => this.isCompletedToday(habit));
+    return this.habits.filter(
+      (habit: Habit) => !habit.AntiHabit && this.isCompletedToday(habit)
+    );
+  }
+
+  protected get failedAntiHabits(): Habit[] {
+    return this.habits.filter(
+      (habit: Habit) => habit.AntiHabit && this.isCompletedToday(habit)
+    );
   }
 
   public ngOnInit(): void {

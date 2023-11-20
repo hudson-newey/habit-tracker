@@ -24,8 +24,6 @@ export class CalendarHeatmapComponent implements AfterViewInit {
     this.spec = this.addDataToSpec(this.data, this.spec);
 
     this.chart = await embed("#calendar-element", this.spec);
-    
-    console.debug(this.spec.data.values);
   }
 
   private addDataToSpec(data: string[], spec: any): any {

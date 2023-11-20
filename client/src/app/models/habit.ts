@@ -7,6 +7,7 @@ export interface IHabit {
   Description?: string;
   AntiHabit?: boolean;
   CompletedDates?: string[];
+  CreatedAt?: string;
   Goal?: Id;
 }
 
@@ -20,6 +21,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public Description!: string;
   public AntiHabit!: boolean;
   public CompletedDates!: string[]; // as ISO 8601
+  public CreatedAt!: string; // as ISO 8601
   public Goal!: Id;
 
   public override get ViewUrl(): any[] {
@@ -36,9 +38,28 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
 
   // get the dates in the format yyyy-MM-dd
   public get FormattedCompletedDates(): string[] {
-    return this.CompletedDates.map((date: string) => {
-      const dateObject = new Date(date);
-      return dateObject.toLocaleDateString("en-CA");
-    });
+    if (this.AntiHabit) {
+      const currentDate = new Date();
+      const createdAtDate = new Date(this.CreatedAt);
+      const formattedCompletedDates = [];
+
+      for (
+        let date = createdAtDate;
+        date <= currentDate;
+        date.setDate(date.getDate() + 1)
+      ) {
+        const formattedDate = date.toISOString().split("T")[0];
+        if (!this.CompletedDates || !this.CompletedDates.includes(formattedDate)) {
+          formattedCompletedDates.push(formattedDate);
+        }
+      }
+
+      return formattedCompletedDates;
+    } else {
+      return this.CompletedDates.map((date: string) => {
+        const dateObject = new Date(date);
+        return dateObject.toISOString().split("T")[0];
+      });
+    }
   }
 }

@@ -12,7 +12,7 @@
   <table class="uk-table uk-table-striped">
     <thead>
       <tr>
-        <th>Completed</th>
+        <th></th>
         <th>Name</th>
         <th>Description</th>
         <th>Anti Habit</th>
@@ -112,7 +112,58 @@
   </table>
 </section>
 
+
+<section>
+  <h2>Failed Anti Habits</h2>
+
+  <table class="uk-table uk-table-striped uk-text-muted">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Anti Habit</th>
+        <th>Associated Goal</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let model of failedAntiHabits">
+        <td>
+          <input
+            (change)="uncompleteHabit(model)"
+            type="checkbox"
+            class="uk-checkbox"
+            checked
+          />
+        </td>
+
+        <td>{{ model.Name }}</td>
+
+        <td>
+          <ng-container *ngIf="model.Description; else defaultDescription">
+            {{ model.Description }}
+          </ng-container>
+        </td>
+
+        <td>
+          <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
+        </td>
+
+        <td>test</td>
+
+        <td>
+          <a
+            [routerLink]="model.ViewUrl"
+            class="uk-button-small uk-button-primary"
+            >View</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
 <ng-template #defaultDescription>
   <i>No description</i>
 </ng-template>
-
