@@ -48,7 +48,7 @@ export class HabitListComponent implements OnInit {
       model.CompletedDates = [];
     }
 
-    model.CompletedDates.push(new Date().toISOString());
+    model.CompletedDates.push(new Date().toLocaleDateString());
 
     this.api
       .updateHabit(model)
@@ -59,13 +59,11 @@ export class HabitListComponent implements OnInit {
   }
 
   public uncompleteHabit(model: Habit): void {
-    const todaysDate: string = new Date().toLocaleDateString("en-CA");
+    const todaysDate: string = new Date().toLocaleDateString();
 
     const indexToRemove: number = model.CompletedDates.findIndex(
       (item: string) => {
-        const formattedDate: string = new Date(item).toLocaleDateString(
-          "en-CA"
-        );
+        const formattedDate: string = new Date(item).toLocaleDateString();
         return todaysDate === formattedDate;
       }
     );
@@ -82,7 +80,7 @@ export class HabitListComponent implements OnInit {
 
   protected isCompletedToday(task: Habit): boolean {
     const lastCompletedDate = task.CompletedDates?.at(-1)?.split("T")[0];
-    const today: string = new Date()?.toISOString()?.split("T")[0];
+    const today: string = new Date()?.toLocaleDateString()?.split("T")[0];
 
     return lastCompletedDate === today;
   }

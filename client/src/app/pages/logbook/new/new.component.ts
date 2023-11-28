@@ -15,7 +15,7 @@ export class LogbookNewComponent {
   ) {}
 
   protected model: ILogbook = {
-    CreatedAt: new Date().toISOString(),
+    CreatedAt: new Date().toLocaleDateString(),
   };
 
   protected submitForm(): void {

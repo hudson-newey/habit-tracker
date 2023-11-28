@@ -18,7 +18,7 @@ export class NewHabitPage implements OnInit {
   ) {}
 
   protected model: IHabit = {
-    CreatedAt: new Date().toISOString(),
+    CreatedAt: new Date().toLocaleDateString(),
   };
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 

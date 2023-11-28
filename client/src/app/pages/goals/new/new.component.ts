@@ -28,6 +28,6 @@ export class NewGoalPageComponent {
 
   protected updateCompleteBy(event: any): void {
     const value: Date = new Date(event.target.value);
-    this.model.CompleteBy = value.toISOString();
+    this.model.CompleteBy = value.toLocaleDateString();
   }
 }
