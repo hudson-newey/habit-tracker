@@ -1,34 +1,26 @@
 package main
 
 import (
-	"io"
-	"io/ioutil"
-	"log"
 	"net/http"
-	"os"
+	"path/filepath"
 )
 
 func main() {
-	// Set routing rules
-	http.HandleFunc("/", home)
+	// Define the directory to serve
+	staticDir := "../client/dist/client/"
 
-	//Use the default DefaultServeMux.
-	err := http.ListenAndServe("0.0.0.0:8080", nil)
+	// Create a new file server handler
+	fileServer := http.FileServer(http.Dir(staticDir))
+
+	// Create a handler that serves both the Angular app and the API
+	http.Handle("/", http.StripPrefix("/", fileServer))
+
+	// Start the server
+	port := 8080
+	serverAddress := "0.0.0.0:8080"
+	println("Server is running on http://localhost:" + string(port))
+	err := http.ListenAndServe(serverAddress, nil)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
-}
-
-func home(w http.ResponseWriter, r *http.Request) {
-	programName := os.Args[1]
-	io.WriteString(w, readFile(programName))
-}
-
-func readFile(fileName string) string {
-	data, err := ioutil.ReadFile(fileName)
-	if err != nil {
-		return "Error 404, File not Found!"
-	}
-
-	return string(data)
 }
