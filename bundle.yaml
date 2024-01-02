@@ -1,0 +1,19 @@
+appName: habit-tracker
+description: A habit tracking application
+author: hudson-newey
+version: 1.0
+license: see LICENSE file
+
+bundle-version: 1.1
+
+scripts:
+  - 'cd ./database/;docker-compose up;cd ..;'
+  - 'cd ./server/;go run server.go &; cd..;'
+  - 'cd ./client/;pnpm start; cd..;'
+
+dependencies:
+  - pnpm
+  - node
+  - docker
+  - docker-compose
+  - go
