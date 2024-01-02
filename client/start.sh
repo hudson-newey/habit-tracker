@@ -1,5 +1,6 @@
 #!/bin/bash
-echo "Warning: This script should only be used for development environments.";
+rm -rf ./dist/;
+
 pnpm build;
 
 cd ../clientServer/;
