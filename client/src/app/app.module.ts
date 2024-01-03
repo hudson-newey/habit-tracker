@@ -1,7 +1,7 @@
 // ts-ignore
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
+import { NgModule, isDevMode } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -36,6 +36,7 @@ import { DeleteHabitPageComponent } from "./pages/habits/delete/delete.component
 import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
 import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
 import { CalendarHeatmapComponent } from './components/calendar-heatmap/calendar-heatmap.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const pages: any[] = [
   // goals
@@ -88,6 +89,12 @@ const components: any[] = [NavbarComponent, CalendarHeatmapComponent];
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [...services],
   bootstrap: [AppComponent],
