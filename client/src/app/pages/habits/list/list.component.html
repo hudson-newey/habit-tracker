@@ -14,9 +14,9 @@
       <tr>
         <th></th>
         <th>Name</th>
-        <th>Description</th>
+        <th class="hide-in-mobile">Description</th>
         <th>Anti Habit</th>
-        <th>Associated Goal</th>
+        <th class="hide-in-mobile">Associated Goal</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -31,8 +31,8 @@
         </td>
 
         <td>{{ model.Name }}</td>
-        
-        <td>
+
+        <td class="hide-in-mobile">
           <ng-container *ngIf="model.Description; else defaultDescription">
             <p class="description">
               {{ model.Description }}
@@ -44,10 +44,10 @@
           <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
         </td>
 
-        <td>
+        <td class="hide-in-mobile">
           aaa
         </td>
-        
+
         <td>
           <a
             [routerLink]="model.ViewUrl"
@@ -66,9 +66,9 @@
       <tr>
         <th>Completed</th>
         <th>Name</th>
-        <th>Description</th>
+        <th class="hide-in-mobile">Description</th>
         <th>Anti Habit</th>
-        <th>Associated Goal</th>
+        <th class="hide-in-mobile">Associated Goal</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -85,7 +85,7 @@
 
         <td>{{ model.Name }}</td>
 
-        <td>
+        <td class="hide-in-mobile">
           <ng-container *ngIf="model.Description; else defaultDescription">
             <p class="description">
               {{ model.Description }}
@@ -97,7 +97,7 @@
           <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
         </td>
 
-        <td>test</td>
+        <td class="hide-in-mobile">test</td>
 
         <td>
           <a
@@ -120,9 +120,9 @@
       <tr>
         <th></th>
         <th>Name</th>
-        <th>Description</th>
+        <th class="hide-in-mobile">Description</th>
         <th>Anti Habit</th>
-        <th>Associated Goal</th>
+        <th class="hide-in-mobile">Associated Goal</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -139,7 +139,7 @@
 
         <td>{{ model.Name }}</td>
 
-        <td>
+        <td class="hide-in-mobile">
           <ng-container *ngIf="model.Description; else defaultDescription">
             <p class="description">
               {{ model.Description }}
@@ -151,7 +151,7 @@
           <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
         </td>
 
-        <td>test</td>
+        <td class="hide-in-mobile">test</td>
 
         <td>
           <a

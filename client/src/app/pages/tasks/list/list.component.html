@@ -11,10 +11,10 @@
   <table class="uk-table uk-table-striped">
     <thead>
       <tr>
-        <th>Completed</th>
+        <th></th>
         <th>Name</th>
-        <th>Description</th>
-        <th>Importance</th>
+        <th class="hide-in-mobile">Description</th>
+        <th class="hide-in-mobile">Importance</th>
         <th>Complete By</th>
         <th>Action</th>
       </tr>
@@ -35,7 +35,7 @@
 
         <td>{{ model.Name }}</td>
 
-        <td>
+        <td class="hide-in-mobile">
           <ng-container *ngIf="model.Description; else defaultDescription">
             <p class="description">
               {{ model.Description }}
@@ -43,7 +43,7 @@
           </ng-container>
         </td>
 
-        <td>{{ model.ImportanceHuman }}</td>
+        <td class="hide-in-mobile">{{ model.ImportanceHuman }}</td>
 
         <td>
           <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">

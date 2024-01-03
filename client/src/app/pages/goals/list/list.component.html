@@ -10,9 +10,9 @@
   <table class="uk-table uk-table-striped">
     <thead>
       <tr>
-        <th>Completed</th>
+        <th></th>
         <th>Name</th>
-        <th>Description</th>
+        <th class="hide-in-mobile">Description</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -26,10 +26,10 @@
             class="uk-checkbox"
           />
         </td>
-        
+
         <td>{{ model.Name }}</td>
 
-        <td>
+        <td class="hide-in-mobile">
           <ng-container *ngIf="model.Description; else defaultDescription">
             <p class="description">
               {{ model.Description }}

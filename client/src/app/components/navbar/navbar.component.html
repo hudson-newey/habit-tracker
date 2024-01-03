@@ -1,7 +1,7 @@
-<nav class="uk-navbar-container">
-  <div class="uk-container">
+<nav class="uk-navbar-container navbar-container">
+  <div class="uk-container navbar-container">
     <div class="uk-navbar-left">
-      <strong class="uk-nav-primary">Goal Tracker</strong>
+      <strong class="uk-nav-primary hide-in-mobile">Goal Tracker</strong>
 
       <ul class="uk-navbar-nav">
         <li [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="['uk-active']">
@@ -25,11 +25,12 @@
         </li>
 
         <li [routerLinkActive]="['uk-active']">
-          <a routerLink="/about" class="uk-link uk-navbar-item">About</a>
+          <a routerLink="/about" class="uk-link uk-navbar-item hide-in-mobile">About</a>
         </li>
       </ul>
 
-      <span class="authentication-navbar">
+      <!-- TODO: Make this work in mobile -->
+      <span class="authentication-navbar hide-in-mobile">
         <a routerLink="/login" class="uk-link-muted">Login</a>
         <a routerLink="/register" class="uk-link-muted uk-margin-left">Register</a>
       </span>
