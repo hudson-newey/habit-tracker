@@ -58,7 +58,7 @@
   </table>
 </section>
 
-<section>
+<section *ngIf="completedHabits.length > 0">
   <h2>Completed Habits</h2>
 
   <table class="uk-table uk-table-striped uk-text-muted">
@@ -112,7 +112,7 @@
 </section>
 
 
-<section>
+<section *ngIf="failedAntiHabits.length > 0">
   <h2>Failed Anti Habits</h2>
 
   <table class="uk-table uk-table-striped uk-text-muted">

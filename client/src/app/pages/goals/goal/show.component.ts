@@ -20,7 +20,7 @@ export class GoalPageComponent implements OnInit {
   protected model?: Goal;
   protected associatedTasks?: Task[];
   protected associatedHabits?: Habit[];
-  
+
   public ngOnInit(): void {
     const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
 

@@ -1,3 +1,5 @@
+import { customServerStorageKey } from "./app/services/clientConfig/client-config.service";
+
 interface IEnvironment {
   production: boolean;
   endpoint: string;
@@ -5,5 +7,5 @@ interface IEnvironment {
 
 export const environment: IEnvironment = {
   production: true,
-  endpoint: `http://${window.location.hostname}:8081`,
+  endpoint: localStorage.getItem(customServerStorageKey) ?? "",
 };

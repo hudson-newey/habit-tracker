@@ -1,6 +1,5 @@
-// ts-ignore
 import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NgModule, isDevMode } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -8,8 +7,6 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { AboutPageComponent } from "./pages/about/about.component";
-import { ContactUsPageComponent } from "./pages/contact-us/contact-us.component";
 import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
 import { GoalPageComponent } from "./pages/goals/goal/show.component";
 import { GoalsPageComponent } from "./pages/goals/list/list.component";
@@ -25,18 +22,21 @@ import { TaskPageComponent } from "./pages/tasks/task/show.component";
 import { GoalsService } from "./services/goals/goals.service";
 import { HabitsService } from "./services/habits/habits.service";
 import { TasksService } from "./services/tasks/tasks.service";
-import { RegisterComponent } from "./pages/register/register.component";
-import { LoginComponent } from "./pages/login/login.component";
 import { LogbookShowComponent } from "./pages/logbook/show/show.component";
 import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
 import { LogbookNewComponent } from "./pages/logbook/new/new.component";
 import { LogbookListComponent } from "./pages/logbook/list/list.component";
-import { TasksUpdateComponent } from './pages/tasks/update/update.component';
+import { TasksUpdateComponent } from "./pages/tasks/update/update.component";
 import { DeleteHabitPageComponent } from "./pages/habits/delete/delete.component";
 import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
 import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
-import { CalendarHeatmapComponent } from './components/calendar-heatmap/calendar-heatmap.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { CalendarHeatmapComponent } from "./components/calendar-heatmap/calendar-heatmap.component";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { NoItemsPlaceholderComponent } from "./components/no-items-placeholder/no-items-placeholder.component";
+import { ConfigurePageComponent } from "./pages/configure/configure.component";
+import { ClientConfigService } from "./services/clientConfig/client-config.service";
+import { ConfigInterceptor } from "./services/config-interceptor/config.interceptor";
+import { VirtualDatabaseService } from "./services/virtualDatabase/virtual-database.service";
 
 const pages: any[] = [
   // goals
@@ -68,17 +68,24 @@ const pages: any[] = [
 
   // general
   SchedulePageComponent,
-
-  // site
-  AboutPageComponent,
-  ContactUsPageComponent,
-  RegisterComponent,
-  LoginComponent,
+  ConfigurePageComponent,
 ];
 
-const services: any[] = [HabitsService, GoalsService, TasksService];
+const services: any[] = [
+  HabitsService,
+  GoalsService,
+  TasksService,
+  ClientConfigService,
 
-const components: any[] = [NavbarComponent, CalendarHeatmapComponent];
+  // TODO: remove this hacky solution
+  VirtualDatabaseService,
+];
+
+const components: any[] = [
+  NavbarComponent,
+  CalendarHeatmapComponent,
+  NoItemsPlaceholderComponent,
+];
 
 @NgModule({
   declarations: [AppComponent, ...components, ...pages],
@@ -89,14 +96,17 @@ const components: any[] = [NavbarComponent, CalendarHeatmapComponent];
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: "registerWhenStable:30000",
     }),
   ],
-  providers: [...services],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ConfigInterceptor, multi: true },
+    ...services,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

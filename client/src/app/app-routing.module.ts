@@ -1,7 +1,5 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AboutPageComponent } from "./pages/about/about.component";
-import { ContactUsPageComponent } from "./pages/contact-us/contact-us.component";
 import { DeleteGoalPageComponent } from "./pages/goals/delete/delete.component";
 import { GoalPageComponent } from "./pages/goals/goal/show.component";
 import { GoalsPageComponent } from "./pages/goals/list/list.component";
@@ -19,11 +17,10 @@ import { LogbookListComponent } from "./pages/logbook/list/list.component";
 import { LogbookNewComponent } from "./pages/logbook/new/new.component";
 import { LogbookShowComponent } from "./pages/logbook/show/show.component";
 import { LogbookDeleteComponent } from "./pages/logbook/delete/delete.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { RegisterComponent } from "./pages/register/register.component";
 import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
 import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
 import { TasksUpdateComponent } from "./pages/tasks/update/update.component";
+import { ConfigurePageComponent } from "./pages/configure/configure.component";
 
 const routes: Routes = [
   // goals
@@ -55,14 +52,7 @@ const routes: Routes = [
 
   // general
   { path: "schedule", component: SchedulePageComponent },
-
-  // authentication
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-
-  // site
-  { path: "about", component: AboutPageComponent },
-  { path: "contact-us", component: ContactUsPageComponent },
+  { path: "configure", component: ConfigurePageComponent },
 ];
 
 @NgModule({

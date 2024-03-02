@@ -1,0 +1,57 @@
+<h1>Configure</h1>
+
+<p>
+  This web app is intended to be used with the GoLang API found
+  <a href="https://github.com/hudson-newey/habit-tracker/tree/main/server"
+    >on GitHub</a
+  >.
+</p>
+
+<p>
+  It is possible to use this app without the API, but you will not be able to
+  sync your Todo items and Habits between devices.
+</p>
+
+<p>
+  You are free to use this GitHub pages hosted version of the application with
+  your own hosted server (or without) by inputting the custom URL below, or you
+  can host your own instance of the server, client and mobile application using
+  the code available
+  <a href="https://github.com/hudson-newey/habit-tracker">here</a>.
+</p>
+
+<section>
+  <h2>Custom Server URL</h2>
+  <p>
+    If you are using a custom server, please input the URL below. If you are
+    using the habit tracker without device syncing, you can leave this blank.
+  </p>
+
+  <input
+    type="text"
+    class="uk-input"
+    placeholder="Server URL"
+    [(ngModel)]="customServerUrl"
+  />
+
+  <div class="action-buttons">
+    <button
+      id="save-server-button"
+      class="uk-button uk-button-primary"
+      (click)="saveCustomServerUrl()"
+    >
+      Save
+    </button>
+
+    <button
+      id="remove-server-button"
+      class="uk-button uk-button-danger"
+      (click)="clearCustomServerUrl()"
+    >
+      Remove Server
+    </button>
+  </div>
+
+  <div></div>
+  <p class="uk-text-secondary">{{ formFeedback }}</p>
+</section>

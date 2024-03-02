@@ -7,7 +7,6 @@
 </section>
 
 <section>
-  <h2>Remaining Tasks</h2>
   <table class="uk-table uk-table-striped">
     <thead>
       <tr>
@@ -68,7 +67,7 @@
   </table>
 </section>
 
-<section>
+<section *ngIf="completedTasks.length > 0">
   <h2>Completed Tasks</h2>
 
   <table class="uk-table uk-table-striped uk-text-muted">
