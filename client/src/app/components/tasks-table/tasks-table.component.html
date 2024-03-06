@@ -1,0 +1,61 @@
+<table class="uk-table uk-table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th class="hide-in-mobile">Description</th>
+      <th class="hide-in-mobile">Importance</th>
+      <th>Complete By</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let model of models"
+      [ngClass]="{ 'overdue-task': model.isOverdue }"
+    >
+      <td>
+        <input
+          [(ngModel)]="model.Completed"
+          (change)="changeState.emit(model)"
+          type="checkbox"
+          class="uk-checkbox"
+        />
+      </td>
+
+      <td>{{ model.Name }}</td>
+
+      <td class="hide-in-mobile">
+        <ng-container *ngIf="model.Description; else defaultDescription">
+          <p class="description">
+            {{ model.Description }}
+          </p>
+        </ng-container>
+      </td>
+
+      <td class="hide-in-mobile">{{ model.ImportanceHuman }}</td>
+
+      <td>
+        <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
+          {{ model.CompleteBy | date }}
+        </ng-container>
+      </td>
+
+      <td>
+        <a
+          [routerLink]="model.ViewUrl"
+          class="uk-button uk-button-small uk-button-default uk-margin-small-right"
+          >View</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #defaultDescription>
+  <i>No description</i>
+</ng-template>
+
+<ng-template #defaultCompleteBy>
+  <i>No date set</i>
+</ng-template>

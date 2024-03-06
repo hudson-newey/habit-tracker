@@ -1,6 +1,12 @@
 @import "node_modules/uikit/src/less/uikit.theme.less";
 
-// if I don't do this, the table can look overwhelming
-.uk-table td {
-    padding: 0px 0px;
+// I make the checkboxes bigger because they are hard to see and click on mobile
+input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
 }

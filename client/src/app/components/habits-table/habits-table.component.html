@@ -1,31 +1,20 @@
-<div class="list-header">
-  <h1>Goals</h1>
-
-  <section>
-    <nav>
-      <a routerLink="/goals/new" class="uk-button uk-button-primary"
-        >New Goal</a
-      >
-    </nav>
-  </section>
-</div>
-
-<section>
-  <table class="uk-table uk-table-striped">
+<table class="uk-table uk-table-striped uk-table-middle">
     <thead>
       <tr>
+        <!-- We leave the first table header empty beacuse it is used for the checkbox -->
         <th></th>
         <th>Name</th>
         <th class="hide-in-mobile">Description</th>
+        <th class="centered">Anti</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let model of goals">
+      <tr *ngFor="let model of models">
         <td>
           <input
-            [(ngModel)]="model.Completed"
-            (change)="updateGoal(model)"
+            [checked]="model.IsCompletedToday"
+            (change)="changeState.emit(model)"
             type="checkbox"
             class="uk-checkbox"
           />
@@ -41,18 +30,19 @@
           </ng-container>
         </td>
 
+        <td class="centered">
+          <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
+        </td>
+
         <td>
           <a
             [routerLink]="model.ViewUrl"
             class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-            >View</a
-          >
-        </td>
+          >View</a>
       </tr>
     </tbody>
   </table>
-</section>
 
 <ng-template #defaultDescription>
-  <i>No description provided.</i>
+  <i>No description</i>
 </ng-template>

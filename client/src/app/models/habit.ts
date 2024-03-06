@@ -40,6 +40,12 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
     return [`/habits`, this.Id, "delete"];
   }
 
+  // returns a boolean specifying if the habit has been completed today
+  public get IsCompletedToday(): boolean {
+    const currentDate = new Date().toLocaleDateString().split("T")[0];
+    return this.CompletedDates?.includes(currentDate) ?? false;
+  }
+
   // get the dates in the format yyyy-MM-dd
   public get FormattedCompletedDates(): string[] {
     if (this.AntiHabit) {

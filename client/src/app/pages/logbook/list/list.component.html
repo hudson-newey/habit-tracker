@@ -1,19 +1,21 @@
-<h1>Logbook Entries</h1>
+<div class="list-header">
+  <h1>Logbook</h1>
 
-<section>
-  <nav>
-    <a routerLink="/logbook/new" class="uk-button uk-button-default"
-      >New Entry</a
-    >
-  </nav>
-</section>
+  <section>
+    <nav>
+      <a routerLink="/logbook/new" class="uk-button uk-button-primary"
+        >New Entry</a
+      >
+    </nav>
+  </section>
+</div>
 
 <section>
   <table class="uk-table">
     <thead>
       <tr>
         <th>Name</th>
-        <th>Created At</th>
+        <th>Created</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -24,15 +26,9 @@
         <td>
           <a
             [routerLink]="model.ViewUrl"
-            class="uk-button-small uk-button-primary uk-margin-small-right"
+            class="uk-button-small uk-button-default uk-margin-small-right"
           >
             View
-          </a>
-          <a
-            [routerLink]="model.DeleteUrl"
-            class="uk-button-small uk-button-danger"
-          >
-            Delete
           </a>
         </td>
       </tr>

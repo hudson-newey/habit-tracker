@@ -82,6 +82,6 @@ export class VirtualDatabaseService extends AbstractService {
       return 1;
     }
 
-    return Math.max(...table.map((item: any) => item.id)) + 1;
+    return Math.max(...table.map((item: any) => item.Id)) + 1;
   }
 }

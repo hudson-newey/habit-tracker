@@ -1,126 +1,23 @@
-<h1>All Tasks</h1>
+<div class="list-header">
+  <h1>Tasks</h1>
 
-<section>
   <nav>
-    <a routerLink="/tasks/new" class="uk-button uk-button-default">New Task</a>
+    <a routerLink="/tasks/new" class="uk-button uk-button-primary">New Task</a>
   </nav>
-</section>
+</div>
 
-<section>
-  <table class="uk-table uk-table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th class="hide-in-mobile">Description</th>
-        <th class="hide-in-mobile">Importance</th>
-        <th>Complete By</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let model of incompleteTasks"
-        [ngClass]="{ 'overdue-task': model.isOverdue }"
-      >
-        <td>
-          <input
-            [(ngModel)]="model.Completed"
-            (change)="updateTask(model)"
-            type="checkbox"
-            class="uk-checkbox"
-          />
-        </td>
-
-        <td>{{ model.Name }}</td>
-
-        <td class="hide-in-mobile">
-          <ng-container *ngIf="model.Description; else defaultDescription">
-            <p class="description">
-              {{ model.Description }}
-            </p>
-          </ng-container>
-        </td>
-
-        <td class="hide-in-mobile">{{ model.ImportanceHuman }}</td>
-
-        <td>
-          <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
-            {{ model.CompleteBy | date }}
-          </ng-container>
-        </td>
-
-        <td>
-          <a
-            [routerLink]="model.ViewUrl"
-            class="uk-button-small uk-button-primary uk-margin-small-right"
-            >View</a
-          >
-          <a
-            [routerLink]="['/tasks', model.Id, 'delete']"
-            class="uk-button-small uk-button-danger"
-            >Delete</a
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<section class="incompleteTasks.length > 0">
+  <app-tasks-table
+    [models]="incompleteTasks"
+    (changeState)="updateTask($event)"
+  ></app-tasks-table>
 </section>
 
 <section *ngIf="completedTasks.length > 0">
   <h2>Completed Tasks</h2>
 
-  <table class="uk-table uk-table-striped uk-text-muted">
-    <thead>
-      <tr>
-        <th>Completed</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Importance</th>
-        <th>Complete By</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let model of completedTasks">
-        <td>
-          <input
-            [(ngModel)]="model.Completed"
-            (change)="updateTask(model)"
-            type="checkbox"
-            class="uk-checkbox"
-          />
-        </td>
-        <td>{{ model.Name }}</td>
-        <td>
-          <ng-container *ngIf="model.Description; else defaultDescription">
-            <p class="description">
-              {{ model.Description }}
-            </p>
-          </ng-container>
-        </td>
-        <td>
-          {{ model.ImportanceHuman }}
-        </td>
-        <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
-          {{ model.CompleteBy | date }}
-        </ng-container>
-        <td>
-          <a
-            [routerLink]="model.ViewUrl"
-            class="uk-button-small uk-button-primary"
-            >View</a
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <app-tasks-table
+    [models]="completedTasks"
+    (changeState)="updateTask($event)"
+  ></app-tasks-table>
 </section>
-
-<ng-template #defaultDescription>
-  <i>No description</i>
-</ng-template>
-
-<ng-template #defaultCompleteBy>
-  <i>No date set</i>
-</ng-template>

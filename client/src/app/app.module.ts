@@ -36,6 +36,8 @@ import { ConfigurePageComponent } from "./pages/configure/configure.component";
 import { ClientConfigService } from "./services/clientConfig/client-config.service";
 import { ConfigInterceptor } from "./services/config-interceptor/config.interceptor";
 import { VirtualDatabaseService } from "./services/virtualDatabase/virtual-database.service";
+import { HabitsTableComponent } from "./components/habits-table/habits-table.component";
+import { TasksTableComponent } from './components/tasks-table/tasks-table.component';
 
 const pages: any[] = [
   // goals
@@ -76,7 +78,6 @@ const services: any[] = [
   TasksService,
   ClientConfigService,
 
-  // TODO: remove this hacky solution
   VirtualDatabaseService,
 ];
 
@@ -84,6 +85,8 @@ const components: any[] = [
   NavbarComponent,
   CalendarHeatmapComponent,
   NoItemsPlaceholderComponent,
+  HabitsTableComponent,
+  TasksTableComponent,
 ];
 
 @NgModule({

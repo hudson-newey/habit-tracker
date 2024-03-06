@@ -6,6 +6,6 @@ interface IEnvironment {
 }
 
 export const environment: IEnvironment = {
-  production: true,
+  production: false,
   endpoint: localStorage.getItem(customServerStorageKey) ?? "",
 };
