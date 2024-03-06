@@ -1,7 +1,13 @@
 <nav class="uk-navbar-container navbar-container">
   <div class="uk-container navbar-container">
     <div class="uk-navbar-left">
-      <strong class="uk-nav-primary hide-in-mobile">Goal Tracker</strong>
+      <a
+        class="uk-navbar-item uk-logo"
+        [routerLink]="['/']"
+        routerLinkActive="uk-active"
+      >
+        <strong class="uk-nav-primary hide-in-mobile">Goal Tracker</strong>
+      </a>
 
       <ul class="uk-navbar-nav">
         <li
@@ -21,10 +27,6 @@
 
         <li [routerLinkActive]="['uk-active']">
           <a routerLink="/logbook" class="uk-link uk-navbar-item">Logbook</a>
-        </li>
-
-        <li>
-          <a routerLink="/planner" class="uk-link uk-navbar-item">Planner</a>
         </li>
 
         <span class="navbar-right hide-in-mobile">

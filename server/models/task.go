@@ -8,4 +8,5 @@ type Task struct {
 	Goal        string
 	Importance  int
 	CompleteBy  string
+	DependsOn   []string
 }
