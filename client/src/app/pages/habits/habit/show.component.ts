@@ -19,12 +19,13 @@ export class HabitShowPageComponent implements OnInit {
     private goalApi: GoalsService,
   ) {}
 
-  protected model?: Habit;
-  protected goalModel?: Goal;
-
   // font-awesome icons
   protected faCheck = faCheck;
   protected faXmark = faXmark;
+
+  protected model?: Habit;
+  protected goalModel?: Goal;
+  protected recentCompletedDates: string[] = [];
 
   public ngOnInit(): void {
     const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
@@ -35,10 +36,16 @@ export class HabitShowPageComponent implements OnInit {
       .subscribe((response) => {
         this.model = new Habit(response.data);
 
+        // to prevent there being a huge list of completed dates
+        // we only show the last week of completed dates
+        // I don't do this on the model because we still use the full list in other places
+        // eg. The heat map and calendar view
+        this.recentCompletedDates = this.model?.FormattedCompletedDates.slice(-7) ?? [];
+
         if (!this.model?.Goal) {
           return;
         }
-        
+
         this.goalApi.getGoal(this.model?.Goal as Id)
           .pipe(take(1))
           .subscribe((response) => {

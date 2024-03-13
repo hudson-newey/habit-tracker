@@ -48,10 +48,11 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
 
   // get the dates in the format yyyy-MM-dd
   public get FormattedCompletedDates(): string[] {
+    let formattedCompletedDates: string[] = [];
+
     if (this.AntiHabit) {
       const currentDate = new Date();
       const createdAtDate = new Date(this.CreatedAt);
-      const formattedCompletedDates = [];
 
       for (
         let date = createdAtDate;
@@ -63,13 +64,13 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
           formattedCompletedDates.push(formattedDate);
         }
       }
-
-      return formattedCompletedDates;
     } else {
-      return this.CompletedDates?.map((date: string) => {
+      formattedCompletedDates = this.CompletedDates?.map((date: string) => {
         const dateObject = new Date(date);
         return dateObject.toLocaleDateString().split("T")[0];
       });
     }
+
+    return formattedCompletedDates;
   }
 }

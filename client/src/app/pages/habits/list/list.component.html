@@ -9,7 +9,7 @@
 </div>
 
 <main>
-  <section *ngIf="inCompleteHabits.length > 0">
+  <section>
     <app-habits-table
       [models]="inCompleteHabits"
       (changeState)="completeHabit($event)"
