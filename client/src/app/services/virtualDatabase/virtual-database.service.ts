@@ -14,7 +14,7 @@ export class VirtualDatabaseService extends AbstractService {
     const newContent = request.body;
 
     if (localStorage.getItem(virtualTableName) === null) {
-      localStorage.setItem(virtualTableName, "[]");
+      this.updateTable(virtualTableName, "[]");
     }
 
     const virtualTable = this.tableValue(virtualTableName);
@@ -48,7 +48,7 @@ export class VirtualDatabaseService extends AbstractService {
       newContentObject.Id = this.nextTableId(virtualTableName);
       virtualTable.push(newContentObject);
 
-      localStorage.setItem(virtualTableName, JSON.stringify(virtualTable));
+      this.updateTable(virtualTableName, JSON.stringify(virtualTable));
     }
 
     if (request.method === "DELETE") {
@@ -56,7 +56,7 @@ export class VirtualDatabaseService extends AbstractService {
 
       virtualTable.splice(index, 1);
 
-      localStorage.setItem(virtualTableName, JSON.stringify(virtualTable));
+      this.updateTable(virtualTableName, JSON.stringify(virtualTable));
     }
 
     if (request.method === "PUT") {
@@ -64,7 +64,7 @@ export class VirtualDatabaseService extends AbstractService {
 
       virtualTable[index] = newContent;
 
-      localStorage.setItem(virtualTableName, JSON.stringify(virtualTable));
+      this.updateTable(virtualTableName, JSON.stringify(virtualTable));
     }
 
     const tableValue = this.tableValue(virtualTableName);
@@ -83,5 +83,13 @@ export class VirtualDatabaseService extends AbstractService {
     }
 
     return Math.max(...table.map((item: any) => item.Id)) + 1;
+  }
+
+  // we delete the table and recreate it so that the local storage time to destruction is postponed
+  // if we didn't do this, the local storage would be destroyed even if the user is using the app
+  // TODO: I should probably find a better solution to this
+  private updateTable(table: string, value: string): void {
+    localStorage.removeItem(table);
+    localStorage.setItem(table, value);
   }
 }
