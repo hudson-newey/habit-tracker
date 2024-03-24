@@ -16,19 +16,21 @@
 
 <hr />
 
-<span>
+<p>
   Is Anti Habit:
   <fa-icon [icon]="model?.AntiHabit ? faCheck : faXmark"></fa-icon>
-</span>
+</p>
 
-<p>
+<p *ngIf="model?.IsQuantifiable">
+  Completed Value: {{ model?.Value ?? 0 }} / {{ model?.TargetValue }}
+</p>
+
+<p *ngIf="goalModel">
   Associated Goal:
   <a [routerLink]="goalModel?.ViewUrl">
     {{ goalModel?.Name }}
   </a>
 </p>
-
-<hr />
 
 <h2>Completed Dates</h2>
 

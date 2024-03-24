@@ -22,20 +22,54 @@
   ></textarea>
 
   <label for="associated-goal" class="uk-form-label">Associated Goal</label>
-  <select name="associated-goal" id="associated-goal" class="uk-input" [(ngModel)]="model.Goal">
+  <select
+    name="associated-goal"
+    id="associated-goal"
+    class="uk-input"
+    [(ngModel)]="model.Goal"
+  >
     <ng-container *ngFor="let goal of goals$ | async">
       <option [value]="goal.Id">{{ goal.Name }}</option>
     </ng-container>
   </select>
 
-  <input
-    [(ngModel)]="model.AntiHabit"
-    type="checkbox"
-    name="anti-habit"
-    id="anti-habit"
-    class="uk-checkbox"
-  />
-  <label for="anti-habit" class="uk-form-label">Anti Habit</label>
+  <div id="boolean-selectors">
+    <label for="anti-habit" class="uk-form-label">
+      <input
+        [(ngModel)]="model.AntiHabit"
+        id="anti-habit"
+        name="anti-habit"
+        class="uk-checkbox"
+        type="checkbox"
+      />
+      Anti Habit
+    </label>
+
+    <label for="quantifiable-habit" class="uk-form-label">
+      <input
+        [(ngModel)]="model.IsQuantifiable"
+        id="quantifiable-habit"
+        name="quantifiable-habit"
+        class="uk-checkbox"
+        type="checkbox"
+      />
+      Quantifiable
+    </label>
+  </div>
+
+  <div *ngIf="model.IsQuantifiable" class="uk-form-label target-value">
+    <label for="target-value">
+      Target Value
+
+      <input
+        [(ngModel)]="model.TargetValue"
+        name="target-value"
+        type="number"
+        class="uk-input"
+        placeholder="eg. 5 (km run)"
+      />
+    </label>
+  </div>
 
   <div>
     <button

@@ -65,6 +65,10 @@ export class HabitListComponent implements OnInit {
 
     model.CompletedDates.splice(indexToRemove, 1);
 
+    if (model.IsQuantifiable) {
+      model.Value = model.TargetValue - 1;
+    }
+
     this.api
       .updateHabit(model)
       .pipe(take(1))

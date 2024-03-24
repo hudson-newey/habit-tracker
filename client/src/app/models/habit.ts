@@ -10,6 +10,8 @@ export interface IHabit {
   Goal?: Id;
   AntiHabit?: boolean;
   IsQuantifiable?: boolean;
+  value?: number;
+  TargetValue?: number;
   DependsOn?: Id[];
 }
 
@@ -26,6 +28,8 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public CreatedAt!: string; // as ISO 8601
   public Goal!: Id;
   public IsQuantifiable!: boolean;
+  public TargetValue!: number;
+  public Value!: number;
   public DependsOn!: Id[];
 
   public override get ViewUrl(): any[] {
@@ -67,10 +71,10 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
     } else {
       formattedCompletedDates = this.CompletedDates?.map((date: string) => {
         const dateObject = new Date(date);
-        return dateObject.toLocaleDateString().split("T")[0];
+        return dateObject.toLocaleDateString().split("T")[0] ?? [];
       });
     }
 
-    return formattedCompletedDates;
+    return formattedCompletedDates ?? [];
   }
 }

@@ -1,47 +1,71 @@
 <table class="uk-table uk-table-striped uk-table-middle">
-    <thead>
-      <tr>
-        <!-- We leave the first table header empty beacuse it is used for the checkbox -->
-        <th></th>
-        <th>Name</th>
-        <th class="hide-in-mobile">Description</th>
-        <th class="centered">Anti</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let model of models">
-        <td>
+  <thead>
+    <tr>
+      <!-- We leave the first table header empty beacuse it is used for the checkbox -->
+      <th></th>
+      <th>Name</th>
+      <th class="hide-in-mobile">Description</th>
+      <th class="centered">Anti</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let model of models">
+      <td>
+        @if (!model.IsQuantifiable || model.IsCompletedToday) {
+          <!-- This template is used when a habit can be completed or not completed -->
           <input
             [checked]="model.IsCompletedToday"
             (change)="changeState.emit(model)"
             type="checkbox"
             class="uk-checkbox"
           />
-        </td>
+        } @else {
+          <!--
+            This template is used when a habit can have a value attached
+            eg. run x km or drank x glasses of water today
+          --->
+          <button
+            class="uk-button uk-button-default increment-button"
+            (click)="incrementValue(model)"
+          >
+            {{ model.Value ?? 0 }}
+          </button>
+        }
+      </td>
 
-        <td>{{ model.Name }}</td>
+      <td>
+        <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">{{
+          model.Name
+        }}</a>
+      </td>
 
-        <td class="hide-in-mobile">
-          <ng-container *ngIf="model.Description; else defaultDescription">
-            <p class="description">
-              {{ model.Description }}
-            </p>
-          </ng-container>
-        </td>
+      <td class="hide-in-mobile">
+        <ng-container *ngIf="model.Description; else defaultDescription">
+          <p class="description">
+            {{ model.Description }}
+          </p>
+        </ng-container>
+      </td>
 
-        <td class="centered">
-          <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
-        </td>
+      <td class="centered">
+        <fa-icon [icon]="model.AntiHabit ? faCheck : faXmark"></fa-icon>
+      </td>
 
-        <td>
-          <a
-            [routerLink]="model.ViewUrl"
-            class="uk-button uk-button-small uk-button-default uk-margin-small-right"
-          >View</a>
-      </tr>
-    </tbody>
-  </table>
+      <td>
+        <a
+          [routerLink]="model.ViewUrl"
+          class="uk-button uk-button-small uk-button-default uk-margin-small-right"
+          >View</a
+        >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #quantifiableAction> </ng-template>
+
+<ng-template #booleanAction> </ng-template>
 
 <ng-template #defaultDescription>
   <i>No description</i>

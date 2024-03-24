@@ -8,6 +8,7 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 
 @Component({
   selector: "app-new-page",
+  styleUrl: "new.component.less",
   templateUrl: "new.component.html",
 })
 export class NewHabitPage implements OnInit {

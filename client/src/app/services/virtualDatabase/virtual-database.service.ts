@@ -29,7 +29,7 @@ export class VirtualDatabaseService extends AbstractService {
           const associatedTableName = request.url.split("/")[3];
 
           const value = this.tableValue(associatedTableName).filter(
-            (model: any) => model.Goal = id,
+            (model: any) => model.Goal === String(id),
           );
 
           console.log(value);

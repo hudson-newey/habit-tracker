@@ -5,7 +5,7 @@
       <th>Name</th>
       <th class="hide-in-mobile">Description</th>
       <th class="hide-in-mobile">Importance</th>
-      <th>Complete By</th>
+      <th>Due Date</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -23,7 +23,11 @@
         />
       </td>
 
-      <td>{{ model.Name }}</td>
+      <td>
+        <a [routerLink]="model.ViewUrl" class="uk-link uk-text-secondary">
+          {{ model.Name }}
+        </a>
+      </td>
 
       <td class="hide-in-mobile">
         <ng-container *ngIf="model.Description; else defaultDescription">
