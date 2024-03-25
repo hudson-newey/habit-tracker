@@ -1,5 +1,8 @@
 @import "node_modules/uikit/src/less/uikit.theme.less";
 
+@dark-color: #333;
+@light-color: #fff;
+
 // I make the checkboxes bigger because they are hard to see and click on mobile
 input[type="checkbox"] {
   width: 1.5rem;
@@ -18,5 +21,23 @@ input[type="checkbox"] {
 @media screen and (max-width: 768px) {
   .hide-in-mobile {
     display: none;
+  }
+}
+
+html {
+  background-color: @light-color;
+
+  .light-dark {
+    .uk-dark;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: @dark-color;
+  }
+
+  .light-dark {
+    .uk-light;
   }
 }
