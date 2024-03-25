@@ -1,8 +1,18 @@
 <h1>Task: {{ model?.Name }}</h1>
 
-<span class="uk-text-default">Created: {{ model?.CreatedAt | date }}</span>
+<button
+  class="uk-button uk-button-secondary uk-margin-small-right"
+  [routerLink]="model?.EditUrl"
+>
+  Edit: {{ model?.Name }}
+</button>
+
+<button class="uk-button uk-button-danger" [routerLink]="model?.DeleteUrl">
+  Delete: {{ model?.Name }}
+</button>
+
+<div class="uk-text-default">Created: {{ model?.CreatedAt | date }}</div>
 
 <pre>
     {{ model?.Content }}
 </pre>
-

@@ -39,6 +39,7 @@ import { VirtualDatabaseService } from "./services/virtualDatabase/virtual-datab
 import { HabitsTableComponent } from "./components/habits-table/habits-table.component";
 import { TasksTableComponent } from "./components/tasks-table/tasks-table.component";
 import { NoContextMenuDirective } from "./directives/no-context-menu.directive";
+import { LogbookEditComponent } from "./pages/logbook/edit/edit.component";
 
 const pages: any[] = [
   // goals
@@ -67,6 +68,7 @@ const pages: any[] = [
   LogbookNewComponent,
   LogbookShowComponent,
   LogbookDeleteComponent,
+  LogbookEditComponent,
 
   // general
   SchedulePageComponent,

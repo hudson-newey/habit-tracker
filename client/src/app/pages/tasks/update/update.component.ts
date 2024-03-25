@@ -14,20 +14,20 @@ export class TasksUpdateComponent {
   public constructor(
     private api: TasksService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   protected model: ITask = {};
 
   public ngOnInit(): void {
     const modelId: Id = this.route.snapshot.paramMap.get("id") as Id;
-    
+
     this.api
       .getTask(modelId)
       .pipe(take(1))
       .subscribe((response) => {
         this.model = response.data;
-      });;
+      });
   }
 
   protected submitForm(): void {
@@ -36,7 +36,7 @@ export class TasksUpdateComponent {
     this.api
       .updateTask(taskModel)
       .pipe(take(1))
-      .subscribe(() => this.router.navigateByUrl("/tasks"));
+      .subscribe(() => this.router.navigate(taskModel.ViewUrl));
   }
 
   protected updateImportance(event: any): void {

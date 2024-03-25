@@ -21,6 +21,7 @@ import { GoalsUpdateComponent } from "./pages/goals/update/update.component";
 import { HabitsUpdateComponent } from "./pages/habits/update/update.component";
 import { TasksUpdateComponent } from "./pages/tasks/update/update.component";
 import { ConfigurePageComponent } from "./pages/configure/configure.component";
+import { LogbookEditComponent } from "./pages/logbook/edit/edit.component";
 
 const routes: Routes = [
   // goals
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: "logbook/new", component: LogbookNewComponent },
   { path: "logbook/:id", component: LogbookShowComponent },
   { path: "logbook/:id/delete", component: LogbookDeleteComponent },
+  { path: "logbook/:id/edit", component: LogbookEditComponent },
 
   // general
   { path: "schedule", component: SchedulePageComponent },
