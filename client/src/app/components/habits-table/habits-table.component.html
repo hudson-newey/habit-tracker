@@ -27,9 +27,11 @@
           --->
           <button
             class="uk-button uk-button-default increment-button"
-            (click)="incrementValue(model)"
+            (click)="changeState.emit(model)"
+            (contextmenu)="decrementState.emit(model)"
+            appNoContextMenu
           >
-            {{ model.Value ?? 0 }}
+            {{ model?.TimesCompletedToday ?? 0 }}
           </button>
         }
       </td>

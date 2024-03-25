@@ -65,10 +65,6 @@ export class HabitListComponent implements OnInit {
 
     model.CompletedDates.splice(indexToRemove, 1);
 
-    if (model.IsQuantifiable) {
-      model.Value = model.TargetValue - 1;
-    }
-
     this.api
       .updateHabit(model)
       .pipe(take(1))
@@ -77,10 +73,7 @@ export class HabitListComponent implements OnInit {
       });
   }
 
-  protected isCompletedToday(task: Habit): boolean {
-    const lastCompletedDate = task.CompletedDates?.at(-1)?.split("T")[0];
-    const today: string = new Date()?.toLocaleDateString()?.split("T")[0];
-
-    return lastCompletedDate === today;
+  protected isCompletedToday(model: Habit): boolean {
+    return model.IsCompletedToday;
   }
 }

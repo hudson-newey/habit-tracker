@@ -13,6 +13,7 @@
     <app-habits-table
       [models]="inCompleteHabits"
       (changeState)="completeHabit($event)"
+      (decrementState)="uncompleteHabit($event)"
     ></app-habits-table>
   </section>
 

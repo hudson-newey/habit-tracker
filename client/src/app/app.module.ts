@@ -37,7 +37,8 @@ import { ClientConfigService } from "./services/clientConfig/client-config.servi
 import { ConfigInterceptor } from "./services/config-interceptor/config.interceptor";
 import { VirtualDatabaseService } from "./services/virtualDatabase/virtual-database.service";
 import { HabitsTableComponent } from "./components/habits-table/habits-table.component";
-import { TasksTableComponent } from './components/tasks-table/tasks-table.component';
+import { TasksTableComponent } from "./components/tasks-table/tasks-table.component";
+import { NoContextMenuDirective } from "./directives/no-context-menu.directive";
 
 const pages: any[] = [
   // goals
@@ -89,8 +90,10 @@ const components: any[] = [
   TasksTableComponent,
 ];
 
+const directives: any[] = [NoContextMenuDirective];
+
 @NgModule({
-  declarations: [AppComponent, ...components, ...pages],
+  declarations: [AppComponent, ...components, ...pages, ...directives],
   imports: [
     CommonModule,
     BrowserModule,

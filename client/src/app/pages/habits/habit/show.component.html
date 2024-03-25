@@ -22,13 +22,13 @@
 </p>
 
 <p *ngIf="model?.IsQuantifiable">
-  Completed Value: {{ model?.Value ?? 0 }} / {{ model?.TargetValue }}
+  Completed Value: {{ model?.TimesCompletedToday }} / {{ model?.TargetValue }}
 </p>
 
 <p *ngIf="goalModel">
   Associated Goal:
-  <a [routerLink]="goalModel?.ViewUrl">
-    {{ goalModel?.Name }}
+  <a [routerLink]="goalModel.ViewUrl">
+    {{ goalModel.Name }}
   </a>
 </p>
 

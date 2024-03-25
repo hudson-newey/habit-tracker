@@ -10,7 +10,6 @@ export interface IHabit {
   Goal?: Id;
   AntiHabit?: boolean;
   IsQuantifiable?: boolean;
-  value?: number;
   TargetValue?: number;
   DependsOn?: Id[];
 }
@@ -29,7 +28,6 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public Goal!: Id;
   public IsQuantifiable!: boolean;
   public TargetValue!: number;
-  public Value!: number;
   public DependsOn!: Id[];
 
   public override get ViewUrl(): any[] {
@@ -44,10 +42,17 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
     return [`/habits`, this.Id, "delete"];
   }
 
-  // returns a boolean specifying if the habit has been completed today
-  public get IsCompletedToday(): boolean {
+  public get TimesCompletedToday(): number {
     const currentDate = new Date().toLocaleDateString().split("T")[0];
-    return this.CompletedDates?.includes(currentDate) ?? false;
+    return this.CompletedDates?.filter((date: string) => date === currentDate).length ?? 0;
+  }
+
+  public get IsCompletedToday(): boolean {
+    if (this.IsQuantifiable) {
+      return this.TimesCompletedToday >= this.TargetValue;
+    }
+
+    return this.TimesCompletedToday > 0;
   }
 
   // get the dates in the format yyyy-MM-dd
