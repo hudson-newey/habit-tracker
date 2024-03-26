@@ -46,7 +46,6 @@
       "title": "Count",
       "condition": { "test": "datum.count === 0", "value": "transparent" },
       "legend": null
-    },
-    "tooltip": [{ "field": "count", "type": "quantitative", "title": "Count" }]
+    }
   }
 }

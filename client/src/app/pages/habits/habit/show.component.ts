@@ -40,7 +40,10 @@ export class HabitShowPageComponent implements OnInit {
         // we only show the last week of completed dates
         // I don't do this on the model because we still use the full list in other places
         // eg. The heat map and calendar view
-        this.recentCompletedDates = this.model?.FormattedCompletedDates.slice(-7) ?? [];
+        const completedDates = this.model?.CompletedDates ?? [];
+        const uniqueCompletedDates = Array.from(new Set(completedDates));
+
+        this.recentCompletedDates = uniqueCompletedDates.slice(-7);
 
         if (!this.model?.Goal) {
           return;
