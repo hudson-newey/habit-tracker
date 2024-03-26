@@ -1,20 +1,18 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
-import { Habit, IHabit } from "src/app/models/habit";
+import { IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
   selector: "app-update",
-  templateUrl: "./update.component.html",
-  styleUrls: ["./update.component.less"],
+  template: `<app-habit-form [creating]="false" [model]="model"></app-habit-form>`,
 })
 export class HabitsUpdateComponent {
   public constructor(
     private api: HabitsService,
     private route: ActivatedRoute,
-    private router: Router
   ) {}
 
   protected model: IHabit = {};
@@ -28,14 +26,5 @@ export class HabitsUpdateComponent {
       .subscribe((response) => {
         this.model = response.data;
       });
-  }
-
-  protected submitForm(): void {
-    const habitModel: Habit = new Habit(this.model);
-
-    this.api
-      .updateHabit(habitModel)
-      .pipe(take(1))
-      .subscribe(() => this.router.navigateByUrl("/"));
   }
 }

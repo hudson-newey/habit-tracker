@@ -1,4 +1,9 @@
-<h1>New Goal</h1>
+@if (creating) {
+  <h1>Create Goal</h1>
+}
+@else {
+  <h1>Edit Goal: {{ model.Name }}</h1>
+}
 
 <form #ngForm action="">
   <label for="new-task-input" class="uk-form-label">Goal Name</label>
@@ -35,6 +40,6 @@
     type="submit"
     class="uk-button uk-button-primary uk-margin-top"
   >
-    Add New Goal
+    {{ creating ? "Create" : "Update" }} Goal
   </button>
 </form>

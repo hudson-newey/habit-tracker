@@ -1,6 +1,6 @@
 import { Id } from "../types/helpers";
 
-interface IAbstractModel {
+export interface IAbstractModel {
   Id: Id;
   toString: () => string;
 }

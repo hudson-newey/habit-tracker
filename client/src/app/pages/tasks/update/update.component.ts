@@ -1,20 +1,18 @@
-import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { take } from "rxjs";
-import { ITask, Task } from "src/app/models/task";
+import { ITask } from "src/app/models/task";
 import { TasksService } from "src/app/services/tasks/tasks.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
   selector: "app-update",
-  templateUrl: "./update.component.html",
-  styleUrls: ["./update.component.less"],
+  template: `<app-task-form [creating]="false" [model]="model"></app-task-form>`,
 })
-export class TasksUpdateComponent {
+export class TasksUpdateComponent implements OnInit {
   public constructor(
     private api: TasksService,
     private route: ActivatedRoute,
-    private router: Router,
   ) {}
 
   protected model: ITask = {};
@@ -28,24 +26,5 @@ export class TasksUpdateComponent {
       .subscribe((response) => {
         this.model = response.data;
       });
-  }
-
-  protected submitForm(): void {
-    const taskModel: Task = new Task(this.model);
-
-    this.api
-      .updateTask(taskModel)
-      .pipe(take(1))
-      .subscribe(() => this.router.navigate(taskModel.ViewUrl));
-  }
-
-  protected updateImportance(event: any): void {
-    const value: string = event.target.value;
-    this.model.Importance = parseInt(value, 10);
-  }
-
-  protected updateCompleteBy(event: any): void {
-    const value: Date = new Date(event.target.value);
-    this.model.CompleteBy = value.toLocaleDateString();
   }
 }

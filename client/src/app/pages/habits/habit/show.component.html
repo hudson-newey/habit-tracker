@@ -42,6 +42,6 @@
 
 <ng-container *ngIf="model">
   <app-calendar-heatmap
-    [data]="model?.FormattedCompletedDates ?? []"
+    [data]="model.FormattedCompletedDates"
   ></app-calendar-heatmap>
 </ng-container>

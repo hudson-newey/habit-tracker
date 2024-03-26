@@ -1,4 +1,9 @@
-<h1>Add New Habit</h1>
+@if (creating) {
+  <h1>Create Habit</h1>
+}
+@else {
+  <h1>Edit Habit: {{ model.Name }}</h1>
+}
 
 <form #ngForm action="">
   <label for="new-habit-input" class="uk-form-label">Habit Name</label>

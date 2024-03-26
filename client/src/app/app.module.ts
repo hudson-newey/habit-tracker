@@ -40,6 +40,10 @@ import { HabitsTableComponent } from "./components/habits-table/habits-table.com
 import { TasksTableComponent } from "./components/tasks-table/tasks-table.component";
 import { NoContextMenuDirective } from "./directives/no-context-menu.directive";
 import { LogbookEditComponent } from "./pages/logbook/edit/edit.component";
+import { AbstractFormComponent } from "./components/forms/abstract-form.component";
+import { HabitFormComponent } from "./components/forms/habit-form/habit-form.component";
+import { TaskFormComponent } from "./components/forms/task-form/task-form.component";
+import { GoalFormComponent } from "./components/forms/goal-form/goal-form.component";
 
 const pages: any[] = [
   // goals
@@ -90,6 +94,12 @@ const components: any[] = [
   NoItemsPlaceholderComponent,
   HabitsTableComponent,
   TasksTableComponent,
+
+  // forms
+  AbstractFormComponent,
+  HabitFormComponent,
+  TaskFormComponent,
+  GoalFormComponent,
 ];
 
 const directives: any[] = [NoContextMenuDirective];
