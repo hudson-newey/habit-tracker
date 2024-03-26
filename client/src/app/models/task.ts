@@ -22,7 +22,7 @@ export class Task extends AbstractModel<ITask> implements ITask {
   public Description!: string;
   public Completed!: boolean;
   public Goal!: Id;
-  public Importance!: number;
+  public Importance: number = 1;
   public CompleteBy!: string;
   public DependsOn!: Id[];
 

@@ -21,9 +21,6 @@ export class HabitFormComponent extends AbstractFormComponent<IHabit> implements
     super();
   }
 
-  public override model: IHabit = {
-    CreatedAt: new Date().toLocaleDateString(),
-  };
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 
   public ngOnInit(): void {

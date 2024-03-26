@@ -24,9 +24,6 @@ export class TaskFormComponent
     super();
   }
 
-  public override model: ITask = {
-    Importance: 1,
-  };
   protected goals$ = new BehaviorSubject<Goal[]>([]);
 
   public ngOnInit(): void {
