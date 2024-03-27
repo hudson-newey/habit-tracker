@@ -44,6 +44,7 @@ import { AbstractFormComponent } from "./components/forms/abstract-form.componen
 import { HabitFormComponent } from "./components/forms/habit-form/habit-form.component";
 import { TaskFormComponent } from "./components/forms/task-form/task-form.component";
 import { GoalFormComponent } from "./components/forms/goal-form/goal-form.component";
+import { LogbookService } from "./services/logbook/logbook.service";
 
 const pages: any[] = [
   // goals
@@ -84,6 +85,7 @@ const services: any[] = [
   GoalsService,
   TasksService,
   ClientConfigService,
+  LogbookService,
 
   VirtualDatabaseService,
 ];
