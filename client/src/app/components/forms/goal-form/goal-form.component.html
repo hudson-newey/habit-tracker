@@ -35,6 +35,8 @@
     (change)="updateCompleteBy($event)"
   />
 
+  <app-tags-input [(model)]="model.Tags"></app-tags-input>
+
   <button
     (click)="submitForm()"
     type="submit"

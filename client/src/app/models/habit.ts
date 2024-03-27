@@ -12,6 +12,7 @@ export interface IHabit {
   IsQuantifiable?: boolean;
   TargetValue?: number;
   DependsOn?: Id[];
+  Tags?: Id[];
 }
 
 export class Habit extends AbstractModel<IHabit> implements IHabit {
@@ -29,6 +30,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public IsQuantifiable!: boolean;
   public TargetValue!: number;
   public DependsOn!: Id[];
+  public Tags!: Id[];
 
   public override get ViewUrl(): any[] {
     return [`/habits`, this.Id];

@@ -61,6 +61,13 @@ func main() {
 	router.PUT("/logbooks/:id", routes.UpdateLogbook(database))
 	router.DELETE("/logbooks/:id", routes.DeleteLogbook(database))
 
+	// tags
+	router.POST("/tags", routes.CreateTag(database))
+	router.GET("/tags", routes.ListTags(database))
+	router.GET("/tags/:id", routes.GetTag(database))
+	router.PUT("/tags/:id", routes.UpdateTag(database))
+	router.DELETE("/tags/:id", routes.DeleteTag(database))
+
 	// schedule
 	// e.g. calendar, daily todo tasks left
 	router.GET("/schedule/daily-remaining", routes.DailyRemainingRoute(database))

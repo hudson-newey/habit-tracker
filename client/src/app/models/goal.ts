@@ -7,6 +7,7 @@ export interface IGoal {
   Description?: string;
   Completed?: boolean;
   CompleteBy?: string;
+  Tags?: Id[];
 }
 
 export class Goal extends AbstractModel<IGoal> implements IGoal {
@@ -19,6 +20,7 @@ export class Goal extends AbstractModel<IGoal> implements IGoal {
   public Description!: string;
   public Completed!: boolean;
   public CompleteBy!: string;
+  public Tags!: Id[];
 
   public override get ViewUrl(): any[] {
     return ["/goals", this.Id];

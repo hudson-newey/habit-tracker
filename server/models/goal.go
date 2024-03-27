@@ -6,4 +6,5 @@ type Goal struct {
 	Description string
 	Completed   bool
 	CompleteBy  string
+	Tags        []string // as _id
 }

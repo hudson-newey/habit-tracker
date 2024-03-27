@@ -10,6 +10,7 @@ export interface ITask {
   Importance?: number;
   CompleteBy?: string;
   DependsOn?: Id[];
+  Tags?: Id[];
 }
 
 export class Task extends AbstractModel<ITask> implements ITask {
@@ -25,6 +26,7 @@ export class Task extends AbstractModel<ITask> implements ITask {
   public Importance: number = 1;
   public CompleteBy!: string;
   public DependsOn!: Id[];
+  public Tags!: Id[];
 
   public override get ViewUrl(): any[] {
     return ["/tasks", this.Id];

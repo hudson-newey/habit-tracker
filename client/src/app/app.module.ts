@@ -44,6 +44,8 @@ import { AbstractFormComponent } from "./components/forms/abstract-form.componen
 import { HabitFormComponent } from "./components/forms/habit-form/habit-form.component";
 import { TaskFormComponent } from "./components/forms/task-form/task-form.component";
 import { GoalFormComponent } from "./components/forms/goal-form/goal-form.component";
+import { TagsService } from "./services/tags/tags.service";
+import { TagsInputComponent } from "./components/tags-input/tags-input.component";
 
 const pages: any[] = [
   // goals
@@ -84,6 +86,7 @@ const services: any[] = [
   GoalsService,
   TasksService,
   ClientConfigService,
+  TagsService,
 
   VirtualDatabaseService,
 ];
@@ -100,6 +103,8 @@ const components: any[] = [
   HabitFormComponent,
   TaskFormComponent,
   GoalFormComponent,
+
+  TagsInputComponent,
 ];
 
 const directives: any[] = [NoContextMenuDirective];

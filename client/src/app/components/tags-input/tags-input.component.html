@@ -1,0 +1,17 @@
+<label for="tags-input" class="uk-form-label">Tags</label>
+
+<div class="uk-input">
+  <span *ngFor="let tag of selectedTags">
+    <span>{{ tag?.Text }}</span>
+  </span>
+
+  <input
+    id="tags-input"
+    type="text"
+    (change)="searchTags($event)"
+  />
+
+  <div *ngFor="let searchResult of searchResults">
+    {{ searchResult?.Text }}
+  </div>
+</div>

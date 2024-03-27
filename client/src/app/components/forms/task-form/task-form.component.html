@@ -27,7 +27,7 @@
   ></textarea>
 
   <label for="importance-input" class="uk-form-label">
-    Importance (low number = low importance; high number = high importance)
+    Importance
   </label>
   <select
     id="importance-input"
@@ -62,6 +62,8 @@
     class="uk-input"
     (change)="updateCompleteBy($event)"
   />
+
+  <app-tags-input [(model)]="model.Tags"></app-tags-input>
 
   <button
     (click)="submitForm()"
