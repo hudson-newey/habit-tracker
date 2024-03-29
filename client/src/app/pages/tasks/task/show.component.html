@@ -12,9 +12,9 @@
   Delete: {{ model?.Name }}
 </button>
 
-<p>
-  {{ model?.Description }}
-</p>
+@if (model?.Description) {
+  <pre class="uk-text-default">{{ model?.Description }}</pre>
+}
 
 <p>Importance: {{ model?.ImportanceHuman }}</p>
 

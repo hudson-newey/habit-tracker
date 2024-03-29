@@ -9,9 +9,10 @@ interface CalendarData {
 }
 
 @Component({
-  selector: "app-calendar-heatmap",
-  template: ` <div id="calendar-element"></div> `,
-  styleUrls: ["./calendar-heatmap.component.less"],
+    selector: "app-calendar-heatmap",
+    template: ` <div id="calendar-element"></div> `,
+    styleUrls: ["./calendar-heatmap.component.less"],
+    standalone: true,
 })
 export class CalendarHeatmapComponent implements AfterViewInit {
   public constructor() {}

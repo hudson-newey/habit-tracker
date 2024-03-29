@@ -1,4 +1,4 @@
-<h1>Task: {{ model?.Name }}</h1>
+<h1>{{ model?.Name }}</h1>
 
 <button
   class="uk-button uk-button-secondary uk-margin-small-right"
@@ -13,6 +13,9 @@
 
 <div class="uk-text-default">Created: {{ model?.CreatedAt | date }}</div>
 
-<pre>
-    {{ model?.Content }}
-</pre>
+@if (model?.Content) {
+  <pre>{{ model?.Content }}</pre>
+}
+@else {
+  <p>No content</p>
+}

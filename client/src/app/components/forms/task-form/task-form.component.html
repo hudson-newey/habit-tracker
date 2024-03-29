@@ -1,73 +1,62 @@
 @if (creating) {
   <h1>Create a New Task</h1>
-}
-@else {
+} @else {
   <h1>Edit Task: {{ model.Name }}</h1>
 }
 
-<form #ngForm action="">
-  <label for="new-task-input" class="uk-form-label">Task Name</label>
-  <input
-    [(ngModel)]="model.Name"
-    id="new-task-input"
-    name="new-task-input"
-    class="uk-input"
-    type="text"
-  />
+<form>
+  <label class="uk-form-label">
+    Task Name
+    <input name="name" class="uk-input" type="text" [(ngModel)]="model.Name" />
+  </label>
 
-  <label for="new-task-description" class="uk-form-label">
+  <label class="uk-form-label">
     Task Description
+    <textarea
+      name="description"
+      class="uk-textarea"
+      rows="10"
+      [(ngModel)]="model.Description"
+    ></textarea>
   </label>
-  <textarea
-    [(ngModel)]="model.Description"
-    id="new-task-description"
-    name="new-task-description"
-    class="uk-textarea"
-    rows="10"
-  ></textarea>
 
-  <label for="importance-input" class="uk-form-label">
-    Importance (low number = low importance; high number = high importance)
+  <label class="uk-form-label">
+    Importance
+    <select
+      class="uk-select"
+      (change)="updateImportance($event)"
+    >
+      <option value="1" selected>Low</option>
+      <option value="2">Low-Medium</option>
+      <option value="3">Medium</option>
+      <option value="4">Medium-High</option>
+      <option value="5">High</option>
+    </select>
   </label>
-  <select
-    id="importance-input"
-    name="importance-input"
-    class="uk-input"
-    (change)="updateImportance($event)"
-  >
-    <option value="1" selected>Low</option>
-    <option value="2">Low-Medium</option>
-    <option value="3">Medium</option>
-    <option value="4">Medium-High</option>
-    <option value="5">High</option>
-  </select>
 
-  <label for="associated-goal" class="uk-form-label">Associated Goal</label>
-  <select
-    name="associated-goal"
-    id="associated-goal"
-    class="uk-input"
-    [(ngModel)]="model.Goal"
-  >
-    <ng-container *ngFor="let goal of goals$ | async">
-      <option [value]="goal.Id">{{ goal.Name }}</option>
-    </ng-container>
-  </select>
+  <label class="uk-form-label">
+    Associated Goal
+    <select name="associated-goal" class="uk-select" [(ngModel)]="model.Goal">
+      <ng-container *ngFor="let goal of goals$ | async">
+        <option [value]="goal.Id">{{ goal.Name }}</option>
+      </ng-container>
+    </select>
+  </label>
 
-  <label for="complete-by-input" class="uk-form-label">Complete By</label>
-  <input
-    type="date"
-    name="complete-by-input"
-    id="complete-by-input"
-    class="uk-input"
-    (change)="updateCompleteBy($event)"
-  />
+  <label class="uk-form-label">
+    Complete By
+    <input
+      type="date"
+      class="uk-input"
+      (change)="updateCompleteBy($event)"
+    />
+  </label>
 
   <button
-    (click)="submitForm()"
     type="submit"
     class="uk-button uk-button-primary uk-margin-top"
+    (click)="submitForm()"
   >
-    {{ creating ? 'Create' : 'Update'}} Task
+    {{ creating ? "Create" : "Update" }} Task
   </button>
 </form>

@@ -4,11 +4,14 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 import { Goal, IGoal } from "src/app/models/goal";
 import { take } from "rxjs";
 import { Router } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-goal-form",
-  templateUrl: "./goal-form.component.html",
-  styleUrl: "./goal-form.component.less",
+    selector: "app-goal-form",
+    templateUrl: "./goal-form.component.html",
+    styleUrl: "./goal-form.component.less",
+    standalone: true,
+    imports: [FormsModule],
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   public constructor(

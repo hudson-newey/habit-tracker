@@ -1,14 +1,17 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { Id } from "src/app/types/helpers";
+import { DatePipe } from "@angular/common";
 
 @Component({
-  selector: "app-show",
-  templateUrl: "./show.component.html",
-  styleUrls: ["./show.component.less"],
+    selector: "app-show",
+    templateUrl: "./show.component.html",
+    styleUrls: ["./show.component.less"],
+    standalone: true,
+    imports: [RouterLink, DatePipe],
 })
 export class LogbookShowComponent {
   public constructor(

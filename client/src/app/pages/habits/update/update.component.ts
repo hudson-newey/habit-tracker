@@ -4,10 +4,13 @@ import { take } from "rxjs";
 import { IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";
 import { Id } from "src/app/types/helpers";
+import { HabitFormComponent } from "../../../components/forms/habit-form/habit-form.component";
 
 @Component({
-  selector: "app-update",
-  template: `<app-habit-form [creating]="false" [model]="model"></app-habit-form>`,
+    selector: "app-update",
+    template: `<app-habit-form [creating]="false" [model]="model"></app-habit-form>`,
+    standalone: true,
+    imports: [HabitFormComponent],
 })
 export class HabitsUpdateComponent {
   public constructor(

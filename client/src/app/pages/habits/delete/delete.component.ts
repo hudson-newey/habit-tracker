@@ -6,8 +6,9 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete-habit-page",
-  templateUrl: "delete.component.html",
+    selector: "app-delete-habit-page",
+    templateUrl: "delete.component.html",
+    standalone: true,
 })
 export class DeleteHabitPageComponent implements OnInit {
   public constructor(

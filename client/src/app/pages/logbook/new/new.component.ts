@@ -2,11 +2,14 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { ILogbook, Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-new",
-  templateUrl: "./new.component.html",
-  styleUrls: ["./new.component.less"],
+    selector: "app-new",
+    templateUrl: "./new.component.html",
+    styleUrls: ["./new.component.less"],
+    standalone: true,
+    imports: [FormsModule],
 })
 export class LogbookNewComponent {
   public constructor(

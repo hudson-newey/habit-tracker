@@ -7,8 +7,8 @@ describe("LogbookListComponent", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LogbookListComponent],
-    });
+    imports: [LogbookListComponent],
+});
     fixture = TestBed.createComponent(LogbookListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

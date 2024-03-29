@@ -1,88 +1,77 @@
 @if (creating) {
   <h1>Create Habit</h1>
-}
-@else {
+} @else {
   <h1>Edit Habit: {{ model.Name }}</h1>
 }
 
-<form #ngForm action="">
-  <label for="new-habit-input" class="uk-form-label">Habit Name</label>
-  <input
-    [(ngModel)]="model.Name"
-    id="new-habit-input"
-    name="new-habit-input"
-    class="uk-input"
-    type="text"
-  />
-
-  <label for="new-habit-description" class="uk-form-label">
-    Habit Description
+<form>
+  <label class="uk-form-label">
+    Habit Name
+    <input name="name" class="uk-input" type="text" [(ngModel)]="model.Name" />
   </label>
-  <textarea
-    [(ngModel)]="model.Description"
-    id="new-habit-description"
-    name="new-habit-description"
-    class="uk-textarea"
-    rows="10"
-  ></textarea>
 
-  <label for="associated-goal" class="uk-form-label">Associated Goal</label>
-  <select
-    name="associated-goal"
-    id="associated-goal"
-    class="uk-input"
-    [(ngModel)]="model.Goal"
-  >
-    <ng-container *ngFor="let goal of goals$ | async">
-      <option [value]="goal.Id">{{ goal.Name }}</option>
-    </ng-container>
-  </select>
+  <label class="uk-form-label">
+    Habit Description
+    <textarea
+      name="description"
+      class="uk-textarea"
+      rows="10"
+      [(ngModel)]="model.Description"
+    ></textarea>
+  </label>
+
+  <label class="uk-form-label">
+    Associated Goal
+    <select name="goal" class="uk-select" [(ngModel)]="model.Goal">
+      <ng-container *ngFor="let goal of goals$ | async">
+        <option [value]="goal.Id">{{ goal.Name }}</option>
+      </ng-container>
+    </select>
+  </label>
 
   <div id="boolean-selectors">
-    <label for="anti-habit" class="uk-form-label">
+    <label class="uk-form-label">
       <input
-        [(ngModel)]="model.AntiHabit"
-        id="anti-habit"
         name="anti-habit"
         class="uk-checkbox"
         type="checkbox"
+        [(ngModel)]="model.AntiHabit"
       />
       Anti Habit
     </label>
 
-    <label for="quantifiable-habit" class="uk-form-label">
+    <label class="uk-form-label">
       <input
-        [(ngModel)]="model.IsQuantifiable"
-        id="quantifiable-habit"
         name="quantifiable-habit"
         class="uk-checkbox"
         type="checkbox"
+        [(ngModel)]="model.IsQuantifiable"
       />
       Quantifiable
     </label>
   </div>
 
   <div *ngIf="model.IsQuantifiable" class="uk-form-label target-value">
-    <label for="target-value">
+    <label>
       Target Value
 
       <input
-        [(ngModel)]="model.TargetValue"
         name="target-value"
         type="number"
         class="uk-input"
         placeholder="eg. 5 (km run)"
+        [(ngModel)]="model.TargetValue"
       />
     </label>
   </div>
 
   <div>
     <button
-      (click)="submitForm()"
       type="submit"
       class="uk-button uk-button-primary uk-margin-top"
+      (click)="submitForm()"
     >
-      {{ creating ? 'Create' : 'Update' }} Habit
+      {{ creating ? "Create" : "Update" }} Habit
     </button>
   </div>
 </form>

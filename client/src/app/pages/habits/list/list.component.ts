@@ -2,11 +2,20 @@ import { Component, OnInit } from "@angular/core";
 import { take } from "rxjs";
 import { Habit, IHabit } from "src/app/models/habit";
 import { HabitsService } from "src/app/services/habits/habits.service";
+import { NgIf } from "@angular/common";
+import { HabitsTableComponent } from "../../../components/habits-table/habits-table.component";
+import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: "app-list-page",
-  templateUrl: "list.component.html",
-  styleUrls: ["list.component.less"],
+    selector: "app-list-page",
+    templateUrl: "list.component.html",
+    styleUrls: ["list.component.less"],
+    standalone: true,
+    imports: [
+        RouterLink,
+        HabitsTableComponent,
+        NgIf,
+    ],
 })
 export class HabitListComponent implements OnInit {
   public constructor(private api: HabitsService) {}

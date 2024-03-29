@@ -1,10 +1,13 @@
 import { Component } from "@angular/core";
 import { ClientConfigService } from "src/app/services/clientConfig/client-config.service";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-configure",
-  templateUrl: "./configure.component.html",
-  styleUrls: ["./configure.component.less"],
+    selector: "app-configure",
+    templateUrl: "./configure.component.html",
+    styleUrls: ["./configure.component.less"],
+    standalone: true,
+    imports: [FormsModule],
 })
 export class ConfigurePageComponent {
   public constructor(private configService: ClientConfigService) {}

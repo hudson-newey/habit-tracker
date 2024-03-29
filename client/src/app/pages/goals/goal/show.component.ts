@@ -1,15 +1,22 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { Goal } from "src/app/models/goal";
 import { Habit } from "src/app/models/habit";
 import { Task } from "src/app/models/task";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
+import { NgFor, DatePipe } from "@angular/common";
 
 @Component({
-  selector: "app-goal-page",
-  templateUrl: "show.component.html",
+    selector: "app-goal-page",
+    templateUrl: "show.component.html",
+    standalone: true,
+    imports: [
+        RouterLink,
+        NgFor,
+        DatePipe,
+    ],
 })
 export class GoalPageComponent implements OnInit {
   public constructor(

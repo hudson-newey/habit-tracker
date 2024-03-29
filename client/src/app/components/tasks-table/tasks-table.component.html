@@ -10,10 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr
-      *ngFor="let model of models"
-      [ngClass]="{ 'overdue-task': model.isOverdue }"
-    >
+    <tr *ngFor="let model of models">
       <td>
         <input
           [(ngModel)]="model.Completed"
@@ -39,7 +36,7 @@
 
       <td class="hide-in-mobile">{{ model.ImportanceHuman }}</td>
 
-      <td>
+      <td [ngClass]="{ 'uk-text-danger': model.isOverdue }">
         <ng-container *ngIf="model.CompleteBy; else defaultCompleteBy">
           {{ model.CompleteBy | date }}
         </ng-container>

@@ -4,11 +4,14 @@ import { take } from "rxjs";
 import { ILogbook, Logbook } from "src/app/models/logbook";
 import { LogbookService } from "src/app/services/logbook/logbook.service";
 import { Id } from "src/app/types/helpers";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-  selector: "app-edit",
-  templateUrl: "./edit.component.html",
-  styleUrl: "./edit.component.less",
+    selector: "app-edit",
+    templateUrl: "./edit.component.html",
+    styleUrl: "./edit.component.less",
+    standalone: true,
+    imports: [FormsModule],
 })
 export class LogbookEditComponent {
   public constructor(

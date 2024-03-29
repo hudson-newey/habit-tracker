@@ -7,8 +7,8 @@ describe("LogbookShowComponent", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LogbookShowComponent],
-    });
+    imports: [LogbookShowComponent],
+});
     fixture = TestBed.createComponent(LogbookShowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

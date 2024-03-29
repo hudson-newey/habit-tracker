@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { take } from "rxjs";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Habit } from "src/app/models/habit";
@@ -7,10 +7,22 @@ import { Id } from "src/app/types/helpers";
 import { HabitsService } from "src/app/services/habits/habits.service";
 import { Goal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";
+import { CalendarHeatmapComponent } from "../../../components/calendar-heatmap/calendar-heatmap.component";
+import { NgIf, NgFor, DatePipe } from "@angular/common";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: "app-habit-page",
-  templateUrl: "show.component.html",
+    selector: "app-habit-page",
+    templateUrl: "show.component.html",
+    standalone: true,
+    imports: [
+        RouterLink,
+        FaIconComponent,
+        NgIf,
+        NgFor,
+        CalendarHeatmapComponent,
+        DatePipe,
+    ],
 })
 export class HabitShowPageComponent implements OnInit {
   public constructor(

@@ -4,12 +4,15 @@ import { take } from "rxjs";
 import { IGoal } from "src/app/models/goal";
 import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
+import { GoalFormComponent } from "../../../components/forms/goal-form/goal-form.component";
 
 @Component({
-  selector: "app-update",
-  template: `
+    selector: "app-update",
+    template: `
     <app-goal-form [creating]="false" [model]="model"></app-goal-form>
   `,
+    standalone: true,
+    imports: [GoalFormComponent],
 })
 export class GoalsUpdateComponent implements OnInit {
   public constructor(

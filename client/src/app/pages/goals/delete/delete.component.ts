@@ -6,8 +6,9 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete-page",
-  templateUrl: "delete.component.html",
+    selector: "app-delete-page",
+    templateUrl: "delete.component.html",
+    standalone: true,
 })
 export class DeleteGoalPageComponent implements OnInit {
   public constructor(

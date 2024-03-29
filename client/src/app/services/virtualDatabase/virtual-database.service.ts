@@ -32,8 +32,6 @@ export class VirtualDatabaseService extends AbstractService {
             (model: any) => model.Goal === String(id),
           );
 
-          console.log(value);
-
           return value;
         }
 

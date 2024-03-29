@@ -10,11 +10,9 @@
   Delete: {{ model?.Name }}
 </button>
 
-<pre class="uk-text-default">
-    {{ model?.Description }}
-</pre>
-
-<hr>
+@if (model?.Description) {
+  <pre class="uk-text-default">{{ model?.Description }}</pre>
+}
 
 <p>
     Complete By: {{ model?.CompleteBy | date }}

@@ -1,44 +1,34 @@
 @if (creating) {
   <h1>Create Goal</h1>
-}
-@else {
+} @else {
   <h1>Edit Goal: {{ model.Name }}</h1>
 }
 
-<form #ngForm action="">
-  <label for="new-task-input" class="uk-form-label">Goal Name</label>
-  <input
-    [(ngModel)]="model.Name"
-    id="new-task-input"
-    name="new-task-input"
-    class="uk-input"
-    type="text"
-  />
-
-  <label for="new-task-description" class="uk-form-label">
-    Goal Description
+<form>
+  <label class="uk-form-label">
+    Goal Name
+    <input name="name" class="uk-input" type="text" [(ngModel)]="model.Name" />
   </label>
-  <textarea
-    [(ngModel)]="model.Description"
-    id="new-task-description"
-    name="new-task-description"
-    class="uk-textarea"
-    rows="10"
-  ></textarea>
 
-  <label for="complete-by-input" class="uk-form-label">Complete By</label>
-  <input
-    type="date"
-    name="complete-by-input"
-    id="complete-by-input"
-    class="uk-input"
-    (change)="updateCompleteBy($event)"
-  />
+  <label class="uk-form-label">
+    Goal Description
+    <textarea
+      name="description"
+      class="uk-textarea"
+      rows="10"
+      [(ngModel)]="model.Description"
+    ></textarea>
+  </label>
+
+  <label for="complete-by-input" class="uk-form-label">
+    Complete By
+    <input type="date" class="uk-input" (change)="updateCompleteBy($event)" />
+  </label>
 
   <button
-    (click)="submitForm()"
     type="submit"
     class="uk-button uk-button-primary uk-margin-top"
+    (click)="submitForm()"
   >
     {{ creating ? "Create" : "Update" }} Goal
   </button>

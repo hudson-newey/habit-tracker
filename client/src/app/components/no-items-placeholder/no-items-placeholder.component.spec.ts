@@ -8,8 +8,8 @@ describe("NoItemsPlaceholderComponent", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NoItemsPlaceholderComponent],
-    });
+    imports: [NoItemsPlaceholderComponent],
+});
     fixture = TestBed.createComponent(NoItemsPlaceholderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

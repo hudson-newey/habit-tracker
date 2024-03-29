@@ -8,8 +8,8 @@ describe('HabitsTableComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HabitsTableComponent]
-    });
+    imports: [HabitsTableComponent]
+});
     fixture = TestBed.createComponent(HabitsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -7,8 +7,8 @@ describe("UpdateComponent", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GoalsUpdateComponent],
-    });
+    imports: [GoalsUpdateComponent],
+});
     fixture = TestBed.createComponent(GoalsUpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

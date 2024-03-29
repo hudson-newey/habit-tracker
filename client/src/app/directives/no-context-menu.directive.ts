@@ -1,6 +1,9 @@
 import { Directive, HostListener } from "@angular/core";
 
-@Directive({ selector: "[appNoContextMenu]" })
+@Directive({
+    selector: "[appNoContextMenu]",
+    standalone: true
+})
 export class NoContextMenuDirective {
   public constructor() {}
 

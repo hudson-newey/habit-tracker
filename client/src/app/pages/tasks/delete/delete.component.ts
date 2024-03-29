@@ -6,8 +6,9 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
 import { Id } from "src/app/types/helpers";
 
 @Component({
-  selector: "app-delete-task-page",
-  templateUrl: "delete.component.html",
+    selector: "app-delete-task-page",
+    templateUrl: "delete.component.html",
+    standalone: true,
 })
 export class DeleteTaskPageComponent implements OnInit {
   public constructor(

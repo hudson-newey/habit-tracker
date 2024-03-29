@@ -5,7 +5,10 @@ export interface IAbstractFormComponent<T> {
   model?: T;
 }
 
-@Directive({ selector: "app-abstract-form" })
+@Directive({
+    selector: "app-abstract-form",
+    standalone: true
+})
 export abstract class AbstractFormComponent<T extends object>
   implements IAbstractFormComponent<T>
 {

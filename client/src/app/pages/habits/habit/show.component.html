@@ -10,11 +10,9 @@
   Delete: {{ model?.Name }}
 </button>
 
-<p>
-  {{ model?.Description }}
-</p>
-
-<hr />
+@if (model?.Description) {
+  <pre>{{ model?.Description }}</pre>
+}
 
 <p>
   Is Anti Habit:
@@ -35,8 +33,8 @@
 <h2>Completed Dates</h2>
 
 <ul>
-  <li *ngFor="let date of recentCompletedDates">
-    {{ date | date }}
+  <li *ngFor="let completedDate of recentCompletedDates">
+    {{ completedDate | date }}
   </li>
 </ul>
 
