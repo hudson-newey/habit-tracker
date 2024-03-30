@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"server/cors"
 	"server/databaseService"
 	"server/helpers"
@@ -19,14 +20,13 @@ func main() {
 	// create database connection
 	dbClient, ctx, _, err := databaseService.Connect("mongodb://127.0.0.1:27017")
 
-	var database models.Database
-
-	database.Client = dbClient
-	database.Ctx = ctx
-
 	if err != nil {
 		panic(err)
 	}
+
+	var database models.Database
+	database.Client = dbClient
+	database.Ctx = ctx
 
 	// TODO: probably move this to a separate file such as routes/routes.go
 	// goals
@@ -61,16 +61,19 @@ func main() {
 	router.PUT("/logbooks/:id", routes.UpdateLogbook(database))
 	router.DELETE("/logbooks/:id", routes.DeleteLogbook(database))
 
-	// schedule
-	// e.g. calendar, daily todo tasks left
-	router.GET("/schedule/daily-remaining", routes.DailyRemainingRoute(database))
-	router.GET("/schedule/calendar", routes.CalendarRoute(database))
-
-	// ai routes
+	// AI routes
+	// these routes are used so that when you create a goal, the app can provide suggestions on what
+	// tasks and habits you can do to achieve that goal
+	router.POST("/ai/habits", routes.ListHabitsForGoal)
+	router.POST("/ai/tasks", routes.ListTasksForGoal)
 
 	// generic app routes
 	router.GET("/", routes.RedirectRoute)
 
-	serverPort := helpers.EnvVariable("PORT")
-	router.Run(":" + serverPort)
+	serverPort := ":" + helpers.EnvVariable("PORT")
+
+	log.Println("Server running on port",  serverPort)
+	if err := router.Run(serverPort); err != nil {
+		panic(err)
+	}
 }

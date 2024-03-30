@@ -13,6 +13,7 @@ import { GoalsService } from "./app/services/goals/goals.service";
 import { HabitsService } from "./app/services/habits/habits.service";
 import { ConfigInterceptor } from "./app/services/config-interceptor/config.interceptor";
 import { HTTP_INTERCEPTORS, withInterceptorsFromDi, provideHttpClient } from "@angular/common/http";
+import { GptService } from "./app/services/gpt/gpt.service";
 
 const services: any[] = [
   HabitsService,
@@ -20,6 +21,7 @@ const services: any[] = [
   TasksService,
   ClientConfigService,
   LogbookService,
+  GptService,
 
   VirtualDatabaseService,
 ];

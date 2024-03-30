@@ -32,6 +32,14 @@ html {
   }
 }
 
+pre {
+  background-color: transparent;
+  border: none;
+  color: @dark-color;
+  font-family: inherit;
+  font-size: inherit;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     background-color: @dark-color;
@@ -44,5 +52,9 @@ html {
   .uk-button-primary {
     // contrast was too low when using the default color
     color: @dark-color !important;
+  }
+
+  pre {
+    color: @light-color;
   }
 }
