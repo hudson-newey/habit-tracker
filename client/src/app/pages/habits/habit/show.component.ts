@@ -55,7 +55,7 @@ export class HabitShowPageComponent implements OnInit {
         const completedDates = this.model?.CompletedDates ?? [];
         const uniqueCompletedDates = Array.from(new Set(completedDates));
 
-        this.recentCompletedDates = uniqueCompletedDates.slice(-7);
+        this.recentCompletedDates = uniqueCompletedDates.slice(-7) ?? [];
 
         if (!this.model?.Goal) {
           return;

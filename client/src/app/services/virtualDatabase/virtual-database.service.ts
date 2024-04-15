@@ -8,6 +8,40 @@ export class VirtualDatabaseService extends AbstractService {
     super();
   }
 
+  public knownVirtualTablesLocalStorageKey = "knownVirtualTables";
+
+  // TODO: move this to the sync queue service
+  // It's currently here because of recursive interceptors
+  public pushToSyncQueue(request: HttpRequest<unknown>): void {
+    const syncQueue =
+      JSON.parse(localStorage.getItem("syncQueue") as string) ?? [];
+
+    syncQueue.push(request);
+
+    localStorage.setItem("syncQueue", JSON.stringify(syncQueue));
+  }
+
+  public knownVirtualTables(): string[] {
+    const foundTables =
+      JSON.parse(
+        localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
+      ) ?? [];
+
+    return foundTables.filter((x: string) => !!x);
+  }
+
+  public dropTable(tableName: string): void {
+    localStorage.removeItem(tableName);
+  }
+
+  // we delete the table and recreate it so that the local storage time to destruction is postponed
+  // if we didn't do this, the local storage would be destroyed even if the user is using the app
+  // TODO: I should probably find a better solution to this
+  public updateTable(table: string, value: string): void {
+    this.dropTable(table);
+    localStorage.setItem(table, value);
+  }
+
   public applyApiRequest(request: HttpRequest<unknown>): any {
     const virtualTableName = request.url.split("/")[1];
     const id = Number(request.url.split("/")[2]);
@@ -16,6 +50,8 @@ export class VirtualDatabaseService extends AbstractService {
     if (localStorage.getItem(virtualTableName) === null) {
       this.updateTable(virtualTableName, "[]");
     }
+
+    this.addToKnownTables(virtualTableName);
 
     const virtualTable = this.tableValue(virtualTableName);
 
@@ -40,6 +76,8 @@ export class VirtualDatabaseService extends AbstractService {
     }
 
     if (request.method === "POST") {
+      this.pushToSyncQueue(request);
+
       const newContentObject = JSON.parse(JSON.stringify(newContent));
 
       // because id's are auto incremented by mongo, we replicate that here
@@ -50,6 +88,8 @@ export class VirtualDatabaseService extends AbstractService {
     }
 
     if (request.method === "DELETE") {
+      this.pushToSyncQueue(request);
+
       const index = virtualTable.findIndex((item: any) => item.Id === id);
 
       virtualTable.splice(index, 1);
@@ -58,6 +98,8 @@ export class VirtualDatabaseService extends AbstractService {
     }
 
     if (request.method === "PUT") {
+      this.pushToSyncQueue(request);
+
       const index = virtualTable.findIndex((item: any) => item.Id === id);
 
       virtualTable[index] = newContent;
@@ -83,11 +125,20 @@ export class VirtualDatabaseService extends AbstractService {
     return Math.max(...table.map((item: any) => item.Id)) + 1;
   }
 
-  // we delete the table and recreate it so that the local storage time to destruction is postponed
-  // if we didn't do this, the local storage would be destroyed even if the user is using the app
-  // TODO: I should probably find a better solution to this
-  private updateTable(table: string, value: string): void {
-    localStorage.removeItem(table);
-    localStorage.setItem(table, value);
+  private addToKnownTables(tableName: string): void {
+    const knownTables =
+      JSON.parse(
+        localStorage.getItem(this.knownVirtualTablesLocalStorageKey) as string,
+      ) ?? [];
+
+    if (knownTables.includes(tableName)) {
+      return;
+    }
+
+    knownTables.push(tableName);
+    localStorage.setItem(
+      this.knownVirtualTablesLocalStorageKey,
+      JSON.stringify(knownTables),
+    );
   }
 }

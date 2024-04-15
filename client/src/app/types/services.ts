@@ -1,6 +1,6 @@
 export type EmptyResponse = null | undefined | {};
 
-export interface ApiHttpResponse<T extends object> {
+export interface ApiHttpResponse<T> {
     data: T
     message: string;
 }

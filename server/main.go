@@ -70,6 +70,9 @@ func main() {
 	// generic app routes
 	router.GET("/", routes.RedirectRoute)
 
+	// ping routes
+	router.GET("/ping", routes.PingRoute)
+
 	serverPort := ":" + helpers.EnvVariable("PORT")
 
 	log.Println("Server running on port",  serverPort)

@@ -10,19 +10,18 @@ import { Observable, of } from "rxjs";
 import { ClientConfigService } from "../clientConfig/client-config.service";
 import { VirtualDatabaseService } from "../virtualDatabase/virtual-database.service";
 
-// we use the interceptor service to treat local todo items and server todo items differently
 @Injectable()
 export class ConfigInterceptor implements HttpInterceptor {
   public constructor(
     private config: ClientConfigService,
     private virtualDb: VirtualDatabaseService
-  ) {}
+  ) { }
 
   public intercept(
     request: HttpRequest<unknown>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    if (this.config.isCustomServerUrlSet()) {
+    if (this.config.isCustomServerUrlSet() || request.url.endsWith("ping")) {
       return next.handle(request);
     }
 
@@ -34,7 +33,7 @@ export class ConfigInterceptor implements HttpInterceptor {
         body: {
           data,
         },
-      })
+      }),
     );
   }
 }

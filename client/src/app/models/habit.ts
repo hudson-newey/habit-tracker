@@ -55,7 +55,6 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
     return this.TimesCompletedToday > 0;
   }
 
-  // get the dates in the format yyyy-MM-dd
   public get FormattedCompletedDates(): string[] {
     let formattedCompletedDates: string[] = [];
 
