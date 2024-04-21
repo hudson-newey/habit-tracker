@@ -57,7 +57,7 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
 
   protected updateCompleteBy(event: any): void {
     const value: Date = new Date(event.target.value);
-    this.model.CompleteBy = value.toLocaleDateString();
+    this.model.CompleteBy = value.toLocaleDateString("en-GB");
   }
 
   protected getAiTasksAndHabits(): void {

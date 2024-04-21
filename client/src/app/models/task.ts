@@ -3,6 +3,7 @@ import { AbstractModel } from "./abstractModel";
 
 export interface ITask {
   Id?: Id;
+  ClientId?: Id;
   Name?: string;
   Description?: string;
   Completed?: boolean;
@@ -18,6 +19,7 @@ export class Task extends AbstractModel<ITask> implements ITask {
   }
 
   public Id!: Id;
+  public ClientId!: Id;
   public Name!: string;
   public Description!: string;
   public Completed!: boolean;

@@ -6,6 +6,7 @@ import { PingService } from "../ping/ping.service";
 import { Observable, interval, of, take } from "rxjs";
 import { VirtualDatabaseService } from "../virtualDatabase/virtual-database.service";
 import { createUrl } from "../helpers";
+import { ApiHttpResponse } from "src/app/types/services";
 
 @Injectable({ providedIn: "root" })
 export class SyncQueueService extends AbstractService {
@@ -113,9 +114,12 @@ export class SyncQueueService extends AbstractService {
 
     virtualTables.forEach((table) => {
       const url = createUrl(`/${table}`);
-      this.http.get(url).subscribe((response) => {
-        this.virtualDatabase.updateTable(table, JSON.stringify(response));
-      });
+      this.http.get(url)
+        .pipe(take(1))
+        .subscribe((response) => {
+          const responseBody = response as ApiHttpResponse<any>;
+          this.virtualDatabase.updateTable(table, JSON.stringify(responseBody.data));
+        });
     });
   }
 

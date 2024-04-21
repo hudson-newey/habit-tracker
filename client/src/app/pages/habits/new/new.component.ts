@@ -14,6 +14,6 @@ export class NewHabitPage {
   // we don't do this in the habit form because it would update the "created at"
   // date when an update is made (not only on creation)
   protected partialModel: IHabit = {
-    CreatedAt: new Date().toLocaleDateString(),
+    CreatedAt: new Date().toLocaleDateString("en-GB"),
   };
 }

@@ -3,6 +3,7 @@ import { AbstractModel } from "./abstractModel";
 
 export interface ILogbook {
   Id?: Id;
+  ClientId?: Id;
   Name?: string;
   CreatedAt?: string;
   Content?: string;
@@ -14,6 +15,7 @@ export class Logbook extends AbstractModel<ILogbook> {
   }
 
   public Id!: Id;
+  public ClientId!: Id;
   public Name!: string;
   public CreatedAt!: string;
   public Content!: string;

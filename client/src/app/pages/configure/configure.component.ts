@@ -17,6 +17,10 @@ export class ConfigurePageComponent {
   protected formFeedback: string = "";
 
   protected saveCustomServerUrl(): void {
+    if (this.customServerUrl.endsWith("/")) {
+      this.customServerUrl = this.customServerUrl.slice(0, -1);
+    }
+
     if (this.customServerUrl) {
       this.configService.setCustomServerUrl(this.customServerUrl);
       this.formFeedback = "Custom server URL saved!";

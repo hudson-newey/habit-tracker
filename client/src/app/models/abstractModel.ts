@@ -2,6 +2,7 @@ import { Id } from "../types/helpers";
 
 export interface IAbstractModel {
   Id: Id;
+  ClientId: Id;
   toString: () => string;
 }
 
@@ -10,7 +11,10 @@ export abstract class AbstractModel<T> implements IAbstractModel {
     Object.assign(this, data);
   }
 
+  // Id is the database ID (which might be null if the changes arn't reflected in the DB)
+  // the ClientID should be used to get tasks, habits, etc... and is used to uniquely identify the model
   public abstract Id: Required<Id>;
+  public abstract ClientId: Required<Id>;
 
   public toString(): string {
     return JSON.stringify(this);

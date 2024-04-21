@@ -1,5 +1,0 @@
-# Routes
-
-## Client
-
-## Server

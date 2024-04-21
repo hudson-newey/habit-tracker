@@ -3,6 +3,7 @@ import { AbstractModel } from "./abstractModel";
 
 export interface IHabit {
   Id?: Id;
+  ClientId?: Id;
   Name?: string;
   Description?: string;
   CompletedDates?: string[];
@@ -20,6 +21,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   }
 
   public Id!: Id;
+  public ClientId!: Id;
   public Name!: string;
   public Description!: string;
   public AntiHabit!: boolean;
@@ -43,7 +45,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   }
 
   public get TimesCompletedToday(): number {
-    const currentDate = new Date().toLocaleDateString().split("T")[0];
+    const currentDate = new Date().toLocaleDateString("en-GB").split("T")[0];
     return this.CompletedDates?.filter((date: string) => date === currentDate).length ?? 0;
   }
 
@@ -67,7 +69,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
         date <= currentDate;
         date.setDate(date.getDate() + 1)
       ) {
-        const formattedDate = date.toLocaleDateString().split("T")[0];
+        const formattedDate = date.toLocaleDateString("en-GB").split("T")[0];
         if (!this.CompletedDates || !this.CompletedDates.includes(formattedDate)) {
           formattedCompletedDates.push(formattedDate);
         }
@@ -75,7 +77,7 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
     } else {
       formattedCompletedDates = this.CompletedDates?.map((date: string) => {
         const dateObject = new Date(date);
-        return dateObject.toLocaleDateString().split("T")[0] ?? [];
+        return dateObject.toLocaleDateString("en-GB").split("T")[0] ?? [];
       });
     }
 

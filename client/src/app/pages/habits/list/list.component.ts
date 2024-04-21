@@ -43,6 +43,7 @@ export class HabitListComponent implements OnInit {
       .getHabits()
       .pipe(take(1))
       .subscribe((response) => {
+        console.log(response);
         this.habits = response.data.map((model: IHabit) => new Habit(model));
       });
   }
@@ -52,7 +53,7 @@ export class HabitListComponent implements OnInit {
       model.CompletedDates = [];
     }
 
-    model.CompletedDates.push(new Date().toLocaleDateString());
+    model.CompletedDates.push(new Date().toLocaleDateString("en-GB"));
 
     this.api
       .updateHabit(model)
@@ -63,11 +64,11 @@ export class HabitListComponent implements OnInit {
   }
 
   public uncompleteHabit(model: Habit): void {
-    const todaysDate: string = new Date().toLocaleDateString();
+    const todaysDate: string = new Date().toLocaleDateString("en-GB");
 
     const indexToRemove: number = model.CompletedDates.findIndex(
       (item: string) => {
-        const formattedDate: string = new Date(item).toLocaleDateString();
+        const formattedDate: string = new Date(item).toLocaleDateString("en-GB");
         return todaysDate === formattedDate;
       }
     );

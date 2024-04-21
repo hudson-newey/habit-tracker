@@ -3,6 +3,7 @@ import { AbstractModel } from "./abstractModel";
 
 export interface IGoal {
   Id?: Id;
+  ClientId?: Id;
   Name?: string;
   Description?: string;
   Completed?: boolean;
@@ -15,6 +16,7 @@ export class Goal extends AbstractModel<IGoal> implements IGoal {
   }
 
   public Id!: Id;
+  public ClientId!: Id;
   public Name!: string;
   public Description!: string;
   public Completed!: boolean;

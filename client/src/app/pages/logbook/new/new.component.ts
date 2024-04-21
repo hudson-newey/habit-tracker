@@ -18,12 +18,12 @@ export class LogbookNewComponent {
   ) {}
 
   protected model: ILogbook = {
-    CreatedAt: new Date().toLocaleDateString(),
+    CreatedAt: new Date().toLocaleDateString("en-GB"),
   };
 
   protected submitForm(): void {
     const logbookModel: Logbook = new Logbook(this.model);
-    
+
     this.api
       .createLogbook(logbookModel)
       .subscribe(() => this.router.navigateByUrl("/logbook"));

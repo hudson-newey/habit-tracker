@@ -52,7 +52,7 @@ export class CalendarHeatmapComponent implements AfterViewInit {
       for (let month = 1; month <= 12; month++) {
         for (let day = 1; day <= 31; day++) {
           const date = new Date(year, month - 1, day)
-            .toLocaleDateString()
+            .toLocaleDateString("en-GB")
             .split("T")[0];
           dateCounts[date] = 0;
         }
@@ -61,7 +61,7 @@ export class CalendarHeatmapComponent implements AfterViewInit {
 
     // Increment counts for dates present in the original array
     for (let date of uniqueDates) {
-      const formattedDate = new Date(date).toLocaleDateString().split("T")[0];
+      const formattedDate = new Date(date).toLocaleDateString("en-GB").split("T")[0];
       dateCounts[formattedDate] += 1;
     }
 
