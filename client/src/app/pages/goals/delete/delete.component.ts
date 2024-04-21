@@ -36,7 +36,7 @@ export class DeleteGoalPageComponent implements OnInit {
     }
 
     this.api
-      .deleteGoal(this.model?.Id)
+      .deleteGoal(this.model?.ClientId)
       .pipe(take(1))
       .subscribe(() =>
         this.router.navigateByUrl("/goals")

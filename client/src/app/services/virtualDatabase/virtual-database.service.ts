@@ -71,7 +71,8 @@ export class VirtualDatabaseService extends AbstractService {
           return value;
         }
 
-        return virtualTable.find((item: any) => item.Id === id);
+        // TODO: Correctly convert these types instead of using ==
+        return virtualTable.find((item: any) => item.ClientId == id);
       }
     }
 
@@ -81,7 +82,7 @@ export class VirtualDatabaseService extends AbstractService {
       const newContentObject = JSON.parse(JSON.stringify(newContent));
 
       // because id's are auto incremented by mongo, we replicate that here
-      newContentObject.Id = this.nextTableId(virtualTableName);
+      newContentObject.ClientId = this.nextTableId(virtualTableName);
       virtualTable.push(newContentObject);
 
       this.updateTable(virtualTableName, JSON.stringify(virtualTable));
@@ -90,7 +91,7 @@ export class VirtualDatabaseService extends AbstractService {
     if (request.method === "DELETE") {
       this.pushToSyncQueue(request);
 
-      const index = virtualTable.findIndex((item: any) => item.Id === id);
+      const index = virtualTable.findIndex((item: any) => item.ClientId === id);
 
       virtualTable.splice(index, 1);
 
@@ -100,7 +101,7 @@ export class VirtualDatabaseService extends AbstractService {
     if (request.method === "PUT") {
       this.pushToSyncQueue(request);
 
-      const index = virtualTable.findIndex((item: any) => item.Id === id);
+      const index = virtualTable.findIndex((item: any) => item.ClientId === id);
 
       virtualTable[index] = newContent;
 
@@ -122,7 +123,7 @@ export class VirtualDatabaseService extends AbstractService {
       return 1;
     }
 
-    return Math.max(...table.map((item: any) => item.Id)) + 1;
+    return Math.max(...table.map((item: any) => item.ClientId)) + 1;
   }
 
   private addToKnownTables(tableName: string): void {

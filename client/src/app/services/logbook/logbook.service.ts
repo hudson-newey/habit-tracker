@@ -33,7 +33,7 @@ export class LogbookService extends AbstractService {
 
   // PUT /logbooks/:logbookId
   public updateLogbook(model: Logbook): Observable<ApiHttpResponse<ILogbook>> {
-    const endpoint: string = createUrl(`/logbooks/${model.Id}`);
+    const endpoint: string = createUrl(`/logbooks/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<ApiHttpResponse<ILogbook>>
   }
 

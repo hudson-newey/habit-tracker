@@ -43,7 +43,6 @@ export class HabitListComponent implements OnInit {
       .getHabits()
       .pipe(take(1))
       .subscribe((response) => {
-        console.log(response);
         this.habits = response.data.map((model: IHabit) => new Habit(model));
       });
   }

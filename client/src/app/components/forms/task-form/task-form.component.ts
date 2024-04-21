@@ -51,14 +51,12 @@ export class TaskFormComponent
         .createTask(taskModel)
         .pipe(take(1))
         .subscribe(() => this.router.navigate(["/tasks"]));
-
-      return;
+    } else {
+      this.api
+        .updateTask(taskModel)
+        .pipe(take(1))
+        .subscribe(() => this.router.navigate(taskModel.ViewUrl));
     }
-
-    this.api
-      .updateTask(taskModel)
-      .pipe(take(1))
-      .subscribe(() => this.router.navigate(taskModel.ViewUrl));
   }
 
   protected updateImportance(event: any): void {

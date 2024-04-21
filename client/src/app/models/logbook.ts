@@ -21,14 +21,14 @@ export class Logbook extends AbstractModel<ILogbook> {
   public Content!: string;
 
   public override get ViewUrl(): any[] {
-    return ["/logbook", this.Id];
+    return ["/logbook", this.ClientId];
   }
 
   public override get EditUrl(): any[] {
-    return ["/logbook", this.Id, "edit"];
+    return ["/logbook", this.ClientId, "edit"];
   }
 
   public override get DeleteUrl(): any[] {
-    return ["/logbook", this.Id, "delete"];
+    return ["/logbook", this.ClientId, "delete"];
   }
 }

@@ -23,14 +23,14 @@ export class Goal extends AbstractModel<IGoal> implements IGoal {
   public CompleteBy!: string;
 
   public override get ViewUrl(): any[] {
-    return ["/goals", this.Id];
+    return ["/goals", this.ClientId];
   }
 
   public override get EditUrl(): any[] {
-    return ["/goals", this.Id, "edit"];
+    return ["/goals", this.ClientId, "edit"];
   }
 
   public override get DeleteUrl(): any[] {
-    return ["/goals", this.Id, "delete"];
+    return ["/goals", this.ClientId, "delete"];
   }
 }

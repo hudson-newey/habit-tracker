@@ -24,7 +24,7 @@
     Associated Goal
     <select name="goal" class="uk-select" [(ngModel)]="model.Goal">
       <ng-container *ngFor="let goal of goals$ | async">
-        <option [value]="goal.Id">{{ goal.Name }}</option>
+        <option [value]="goal.ClientId">{{ goal.Name }}</option>
       </ng-container>
     </select>
   </label>

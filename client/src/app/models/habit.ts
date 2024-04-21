@@ -33,15 +33,15 @@ export class Habit extends AbstractModel<IHabit> implements IHabit {
   public DependsOn!: Id[];
 
   public override get ViewUrl(): any[] {
-    return [`/habits`, this.Id];
+    return [`/habits`, this.ClientId];
   }
 
   public override get EditUrl(): any[] {
-    return [`/habits`, this.Id, "edit"];
+    return [`/habits`, this.ClientId, "edit"];
   }
 
   public override get DeleteUrl(): any[] {
-    return [`/habits`, this.Id, "delete"];
+    return [`/habits`, this.ClientId, "delete"];
   }
 
   public get TimesCompletedToday(): number {

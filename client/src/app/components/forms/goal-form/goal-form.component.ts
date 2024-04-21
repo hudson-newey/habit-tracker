@@ -13,11 +13,11 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { TasksService } from "src/app/services/tasks/tasks.service";
 
 @Component({
-    selector: "app-goal-form",
-    templateUrl: "./goal-form.component.html",
-    styleUrl: "./goal-form.component.less",
-    standalone: true,
-    imports: [FormsModule, CommonModule],
+  selector: "app-goal-form",
+  templateUrl: "./goal-form.component.html",
+  styleUrl: "./goal-form.component.less",
+  standalone: true,
+  imports: [FormsModule, CommonModule],
 })
 export class GoalFormComponent extends AbstractFormComponent<IGoal> {
   public constructor(
@@ -43,16 +43,14 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
         .subscribe(() => {
           this.router.navigate(["/goals"]);
         });
-
-      return;
+    } else {
+      this.api
+        .updateGoal(goalModel)
+        .pipe(take(1))
+        .subscribe(() => {
+          this.router.navigate(goalModel.ViewUrl);
+        });
     }
-
-    this.api
-      .updateGoal(goalModel)
-      .pipe(take(1))
-      .subscribe(() => {
-        this.router.navigate(goalModel.ViewUrl);
-      });
   }
 
   protected updateCompleteBy(event: any): void {
@@ -62,17 +60,19 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
 
   protected getAiTasksAndHabits(): void {
     if (!this.model.Name) {
-      console.log("Goal name is required to generate AI tasks and habits.");
+      console.error("Goal name is required to generate AI tasks and habits.");
       return;
     }
 
-    this.gptApi.getHabitsForGoal(this.model)
+    this.gptApi
+      .getHabitsForGoal(this.model)
       .pipe(take(1))
       .subscribe((response) => {
         this.aiHabits = response.data.map((model: IHabit) => new Habit(model));
       });
 
-    this.gptApi.getTasksForGoal(this.model)
+    this.gptApi
+      .getTasksForGoal(this.model)
       .pipe(take(1))
       .subscribe((response) => {
         this.aiTasks = response.data.map((model: ITask) => new Task(model));
@@ -81,29 +81,33 @@ export class GoalFormComponent extends AbstractFormComponent<IGoal> {
 
   // used when the user adds a suggested habits from the ai suggested habits
   protected addSuggestedHabit(habitModel: Habit): void {
-    if (this.model?.Id || this.model?.Id === "0") {
-      habitModel.Goal = this.model.Id;
+    if (this.model?.ClientId || this.model?.ClientId === "0") {
+      habitModel.Goal = this.model.ClientId;
     }
 
     this.habitsApi
       .createHabit(habitModel)
       .pipe(take(1))
       .subscribe(() => {
-        this.aiHabits = this.aiHabits.filter((habit) => habit.Name !== habitModel.Name);
+        this.aiHabits = this.aiHabits.filter(
+          (habit) => habit.Name !== habitModel.Name,
+        );
       });
   }
 
   // used when the user adds a suggested tasks from the ai suggested tasks
   protected addSuggestedTask(taskModel: Task): void {
-    if (this.model?.Id || this.model?.Id === "0") {
-      taskModel.Goal = this.model.Id;
+    if (this.model?.ClientId || this.model?.ClientId === "0") {
+      taskModel.Goal = this.model.ClientId;
     }
 
     this.tasksApi
       .createTask(taskModel)
       .pipe(take(1))
       .subscribe(() => {
-        this.aiTasks = this.aiTasks.filter((task) => task.Name !== taskModel.Name);
+        this.aiTasks = this.aiTasks.filter(
+          (task) => task.Name !== taskModel.Name,
+        );
       });
   }
 }

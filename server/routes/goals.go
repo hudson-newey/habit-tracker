@@ -2,6 +2,7 @@ package routes
 
 import (
 	"log"
+	"reflect"
 
 	"server/databaseService"
 	"server/helpers"
@@ -17,10 +18,21 @@ func CreateGoal(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		var requestBody models.Goal
 
-		if err := context.BindJSON(&requestBody); err != nil {
+		err := context.BindJSON(&requestBody)
+
+		if err != nil {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
+		}
+
+		// if there is no clientId, this means that the goal was created when connected to the API
+		// and is not a part of a sync request
+		// if there is a clientId, the goal was created offline and is being updated as part of a sync request
+		// therefore, we should maintain the clientId to prevent sync conflicts
+		if requestBody.ClientId == "" || reflect.TypeOf(requestBody.ClientId).Kind() != reflect.String {
+			clientId := helpers.NextClientId(database, "goals")
+			requestBody.ClientId = clientId
 		}
 
 		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "goals", requestBody)
@@ -144,25 +156,15 @@ func GetGoal(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		var goal models.Goal
-		err = database.Client.Database("habits").Collection("goals").FindOne(database.Ctx, filter).Decode(&goal)
+		err := database.Client.Database("habits").Collection("goals").FindOne(database.Ctx, filter).Decode(&goal)
 		if err != nil {
 			log.Println(err)
 			helpers.NotFoundError(context)
 			return
 		}
-
-		goal.Id = id
 
 		helpers.Success(context, goal)
 	}
@@ -174,14 +176,6 @@ func UpdateGoal(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Get the goal model from the request body
 		var goal models.Goal
 		if err := context.ShouldBindJSON(&goal); err != nil {
@@ -190,13 +184,10 @@ func UpdateGoal(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		// Set the goal's ID to the given _id
-		goal.Id = id
-
 		// Update the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		update := bson.M{"$set": goal}
-		_, err = database.Client.Database("habits").Collection("goals").UpdateOne(database.Ctx, filter, update)
+		_, err := database.Client.Database("habits").Collection("goals").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -213,16 +204,8 @@ func DeleteGoal(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id and delete it
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		result, err := database.Client.Database("habits").Collection("goals").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)

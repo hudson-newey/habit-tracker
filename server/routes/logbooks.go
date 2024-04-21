@@ -2,6 +2,7 @@ package routes
 
 import (
 	"log"
+	"reflect"
 	"server/databaseService"
 	"server/helpers"
 	"server/models"
@@ -20,6 +21,11 @@ func CreateLogbook(database models.Database) func(context *gin.Context) {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
+		}
+
+		if requestBody.ClientId == "" || reflect.TypeOf(requestBody.ClientId).Kind() != reflect.String {
+			clientId := helpers.NextClientId(database, "logbooks")
+			requestBody.ClientId = clientId
 		}
 
 		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "logbooks", requestBody)
@@ -93,25 +99,15 @@ func GetLogbook(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		var Logbook models.Logbook
-		err = database.Client.Database("habits").Collection("logbooks").FindOne(database.Ctx, filter).Decode(&Logbook)
+		err := database.Client.Database("habits").Collection("logbooks").FindOne(database.Ctx, filter).Decode(&Logbook)
 		if err != nil {
 			log.Println(err)
 			helpers.NotFoundError(context)
 			return
 		}
-
-		Logbook.Id = id
 
 		helpers.Success(context, Logbook)
 	}
@@ -123,14 +119,6 @@ func UpdateLogbook(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Get the Logbook model from the request body
 		var Logbook models.Logbook
 		if err := context.ShouldBindJSON(&Logbook); err != nil {
@@ -139,13 +127,10 @@ func UpdateLogbook(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		// Set the Logbook's ID to the given _id
-		Logbook.Id = id
-
 		// Update the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		update := bson.M{"$set": Logbook}
-		_, err = database.Client.Database("habits").Collection("logbooks").UpdateOne(database.Ctx, filter, update)
+		_, err := database.Client.Database("habits").Collection("logbooks").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -162,16 +147,8 @@ func DeleteLogbook(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id and delete it
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		result, err := database.Client.Database("habits").Collection("logbooks").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)

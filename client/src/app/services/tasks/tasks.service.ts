@@ -37,7 +37,7 @@ export class TasksService extends AbstractService {
 
   // PUT /tasks/:taskId
   public updateTask(model: Task): Observable<ApiHttpResponse<ITask>> {
-    const endpoint: string = createUrl(`/tasks/${model.Id}`);
+    const endpoint: string = createUrl(`/tasks/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<ApiHttpResponse<ITask>>
   }
 

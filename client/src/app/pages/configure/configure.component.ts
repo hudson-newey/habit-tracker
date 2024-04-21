@@ -21,6 +21,10 @@ export class ConfigurePageComponent {
       this.customServerUrl = this.customServerUrl.slice(0, -1);
     }
 
+    if (!this.customServerUrl.includes("://")) {
+      this.customServerUrl = "http://" + this.customServerUrl;
+    }
+
     if (this.customServerUrl) {
       this.configService.setCustomServerUrl(this.customServerUrl);
       this.formFeedback = "Custom server URL saved!";

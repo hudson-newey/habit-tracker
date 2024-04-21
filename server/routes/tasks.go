@@ -2,6 +2,7 @@ package routes
 
 import (
 	"log"
+	"reflect"
 
 	"server/databaseService"
 	"server/helpers"
@@ -21,6 +22,11 @@ func CreateTask(database models.Database) func(context *gin.Context) {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
+		}
+
+		if requestBody.ClientId == "" || reflect.TypeOf(requestBody.ClientId).Kind() != reflect.String {
+			clientId := helpers.NextClientId(database, "tasks")
+			requestBody.ClientId = clientId
 		}
 
 		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "tasks", requestBody)
@@ -94,25 +100,15 @@ func GetTask(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		var task models.Task
-		err = database.Client.Database("habits").Collection("tasks").FindOne(database.Ctx, filter).Decode(&task)
+		err := database.Client.Database("habits").Collection("tasks").FindOne(database.Ctx, filter).Decode(&task)
 		if err != nil {
 			log.Println(err)
 			helpers.NotFoundError(context)
 			return
 		}
-
-		task.Id = id
 
 		helpers.Success(context, task)
 	}
@@ -124,14 +120,6 @@ func UpdateTask(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Get the task model from the request body
 		var task models.Task
 		if err := context.ShouldBindJSON(&task); err != nil {
@@ -140,13 +128,10 @@ func UpdateTask(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		// Set the task's ID to the given _id
-		task.Id = id
-
 		// Update the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		update := bson.M{"$set": task}
-		_, err = database.Client.Database("habits").Collection("tasks").UpdateOne(database.Ctx, filter, update)
+		_, err := database.Client.Database("habits").Collection("tasks").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -163,16 +148,8 @@ func DeleteTask(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id and delete it
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"_id": id}
 		result, err := database.Client.Database("habits").Collection("tasks").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)

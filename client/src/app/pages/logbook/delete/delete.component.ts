@@ -37,7 +37,7 @@ export class LogbookDeleteComponent implements OnInit {
     }
 
     this.api
-      .deleteLogbook(this.model?.Id)
+      .deleteLogbook(this.model?.ClientId)
       .pipe(take(1))
       .subscribe(() =>
         this.router.navigateByUrl("/logbook")

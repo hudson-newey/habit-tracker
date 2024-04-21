@@ -2,6 +2,7 @@ package routes
 
 import (
 	"log"
+	"reflect"
 
 	"server/databaseService"
 	"server/helpers"
@@ -17,10 +18,17 @@ func CreateHabit(database models.Database) func(context *gin.Context) {
 	return func(context *gin.Context) {
 		var requestBody models.Habit
 
-		if err := context.BindJSON(&requestBody); err != nil {
+		err := context.BindJSON(&requestBody)
+
+		if err != nil {
 			log.Println(err)
 			helpers.BadRequestError(context)
 			return
+		}
+
+		if requestBody.ClientId == "" || reflect.TypeOf(requestBody.ClientId).Kind() != reflect.String {
+			clientId := helpers.NextClientId(database, "habits")
+			requestBody.ClientId = clientId
 		}
 
 		result, err := databaseService.InsertOne(database.Client, database.Ctx, "habits", "habits", requestBody)
@@ -94,25 +102,15 @@ func GetHabit(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		var habit models.Habit
-		err = database.Client.Database("habits").Collection("habits").FindOne(database.Ctx, filter).Decode(&habit)
+		err := database.Client.Database("habits").Collection("habits").FindOne(database.Ctx, filter).Decode(&habit)
 		if err != nil {
 			log.Println(err)
 			helpers.NotFoundError(context)
 			return
 		}
-
-		habit.Id = id
 
 		helpers.Success(context, habit)
 	}
@@ -124,14 +122,6 @@ func UpdateHabit(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Get the habit model from the request body
 		var habit models.Habit
 		if err := context.ShouldBindJSON(&habit); err != nil {
@@ -140,13 +130,10 @@ func UpdateHabit(database models.Database) func(context *gin.Context) {
 			return
 		}
 
-		// Set the habit's ID to the given _id
-		habit.Id = id
-
 		// Update the document with the given _id
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		update := bson.M{"$set": habit}
-		_, err = database.Client.Database("habits").Collection("habits").UpdateOne(database.Ctx, filter, update)
+		_, err := database.Client.Database("habits").Collection("habits").UpdateOne(database.Ctx, filter, update)
 		if err != nil {
 			log.Println(err)
 			helpers.InternalServerError(context)
@@ -163,16 +150,8 @@ func DeleteHabit(database models.Database) func(context *gin.Context) {
 		// Get the id parameter from the URL
 		id := context.Param("id")
 
-		// Convert the id string to an ObjectID
-		objectId, err := primitive.ObjectIDFromHex(id)
-		if err != nil {
-			log.Println(err)
-			helpers.BadRequestError(context)
-			return
-		}
-
 		// Find the document with the given _id and delete it
-		filter := bson.M{"_id": objectId}
+		filter := bson.M{"clientid": id}
 		result, err := database.Client.Database("habits").Collection("habits").DeleteOne(database.Ctx, filter)
 		if err != nil {
 			log.Println(err)

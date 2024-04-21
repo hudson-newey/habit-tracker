@@ -29,15 +29,15 @@ export class Task extends AbstractModel<ITask> implements ITask {
   public DependsOn!: Id[];
 
   public override get ViewUrl(): any[] {
-    return ["/tasks", this.Id];
+    return ["/tasks", this.ClientId];
   }
 
   public override get EditUrl(): any[] {
-    return ["/tasks", this.Id, "edit"];
+    return ["/tasks", this.ClientId, "edit"];
   }
 
   public override get DeleteUrl(): any[] {
-    return ["/tasks", this.Id, "delete"];
+    return ["/tasks", this.ClientId, "delete"];
   }
 
   public get ImportanceHuman(): string {

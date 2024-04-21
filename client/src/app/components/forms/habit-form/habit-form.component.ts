@@ -49,11 +49,11 @@ export class HabitFormComponent extends AbstractFormComponent<IHabit> implements
         .createHabit(habitModel)
         .pipe(take(1))
         .subscribe(() => this.router.navigate(["/"]));
+    } else {
+      this.api
+        .updateHabit(habitModel)
+        .pipe(take(1))
+        .subscribe(() => this.router.navigate(habitModel.ViewUrl));
     }
-
-    this.api
-      .updateHabit(habitModel)
-      .pipe(take(1))
-      .subscribe(() => this.router.navigate(habitModel.ViewUrl));
   }
 }

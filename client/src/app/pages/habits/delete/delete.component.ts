@@ -36,7 +36,7 @@ export class DeleteHabitPageComponent implements OnInit {
     }
 
     this.api
-      .deleteHabit(this.model?.Id)
+      .deleteHabit(this.model?.ClientId)
       .pipe(take(1))
       .subscribe(() =>
         this.router.navigateByUrl("/")

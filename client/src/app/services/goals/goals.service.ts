@@ -44,7 +44,7 @@ export class GoalsService extends AbstractService {
 
   // PUT /goals/:goalId
   public updateGoal(model: Goal): Observable<ApiHttpResponse<IGoal>> {
-    const endpoint: string = createUrl(`/goals/${model.Id}`);
+    const endpoint: string = createUrl(`/goals/${model.ClientId}`);
     return this.http.put(endpoint, model) as Observable<ApiHttpResponse<IGoal>>;
   }
 
