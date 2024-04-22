@@ -1,0 +1,12 @@
+version: 2
+updates:
+    - package-ecosystem: "npm"
+      directory: "/client"
+      schedule:
+          interval: "weekly"
+      allow:
+          - dependency-type: direct
+      ignore:
+        - dependency-name: "*"
+            update-types: ["version-update:semver-patch"]
+        open-pull-requests-limit: 3
