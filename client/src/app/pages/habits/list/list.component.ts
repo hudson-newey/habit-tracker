@@ -5,20 +5,20 @@ import { HabitsService } from "src/app/services/habits/habits.service";
 import { NgIf } from "@angular/common";
 import { HabitsTableComponent } from "../../../components/habits-table/habits-table.component";
 import { RouterLink } from "@angular/router";
+import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
 
 @Component({
-    selector: "app-list-page",
-    templateUrl: "list.component.html",
-    styleUrls: ["list.component.less"],
-    standalone: true,
-    imports: [
-        RouterLink,
-        HabitsTableComponent,
-        NgIf,
-    ],
+  selector: "app-list-page",
+  templateUrl: "list.component.html",
+  styleUrls: ["list.component.less"],
+  standalone: true,
+  imports: [RouterLink, HabitsTableComponent, NgIf],
 })
 export class HabitListComponent implements OnInit {
-  public constructor(private api: HabitsService) {}
+  public constructor(
+    private api: HabitsService,
+    private virtualDb: VirtualDatabaseService
+  ) {}
 
   protected habits: Habit[] = [];
 
@@ -39,6 +39,15 @@ export class HabitListComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.updateHabits();
+
+    this.virtualDb.changeNotifier.addEventListener("change", () =>
+      this.updateHabits()
+    );
+  }
+
+  public updateHabits(): void {
+    console.debug("fetch new habits");
     this.api
       .getHabits()
       .pipe(take(1))
@@ -67,7 +76,9 @@ export class HabitListComponent implements OnInit {
 
     const indexToRemove: number = model.CompletedDates.findIndex(
       (item: string) => {
-        const formattedDate: string = new Date(item).toLocaleDateString("en-GB");
+        const formattedDate: string = new Date(item).toLocaleDateString(
+          "en-GB"
+        );
         return todaysDate === formattedDate;
       }
     );

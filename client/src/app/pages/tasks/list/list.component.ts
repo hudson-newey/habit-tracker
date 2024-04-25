@@ -5,20 +5,20 @@ import { TasksService } from "src/app/services/tasks/tasks.service";
 import { NgIf } from "@angular/common";
 import { TasksTableComponent } from "../../../components/tasks-table/tasks-table.component";
 import { RouterLink } from "@angular/router";
+import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
 
 @Component({
-    selector: "app-tasks-page",
-    templateUrl: "list.component.html",
-    styleUrls: ["list.component.less"],
-    standalone: true,
-    imports: [
-        RouterLink,
-        TasksTableComponent,
-        NgIf,
-    ],
+  selector: "app-tasks-page",
+  templateUrl: "list.component.html",
+  styleUrls: ["list.component.less"],
+  standalone: true,
+  imports: [RouterLink, TasksTableComponent, NgIf],
 })
 export class TasksPageComponent implements OnInit {
-  public constructor(private api: TasksService) {}
+  public constructor(
+    private api: TasksService,
+    private virtualDb: VirtualDatabaseService
+  ) {}
 
   protected tasks: Task[] = [];
 
@@ -31,6 +31,14 @@ export class TasksPageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.updateTasks();
+
+    this.virtualDb.changeNotifier.addEventListener("change", () =>
+      this.updateTasks()
+    );
+  }
+
+  public updateTasks(): void {
     this.api
       .getTasks()
       .pipe(take(1))

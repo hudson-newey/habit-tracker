@@ -3,12 +3,13 @@ package helpers
 import (
 	"server/models"
 	"strconv"
+	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 func NextClientId(database models.Database, table string) string {
-	largestId := 0
+	var largestId int64 = 0
 
 	cursor, err := database.Client.Database("habits").Collection(table).Find(database.Ctx, bson.D{})
 
@@ -23,26 +24,26 @@ func NextClientId(database models.Database, table string) string {
 		return "1"
 	}
 
+	// iterate over all the documents in the Collection
 	for cursor.Next(database.Ctx) {
-		var result map[string]interface{}
+		var result bson.M
 		err := cursor.Decode(&result)
-
 		if err != nil {
-			return "1"
+			fmt.Println(err)
 		}
 
-		// if the result does not have a ClientId field, skip it
-		if _, ok := result["clientid"]; !ok {
-			continue
+		// convert the _id field to an int64
+		id, err := strconv.ParseInt(result["clientid"].(string), 10, 64)
+		if err != nil {
+			fmt.Println(err)
 		}
 
-		id := result["clientid"].(int)
-
+		// if the id is larger than the largestId, set the largestId to the NextClientId
 		if id > largestId {
 			largestId = id
 		}
 	}
 
 	// return the largestId + 1 converted to a string
-	return strconv.Itoa(largestId + 1)
+	return strconv.FormatInt(largestId + 1, 10)
 }

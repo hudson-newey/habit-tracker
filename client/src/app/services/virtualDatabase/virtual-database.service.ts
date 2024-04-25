@@ -1,14 +1,18 @@
 import { HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AbstractService } from "../abstract-service.service";
+import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class VirtualDatabaseService extends AbstractService {
-  public constructor() {
+  public constructor(
+    private config: ClientConfigService,
+  ) {
     super();
   }
 
   public knownVirtualTablesLocalStorageKey = "knownVirtualTables";
+  public changeNotifier = new EventTarget();
 
   // TODO: move this to the sync queue service
   // It's currently here because of recursive interceptors
@@ -38,12 +42,26 @@ export class VirtualDatabaseService extends AbstractService {
   // if we didn't do this, the local storage would be destroyed even if the user is using the app
   // TODO: I should probably find a better solution to this
   public updateTable(table: string, value: string): void {
-    this.dropTable(table);
-    localStorage.setItem(table, value);
+    const currentValue = localStorage.getItem(table);
+
+    if (value !== currentValue) {
+      this.dropTable(table);
+      localStorage.setItem(table, value);
+
+      this.changeNotifier.dispatchEvent(new Event("change"));
+    }
+  }
+
+  public subRoutes(): number {
+    if (!this.config.isCustomServerUrlSet()) {
+      return 0;
+    }
+
+    return this.config.getCustomServerUrl()!.split("/").length - 1;
   }
 
   public applyApiRequest(request: HttpRequest<unknown>): any {
-    const virtualTableName = request.url.split("/")[1];
+    const virtualTableName = request.url.split("/")[this.subRoutes() + 1];
     const id = Number(request.url.split("/")[2]);
     const newContent = request.body;
 
@@ -65,7 +83,7 @@ export class VirtualDatabaseService extends AbstractService {
           const associatedTableName = request.url.split("/")[3];
 
           const value = this.tableValue(associatedTableName).filter(
-            (model: any) => model.Goal === String(id),
+            (model: any) => model.Goal == id,
           );
 
           return value;
@@ -91,7 +109,7 @@ export class VirtualDatabaseService extends AbstractService {
     if (request.method === "DELETE") {
       this.pushToSyncQueue(request);
 
-      const index = virtualTable.findIndex((item: any) => item.ClientId === id);
+      const index = virtualTable.findIndex((item: any) => item.ClientId == id);
 
       virtualTable.splice(index, 1);
 
@@ -101,7 +119,7 @@ export class VirtualDatabaseService extends AbstractService {
     if (request.method === "PUT") {
       this.pushToSyncQueue(request);
 
-      const index = virtualTable.findIndex((item: any) => item.ClientId === id);
+      const index = virtualTable.findIndex((item: any) => item.ClientId == id);
 
       virtualTable[index] = newContent;
 

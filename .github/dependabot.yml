@@ -6,7 +6,4 @@ updates:
           interval: "weekly"
       allow:
           - dependency-type: direct
-      ignore:
-        - dependency-name: "*"
-            update-types: ["version-update:semver-patch"]
-        open-pull-requests-limit: 3
+      open-pull-requests-limit: 3

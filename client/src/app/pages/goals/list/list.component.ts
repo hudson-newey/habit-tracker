@@ -5,25 +5,32 @@ import { GoalsService } from "src/app/services/goals/goals.service";
 import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
+import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
 
 @Component({
-    selector: "app-goals-page",
-    templateUrl: "list.component.html",
-    styleUrls: ["list.component.less"],
-    standalone: true,
-    imports: [
-        RouterLink,
-        NgFor,
-        FormsModule,
-        NgIf,
-    ],
+  selector: "app-goals-page",
+  templateUrl: "list.component.html",
+  styleUrls: ["list.component.less"],
+  standalone: true,
+  imports: [RouterLink, NgFor, FormsModule, NgIf],
 })
 export class GoalsPageComponent implements OnInit {
-  public constructor(private api: GoalsService) {}
+  public constructor(
+    private api: GoalsService,
+    private virtualDb: VirtualDatabaseService
+  ) {}
 
   protected goals: Goal[] = [];
 
   public ngOnInit(): void {
+    this.updateGoals();
+
+    this.virtualDb.changeNotifier.addEventListener("change", () =>
+      this.updateGoals()
+    );
+  }
+
+  public updateGoals(): void {
     this.api
       .listGoals()
       .pipe(take(1))

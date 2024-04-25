@@ -4,10 +4,14 @@ import { ApiHttpResponse } from "src/app/types/services";
 import { HttpClient } from "@angular/common/http";
 import { Observable, catchError, map, of } from "rxjs";
 import { createUrl } from "../helpers";
+import { ClientConfigService } from "../clientConfig/client-config.service";
 
 @Injectable({ providedIn: "root" })
 export class PingService extends AbstractService {
-  public constructor(public http: HttpClient) {
+  public constructor(
+    public http: HttpClient,
+    private config: ClientConfigService,
+  ) {
     super();
   }
 
@@ -17,7 +21,7 @@ export class PingService extends AbstractService {
   }
 
   public hasServerConnection(): Observable<boolean> {
-    if (!navigator.onLine) {
+    if (!navigator.onLine || !this.config.isCustomServerUrlSet()) {
       return of(false);
     }
 
