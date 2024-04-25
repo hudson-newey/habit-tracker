@@ -22,7 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "uikit": "^3.17.8",
+    "uikit": "^3.20.7",
     "vega-embed": "^6.25.0",
     "zone.js": "~0.14.0"
   },
