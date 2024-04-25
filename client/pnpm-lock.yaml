@@ -45,8 +45,8 @@ dependencies:
     specifier: ^3.17.8
     version: 3.19.1
   vega-embed:
-    specifier: ^6.23.0
-    version: 6.24.0(vega-lite@5.16.3)(vega@5.28.0)
+    specifier: ^6.25.0
+    version: 6.25.0(vega-lite@5.16.3)(vega@5.28.0)
   zone.js:
     specifier: ~0.14.0
     version: 0.14.4
@@ -7093,8 +7093,8 @@ packages:
       - encoding
     dev: false
 
-  /vega-embed@6.24.0(vega-lite@5.16.3)(vega@5.28.0):
-    resolution: {integrity: sha512-ANCksO3lXhdLzQn7Mfistm1dsRwQhxTYICVpru7TMc+Ywe7C4vOLWuaVv9Qvem2IgQyuVCal0EoTMKvIVYykFg==}
+  /vega-embed@6.25.0(vega-lite@5.16.3)(vega@5.28.0):
+    resolution: {integrity: sha512-pK99jEhZPNYgx4daiYDyNZ7f1h2ep5PyzMYN/qKzJNxzcaNf8wgmUjHrWeJSeMh8RNyw89VRphIleeg7LNLhDA==}
     peerDependencies:
       vega: ^5.21.0
       vega-lite: '*'
@@ -7110,8 +7110,6 @@ packages:
       vega-themes: 2.14.0(vega-lite@5.16.3)(vega@5.28.0)
       vega-tooltip: 0.34.0
     dev: false
-    bundledDependencies:
-      - yallist
 
   /vega-encode@4.9.2:
     resolution: {integrity: sha512-c3J0LYkgYeXQxwnYkEzL15cCFBYPRaYUon8O2SZ6O4PhH4dfFTXBzSyT8+gh8AhBd572l2yGDfxpEYA6pOqdjg==}
