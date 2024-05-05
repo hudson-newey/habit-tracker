@@ -1,4 +1,4 @@
-import { importProvidersFrom } from "@angular/core";
+import { importProvidersFrom, isDevMode } from "@angular/core";
 import { AppComponent } from "./app/app.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule } from "@angular/forms";
@@ -14,6 +14,7 @@ import { HabitsService } from "./app/services/habits/habits.service";
 import { ConfigInterceptor } from "./app/services/config-interceptor/config.interceptor";
 import { HTTP_INTERCEPTORS, withInterceptorsFromDi, provideHttpClient } from "@angular/common/http";
 import { GptService } from "./app/services/gpt/gpt.service";
+import { provideServiceWorker } from '@angular/service-worker';
 
 const services: any[] = [
   HabitsService,
@@ -28,10 +29,14 @@ const services: any[] = [
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(CommonModule, BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule),
-        { provide: HTTP_INTERCEPTORS, useClass: ConfigInterceptor, multi: true },
-        ...services,
-        provideHttpClient(withInterceptorsFromDi()),
-    ]
+    importProvidersFrom(CommonModule, BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule),
+    { provide: HTTP_INTERCEPTORS, useClass: ConfigInterceptor, multi: true },
+    ...services,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })
+]
 })
   .catch((err) => console.error(err));

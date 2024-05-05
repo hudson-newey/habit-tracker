@@ -33,7 +33,8 @@
               "src/styles.less"
             ],
             "scripts": [],
-            "serviceWorker": false
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -92,6 +93,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
             "styles": [
