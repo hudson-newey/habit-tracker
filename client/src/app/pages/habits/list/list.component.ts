@@ -6,6 +6,7 @@ import { NgIf } from "@angular/common";
 import { HabitsTableComponent } from "../../../components/habits-table/habits-table.component";
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
+import { VibrationService } from "src/app/services/vibration/vibration.service";
 
 @Component({
   selector: "app-list-page",
@@ -17,7 +18,8 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 export class HabitListComponent implements OnInit {
   public constructor(
     private api: HabitsService,
-    private virtualDb: VirtualDatabaseService
+    private virtualDb: VirtualDatabaseService,
+    private vibration: VibrationService
   ) {}
 
   protected habits: Habit[] = [];
@@ -69,6 +71,8 @@ export class HabitListComponent implements OnInit {
       .subscribe((response) => {
         model = new Habit(response.data);
       });
+
+    this.vibration.completionVibration();
   }
 
   public uncompleteHabit(model: Habit): void {

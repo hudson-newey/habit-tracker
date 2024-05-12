@@ -9,7 +9,7 @@
 <section class="incompleteTasks.length > 0">
   <app-tasks-table
     [models]="incompleteTasks"
-    (changeState)="updateTask($event)"
+    (changeState)="completeTask($event)"
   ></app-tasks-table>
 </section>
 

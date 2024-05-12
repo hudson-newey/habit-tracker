@@ -6,6 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { NgFor, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
+import { VibrationService } from "src/app/services/vibration/vibration.service";
 
 @Component({
   selector: "app-goals-page",
@@ -17,7 +18,8 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 export class GoalsPageComponent implements OnInit {
   public constructor(
     private api: GoalsService,
-    private virtualDb: VirtualDatabaseService
+    private virtualDb: VirtualDatabaseService,
+    private vibration: VibrationService
   ) {}
 
   protected goals: Goal[] = [];
@@ -37,6 +39,11 @@ export class GoalsPageComponent implements OnInit {
       .subscribe((response) => {
         this.goals = response.data.map((model: IGoal) => new Goal(model));
       });
+  }
+
+  public completeGoal(model: Goal): void {
+    this.updateGoal(model);
+    this.vibration.completionVibration();
   }
 
   public updateGoal(model: Goal): void {

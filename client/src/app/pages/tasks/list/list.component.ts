@@ -6,6 +6,7 @@ import { NgIf } from "@angular/common";
 import { TasksTableComponent } from "../../../components/tasks-table/tasks-table.component";
 import { RouterLink } from "@angular/router";
 import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual-database.service";
+import { VibrationService } from "src/app/services/vibration/vibration.service";
 
 @Component({
   selector: "app-tasks-page",
@@ -17,7 +18,8 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 export class TasksPageComponent implements OnInit {
   public constructor(
     private api: TasksService,
-    private virtualDb: VirtualDatabaseService
+    private virtualDb: VirtualDatabaseService,
+    private vibrate: VibrationService
   ) {}
 
   protected tasks: Task[] = [];
@@ -45,6 +47,11 @@ export class TasksPageComponent implements OnInit {
       .subscribe((response) => {
         this.tasks = response.data.map((model: ITask) => new Task(model));
       });
+  }
+
+  public completeTask(model: Task): void {
+    this.updateTask(model);
+    this.vibrate.completionVibration();
   }
 
   public updateTask(model: Task): void {
