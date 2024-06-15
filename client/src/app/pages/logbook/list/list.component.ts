@@ -16,7 +16,7 @@ import { VirtualDatabaseService } from "src/app/services/virtualDatabase/virtual
 export class LogbookListComponent implements OnInit {
   public constructor(
     private api: LogbookService,
-    private virtualDb: VirtualDatabaseService
+    private virtualDb: VirtualDatabaseService,
   ) {}
 
   protected logbooks: Logbook[] = [];
@@ -25,7 +25,7 @@ export class LogbookListComponent implements OnInit {
     this.updateLogbooks();
 
     this.virtualDb.changeNotifier.addEventListener("change", () =>
-      this.updateLogbooks()
+      this.updateLogbooks(),
     );
   }
 
@@ -34,9 +34,27 @@ export class LogbookListComponent implements OnInit {
       .getLogbooks()
       .pipe(take(1))
       .subscribe((response) => {
-        this.logbooks = response.data.map(
-          (model: ILogbook) => new Logbook(model)
-        );
+        this.logbooks = response.data
+          .map((model: ILogbook) => new Logbook(model))
+          .sort(this.logbookSorter);
       });
+  }
+
+  // sorts logbooks in decending order (so that the most recentl created)
+  // logbook is at the top of the list
+  private logbookSorter(a: Logbook, b: Logbook): number {
+    // TODO: this should use the CreatedAt property
+    const aCreated = a.Id ?? a.ClientId;
+    const bCreated = b.Id ?? b.ClientId;
+
+    if (aCreated > bCreated) {
+      return -1;
+    } else if (aCreated < bCreated) {
+      return 1;
+    }
+
+    // through domain exhaustion, we know that both values must be equal
+    // if (aCreated === bCreated)
+    return 0;
   }
 }
