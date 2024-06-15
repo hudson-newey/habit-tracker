@@ -44,8 +44,8 @@ export class LogbookListComponent implements OnInit {
   // logbook is at the top of the list
   private logbookSorter(a: Logbook, b: Logbook): number {
     // TODO: this should use the CreatedAt property
-    const aCreated = a.Id ?? a.ClientId;
-    const bCreated = b.Id ?? b.ClientId;
+    const aCreated = parseInt(a.Id ?? a.ClientId);
+    const bCreated = parseInt(b.Id ?? b.ClientId);
 
     if (aCreated > bCreated) {
       return -1;
