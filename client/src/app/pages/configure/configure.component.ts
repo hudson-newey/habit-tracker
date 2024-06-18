@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { ClientConfigService } from "src/app/services/clientConfig/client-config.service";
 import { FormsModule } from "@angular/forms";
+import { SyncQueueService } from "src/app/services/syncQueue/sync-queue.service";
 
 @Component({
     selector: "app-configure",
@@ -10,11 +11,18 @@ import { FormsModule } from "@angular/forms";
     imports: [FormsModule],
 })
 export class ConfigurePageComponent {
-  public constructor(private configService: ClientConfigService) {}
+  public constructor(
+    private configService: ClientConfigService,
+    private syncService: SyncQueueService,
+  ) {}
 
   protected customServerUrl: string =
     this.configService.getCustomServerUrl() ?? "";
   protected formFeedback: string = "";
+
+  protected get isSyncServerSet(): boolean {
+    return this.configService.isCustomServerUrlSet();
+  }
 
   protected saveCustomServerUrl(): void {
     if (this.customServerUrl.endsWith("/")) {
@@ -39,5 +47,9 @@ export class ConfigurePageComponent {
     this.configService.clearCustomServerUrl();
 
     this.formFeedback = "Custom server URL cleared!";
+  }
+
+  protected forceSync(): void {
+    this.syncService.attemptSync();
   }
 }

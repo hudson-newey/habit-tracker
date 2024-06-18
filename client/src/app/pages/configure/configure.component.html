@@ -55,11 +55,15 @@
       id="remove-server-button"
       class="uk-button uk-button-danger"
       (click)="clearCustomServerUrl()"
+      [disabled]="!isSyncServerSet"
     >
       Remove Server
     </button>
+
+    <button class="uk-button uk-button-default" [disabled]="!isSyncServerSet">
+      Force Sync
+    </button>
   </div>
 
-  <div></div>
   <p class="uk-text-secondary">{{ formFeedback }}</p>
 </section>
